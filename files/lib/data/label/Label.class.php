@@ -1,6 +1,7 @@
 <?php
 namespace wcf\data\label;
 use wcf\data\DatabaseObject;
+use wcf\system\WCF;
 
 /**
  * Represents a label.
@@ -22,4 +23,30 @@ class Label extends DatabaseObject {
 	 * @see	wcf\data\DatabaseObject::$databaseIndexName
 	 */
 	protected static $databaseTableIndexName = 'labelID';
+	
+	/**
+	 * Returns true, if label is editable by current user.
+	 * 
+	 * @return	boolean
+	 */
+	public function isEditable() {
+		if (WCF::getSession()->getPermission('admin.content.label.canEditLabel')) {
+			return true;
+		}
+		
+		return false;
+	}
+	
+	/**
+	 * Returns true, if label is deletable by current user.
+	 * 
+	 * @return	boolean
+	 */
+	public function isDeletable() {
+		if (WCF::getSession()->getPermission('admin.content.label.canDeleteLabel')) {
+			return true;
+		}
+		
+		return false;
+	}
 }
