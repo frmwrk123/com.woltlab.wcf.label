@@ -20,9 +20,11 @@
 	<instructions type="install">
 		<instruction type="acptemplate">acptemplates.tar</instruction>
 		<instruction type="file">files.tar</instruction>
+		<instruction type="objectType">objectType.xml</instruction>
 		<instruction type="objectTypeDefinition">objectTypeDefinition.xml</instruction>
 		<instruction type="sql">install.sql</instruction>
 		<instruction type="userGroupOption">userGroupOption.xml</instruction>
 		<instruction type="acpMenu">acpMenu.xml</instruction>
+		<instruction type="aclOption">acpOption.xml</instruction>
 	</instructions>
 </package>
