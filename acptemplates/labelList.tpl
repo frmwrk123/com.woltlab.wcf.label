@@ -17,7 +17,7 @@
 </header>
 
 <div class="contentHeader">
-	{pages print=true assign=pagesLinks controller="LabelList" link="pageNo=%d&sortField=$sortField&sortOrder=$sortOrder"}
+	{pages print=true assign=pagesLinks controller="LabelList" link="pageNo=%d"}
 	
 	{if $__wcf->session->getPermission('admin.content.label.canAddLabel')}
 		<nav>

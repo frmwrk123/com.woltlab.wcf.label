@@ -8,14 +8,14 @@
 		<acpmenuitem name="wcf.acp.menu.link.label.list">
 			<link>index.php/LabelList/</link>
 			<parent>wcf.acp.menu.link.label.general</parent>
-			<permissions>admin.content.canEditLabel,admin.content.canDeleteLabel</permissions>
+			<permissions>admin.content.label.canEditLabel,admin.content.label.canDeleteLabel</permissions>
 			<showorder>1</showorder>
 		</acpmenuitem>
 
 		<acpmenuitem name="wcf.acp.menu.link.label.add">
 			<link>index.php/LabelAdd/</link>
 			<parent>wcf.acp.menu.link.label.general</parent>
-			<permissions>admin.content.canAddLabel</permissions>
+			<permissions>admin.content.label.canAddLabel</permissions>
 			<showorder>2</showorder>
 		</acpmenuitem>
 	</import>

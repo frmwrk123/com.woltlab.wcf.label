@@ -1,6 +1,7 @@
 <?php
 namespace wcf\acp\page;
 use wcf\page\MultipleLinkPage;
+use wcf\system\menu\acp\ACPMenu;
 
 /**
  * Lists available labels
