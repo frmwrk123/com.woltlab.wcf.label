@@ -18,5 +18,23 @@
 			<permissions>admin.content.label.canAddLabel</permissions>
 			<showorder>2</showorder>
 		</acpmenuitem>
+
+		<acpmenuitem name="wcf.acp.menu.link.label.group">
+			<parent>wcf.acp.menu.link.content</parent>
+		</acpmenuitem>
+
+		<acpmenuitem name="wcf.acp.menu.link.label.group.list">
+			<link>index.php/LabelGroupList/</link>
+			<parent>wcf.acp.menu.link.label.group</parent>
+			<permissions>admin.content.label.canEditLabelGroup,admin.content.label.canDeleteLabelGroup</permissions>
+			<showorder>1</showorder>
+		</acpmenuitem>
+
+		<acpmenuitem name="wcf.acp.menu.link.label.group.add">
+			<link>index.php/LabelGroupAdd/</link>
+			<parent>wcf.acp.menu.link.label.group</parent>
+			<permissions>admin.content.label.canAddLabelGroup</permissions>
+			<showorder>2</showorder>
+		</acpmenuitem>
 	</import>
 </data>
