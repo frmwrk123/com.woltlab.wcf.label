@@ -1,5 +1,14 @@
 {include file='header'}
 
+<script type="text/javascript" src="{@RELATIVE_WCF_DIR}js/WCF.ACL.js"></script>
+<script type="text/javascript">
+	//<![CDATA[
+	$(function() {
+		new WCF.ACL.List($('#groupPermissions'), 7 /* DEBUG ONLY! */);
+	});
+	//]]>
+</script>
+
 <header class="mainHeading">
 	<img src="{@RELATIVE_WCF_DIR}icon/{$action}1.svg" alt="" />
 	<hgroup>
@@ -29,8 +38,8 @@
 		<fieldset>
 			<legend>{lang}wcf.acp.label.group.data{/lang}</legend>
 			
-			<dl{if $errorField == 'label'} class="formError"{/if}>
-				<dt><label for="label">{lang}wcf.acp.label.group.groupName{/lang}</label></dt>
+			<dl{if $errorField == 'groupName'} class="formError"{/if}>
+				<dt><label for="groupName">{lang}wcf.acp.label.group.groupName{/lang}</label></dt>
 				<dd>
 					<input type="text" id="groupName" name="groupName" value="{$groupName}" class="long" />
 					{if $errorField == 'groupName'}
@@ -41,6 +50,11 @@
 						</small>
 					{/if}
 				</dd>
+			</dl>
+
+			<dl id="groupPermissions">
+				<dt>{lang}wcf.acp.acl.permissions{/lang}</dt>
+				<dd></dd>
 			</dl>
 		</fieldset>
 	</div>
