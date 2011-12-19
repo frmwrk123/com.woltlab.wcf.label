@@ -22,7 +22,7 @@ class LabelGroupListPage extends MultipleLinkPage {
 	/**
 	 * @see	wcf\page\MultipleLinkPage::$objectListClassName
 	 */
-	public $objectListClassName = 'wcf\data\label\group\LabelList';
+	public $objectListClassName = 'wcf\data\label\group\LabelGroupList';
 	
 	/**
 	 * @see wcf\page\IPage::show()

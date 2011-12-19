@@ -19,12 +19,12 @@ class LabelGroupAddForm extends ACPForm {
 	/**
 	 * @see wcf\page\AbstractPage::$templateName
 	 */
-	public $templateName = 'labelAdd';
+	public $templateName = 'labelGroupAdd';
 	
 	/**
 	 * @see wcf\acp\form\ACPForm::$activeMenuItem
 	 */
-	public $activeMenuItem = 'wcf.acp.menu.link.label.add';
+	public $activeMenuItem = 'wcf.acp.menu.link.label.group.add';
 	
 	/**
 	 * @see wcf\page\AbstractPage::$neededPermissions
