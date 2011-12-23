@@ -46,6 +46,8 @@
 						<small class="innerError">
 							{if $errorType == 'empty'}
 								{lang}wcf.global.form.error.empty{/lang}
+							{else}
+								{lang}wcf.acp.label.group.groupName.error.{@$errorType}{/lang}
 							{/if}
 						</small>
 					{/if}
