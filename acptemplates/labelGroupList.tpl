@@ -63,7 +63,7 @@
 								{event name='buttons'}
 							</td>
 							<td class="columnID"><p>{@$group->groupID}</p></td>
-							<td class="columnText columnLabel"><p class="{$group->cssClassName}">{lang}{$group->label}{/lang}</p></td>
+							<td class="columnText columnLabel"><p class="{$group->cssClassName}">{lang}{$group->groupName}{/lang}</p></td>
 					
 							{event name='columns'}
 						</tr>
