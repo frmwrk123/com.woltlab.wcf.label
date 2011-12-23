@@ -17,4 +17,19 @@ class LabelGroupAction extends AbstractDatabaseObjectAction {
 	 * @see wcf\data\AbstractDatabaseObjectAction::$className
 	 */
 	protected $className = 'wcf\data\label\group\LabelGroupEditor';
+	
+	/**
+	 * @see	wcf\data\AbstractDatabaseObjectAction::$permissionsCreate
+	 */
+	protected $permissionsCreate = array('admin.content.label.canAddLabelGroup');
+	
+	/**
+	 * @see	wcf\data\AbstractDatabaseObjectAction::$permissionsDelete
+	 */
+	protected $permissionsDelete = array('admin.content.label.canDeleteLabelGroup');
+	
+	/**
+	 * @see	wcf\data\AbstractDatabaseObjectAction::$permissionsUpdate
+	 */
+	protected $permissionsUpdate = array('admin.content.label.canEditLabelGroup');
 }
