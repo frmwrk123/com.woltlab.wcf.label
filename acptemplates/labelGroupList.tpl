@@ -10,7 +10,7 @@
 	<script type="text/javascript">
 		//<![CDATA[
 		$(function() {
-			new WCF.Action.Delete('wcf\\data\\label\\LabelGroupAction', $('.labelRow'));
+			new WCF.Action.Delete('wcf\\data\\label\\group\\LabelGroupAction', $('.labelGroupRow'));
 		});
 		//]]>
 	</script>
@@ -47,7 +47,7 @@
 			<tbody>
 				{content}
 					{foreach from=$objects item=group}
-						<tr class="labelRow">
+						<tr class="labelGroupRow">
 							<td class="columnIcon">
 								{if $group->isEditable()}
 									<a href="{link controller='LabelGroupEdit' id=$group->groupID}{/link}"><img src="{@RELATIVE_WCF_DIR}icon/edit1.svg" alt="" title="{lang}wcf.global.button.edit{/lang}" class="balloonTooltip" /></a>
