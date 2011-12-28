@@ -1,10 +1,14 @@
 {include file='header'}
 
+<!-- DEBUG ONLY -->
+<link rel="Stylesheet" type="text/css" href="{@RELATIVE_WCF_DIR}style/acl.css" />
+<!-- DEBUG ONLY -->
+
 <script type="text/javascript" src="{@RELATIVE_WCF_DIR}js/WCF.ACL.js"></script>
 <script type="text/javascript">
 	//<![CDATA[
 	$(function() {
-		new WCF.ACL.List($('#groupPermissions'), 7 /* DEBUG ONLY! */);
+		new WCF.ACL.List($('#groupPermissions'), {@$objectTypeID});
 	});
 	//]]>
 </script>

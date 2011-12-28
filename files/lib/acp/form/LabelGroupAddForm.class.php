@@ -1,6 +1,7 @@
 <?php
 namespace wcf\acp\form;
 use wcf\data\label\group\LabelGroupAction;
+use wcf\system\acl\ACLHandler;
 use wcf\system\exception\UserInputException;
 use wcf\system\WCF;
 use wcf\util\StringUtil;
@@ -36,6 +37,12 @@ class LabelGroupAddForm extends ACPForm {
 	 * @var	string
 	 */
 	public $groupName = '';
+	
+	/**
+	 * object type id
+	 * @var	integer
+	 */
+	public $objectTypeID = 0;
 	
 	/**
 	 * @see wcf\form\IForm::readFormParameters()
@@ -81,6 +88,15 @@ class LabelGroupAddForm extends ACPForm {
 	}
 	
 	/**
+	 * @see	wcf\page\AbstractPage::readData()
+	 */
+	public function readData() {
+		parent::readData();
+		
+		$this->objectTypeID = ACLHandler::getInstance()->getObjectTypeID('com.woltlab.wcf.label');
+	}
+	
+	/**
 	 * @see wcf\page\IPage::assignVariables()
 	 */
 	public function assignVariables() {
@@ -88,7 +104,8 @@ class LabelGroupAddForm extends ACPForm {
 		
 		WCF::getTPL()->assign(array(
 			'action' => 'add',
-			'groupName' => $this->groupName
+			'groupName' => $this->groupName,
+			'objectTypeID' => $this->objectTypeID
 		));
 	}
 }
