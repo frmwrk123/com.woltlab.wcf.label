@@ -2,6 +2,7 @@
 namespace wcf\acp\form;
 use wcf\data\label\group\LabelGroup;
 use wcf\data\label\group\LabelGroupAction;
+use wcf\system\acl\ACLHandler;
 use wcf\system\exception\IllegalLinkException;
 use wcf\system\WCF;
 
@@ -62,6 +63,9 @@ class LabelGroupEditForm extends LabelGroupAddForm {
 			'groupName' => $this->groupName
 		)));
 		$groupAction->executeAction();
+		
+		// update acl
+		ACLHandler::getInstance()->save($this->groupID, $this->objectTypeID);
 		
 		$this->saved();
 		
