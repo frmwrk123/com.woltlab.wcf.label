@@ -25,6 +25,16 @@ class LabelListPage extends MultipleLinkPage {
 	public $objectListClassName = 'wcf\data\label\LabelList';
 	
 	/**
+	 * @see	wcf\page\MultipleLinkPage::initObjectList()
+	 */
+	protected function initObjectList() {
+		parent::initObjectList();
+		
+		$this->objectList->sqlSelects = "label_group.groupName";
+		$this->objectList->sqlJoins = "LEFT JOIN wcf".WCF_N."_label_group label_group ON (label_group.groupID = label.groupID)";
+	}
+	
+	/**
 	 * @see wcf\page\IPage::show()
 	 */
 	public function show() {

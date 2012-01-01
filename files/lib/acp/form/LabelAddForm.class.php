@@ -1,6 +1,7 @@
 <?php
 namespace wcf\acp\form;
 use wcf\data\label\LabelAction;
+use wcf\data\label\group\LabelGroupList;
 use wcf\system\exception\UserInputException;
 use wcf\system\WCF;
 use wcf\util\StringUtil;
@@ -32,10 +33,22 @@ class LabelAddForm extends ACPForm {
 	public $neededPermissions = array('admin.content.label.canAddLabel');
 	
 	/**
+	 * label group id
+	 * @var	integer
+	 */
+	public $groupID = 0;
+	
+	/**
 	 * label value
 	 * @var	string
 	 */
 	public $label = '';
+	
+	/**
+	 * label group list object
+	 * @var	wcf\data\label\group\LabelGroupList
+	 */
+	public $labelGroupList = null;
 	
 	/**
 	 * CSS class name
@@ -51,6 +64,7 @@ class LabelAddForm extends ACPForm {
 		
 		if (isset($_POST['label'])) $this->label = StringUtil::trim($_POST['label']);
 		if (isset($_POST['cssClassName'])) $this->cssClassName = StringUtil::trim($_POST['cssClassName']);
+		if (isset($_POST['groupID'])) $this->groupID = intval($_POST['groupID']);
 	}
 	
 	/**
@@ -63,6 +77,15 @@ class LabelAddForm extends ACPForm {
 		if (empty($this->label)) {
 			throw new UserInputException('label');
 		}
+		
+		// validate group
+		if (!$this->groupID) {
+			throw new UserInputException('groupID');
+		}
+		$groups = $this->labelGroupList->getObjects();
+		if (!isset($groups[$this->groupID])) {
+			throw new UserInputException('groupID', 'invalid');
+		}
 	}
 	
 	/**
@@ -74,18 +97,28 @@ class LabelAddForm extends ACPForm {
 		// save label
 		$labelAction = new LabelAction(array(), 'create', array('data' => array(
 			'label' => $this->label,
-			'cssClassName' => $this->cssClassName
+			'cssClassName' => $this->cssClassName,
+			'groupID' => $this->groupID
 		)));
 		$labelAction->executeAction();
 		$this->saved();
 		
 		// reset values
 		$this->label = $this->cssClassName = '';
+		$this->groupID = 0;
 		
 		// show success
 		WCF::getTPL()->assign(array(
 			'success' => true
 		));
+	}
+	
+	public function readData() {
+		$this->labelGroupList = new LabelGroupList();
+		$this->labelGroupList->sqlLimit = 0;
+		$this->labelGroupList->readObjects();
+		
+		parent::readData();
 	}
 	
 	/**
@@ -97,7 +130,9 @@ class LabelAddForm extends ACPForm {
 		WCF::getTPL()->assign(array(
 			'action' => 'add',
 			'cssClassName' => $this->cssClassName,
-			'label' => $this->label
+			'groupID' => $this->groupID,
+			'label' => $this->label,
+			'labelGroupList' => $this->labelGroupList
 		));
 	}
 }

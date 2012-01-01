@@ -39,6 +39,7 @@
 				<tr>
 					<th class="columnID columnLabelID" colspan="2">{lang}wcf.global.objectID{/lang}</th>
 					<th class="columnText columnLabel">{lang}wcf.acp.label.label{/lang}</th>
+					<th class="columnText columnGroup">{lang}wcf.acp.label.group.groupName{/lang}</th>
 					
 					{event name='headColumns'}
 				</tr>
@@ -64,6 +65,7 @@
 							</td>
 							<td class="columnID"><p>{@$label->labelID}</p></td>
 							<td class="columnText columnLabel"><p class="{$label->cssClassName}">{lang}{$label->label}{/lang}</p></td>
+							<td class="columnText columnGroup"><p>{lang}{$label->groupName}{/lang}</p></td>
 					
 							{event name='columns'}
 						</tr>
