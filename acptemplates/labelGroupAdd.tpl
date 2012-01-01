@@ -8,7 +8,7 @@
 <script type="text/javascript">
 	//<![CDATA[
 	$(function() {
-		new WCF.ACL.List($('#groupPermissions'), {@$objectTypeID});
+		new WCF.ACL.List($('#groupPermissions'), {@$objectTypeID}{if $groupID|isset}, {@$groupID}{/if});
 	});
 	//]]>
 </script>
