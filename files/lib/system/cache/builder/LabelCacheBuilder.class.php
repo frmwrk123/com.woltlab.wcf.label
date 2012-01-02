@@ -1,13 +1,10 @@
 <?php
 namespace wcf\system\cache\builder;
-use wcf\system\acl\ACLHandler;
-
 use wcf\data\acl\option\ACLOptionAction;
-
-use wcf\data\label\LabelList;
-
 use wcf\data\label\group\LabelGroupList;
 use wcf\data\label\group\ViewableLabelGroup;
+use wcf\data\label\LabelList;
+use wcf\system\acl\ACLHandler;
 
 /**
  * Caches labels and groups.
@@ -24,15 +21,19 @@ class LabelCacheBuilder implements ICacheBuilder {
 	 * @see wcf\system\cache\ICacheBuilder::getData()
 	 */
 	public function getData(array $cacheResource) {
-		$data = array();
+		$data = array(
+			'options' => array(),
+			'groups' => array()
+		);
 		
 		// get label groups
 		$groupList = new LabelGroupList();
 		$groupList->sqlLimit = 0;
 		$groupList->readObjects();
-		foreach ($groupList as $group) {
-			$data[$group->groupID] = new ViewableLabelGroup($group);
+		foreach ($groupList as &$group) {
+			$data['groups'][$group->groupID] = new ViewableLabelGroup($group);
 		}
+		unset($group);
 		
 		// get permissions for groups
 		$permissions = ACLHandler::getInstance()->getPermissions(
@@ -41,11 +42,11 @@ class LabelCacheBuilder implements ICacheBuilder {
 			false
 		);
 		
+		// store options
+		$data['options'] = $permissions['options']->getObjects();
+		
 		// assign permissions for each label group
-		foreach ($data as $groupID => $group) {
-			// assign options
-			$group->setOptions($permissions['options']);
-			
+		foreach ($data['groups'] as $groupID => $group) {
 			// group permissions
 			if (isset($permissions['group'][$groupID])) {
 				$group->setGroupPermissions($permissions['group'][$groupID]);

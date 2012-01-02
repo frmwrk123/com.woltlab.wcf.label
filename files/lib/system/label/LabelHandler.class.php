@@ -1,8 +1,9 @@
 <?php
 namespace wcf\system\label;
-use wcf\data\label\LabelList;
 use wcf\data\object\type\ObjectTypeCache;
+use wcf\system\cache\CacheHandler;
 use wcf\system\database\util\PreparedStatementConditionBuilder;
+use wcf\system\exception\SystemException;
 use wcf\system\SingletonFactory;
 use wcf\system\WCF;
 
@@ -24,10 +25,10 @@ class LabelHandler extends SingletonFactory {
 	protected $cache = null;
 	
 	/**
-	 * list of labels
-	 * @var	wcf\data\label\LabelList
+	 * list of label groups
+	 * @var	array<wcf\data\label\group\ViewableLabelGroup>
 	 */
-	protected $labels = null;
+	protected $labelGroups = null;
 	
 	/**
 	 * @see	wcf\system\SingletonFactory::init()
@@ -43,6 +44,29 @@ class LabelHandler extends SingletonFactory {
 			$this->cache['objectTypes'][$objectType->objectTypeID] = $objectType;
 			$this->cache['objectTypeNames'][$objectType->objectType] = $objectType->objectTypeID;
 		}
+		
+		CacheHandler::getInstance()->addResource(
+			'label',
+			WCF_DIR.'cache/cache.label.php',
+			'wcf\system\cache\builder\LabelCacheBuilder'
+		);
+		$this->labelGroups = CacheHandler::getInstance()->get('label');
+	}
+	
+	/**
+	 * Returns an ACL option id by option name.
+	 * 
+	 * @param	string		$optionName
+	 * @return	integer
+	 */
+	public function getOptionID($optionName) {
+		foreach ($this->labelGroups['options'] as $option) {
+			if ($option->optionName == $optionName) {
+				return $option->optionID;
+			}
+		}
+		
+		return null;
 	}
 	
 	/**
@@ -61,65 +85,60 @@ class LabelHandler extends SingletonFactory {
 	}
 	
 	/**
-	 * Returns a label list.
+	 * Returns an array with view permissions for each label id.
 	 * 
-	 * @return	wcf\data\label\LabelList
+	 * @param	array<integer>	$labelIDs
+	 * @return	array
+	 * @see		wcf\system\label\LabelHandler::getPermissions()
 	 */
-	public function getLabels() {
-		if ($this->labels === null) {
-			$this->labels = new LabelList();
-			$this->labels->getConditionBuilder()->add("label.objectTypeID IN (?)", array(array_keys($this->cache['objectTypes'])));
-			$this->labels->sqlLimit = 0;
-			$this->labels->readObjects();
-		}
-		
-		return $this->labels;
+	public function validateCanView(array $labelIDs) {
+		return $this->getPermissions('canViewLabel', $labelIDs);
 	}
 	
 	/**
-	 * Returns a list of assigned labels.
-	 * 
-	 * @param	integer		$objectTypeID
-	 * @param	array<integer>	$objectIDs
-	 * @return	array<array>
+	 * Returns an array with use permissions for each label id.
+	 *
+	 * @param	array<integer>	$labelIDs
+	 * @return	array
+	 * @see		wcf\system\label\LabelHandler::getPermissions()
 	 */
-	public function getAssignedLabels($objectTypeID, array $objectIDs) {
-		$data = array();
-		
-		$conditions = new PreparedStatementConditionBuilder();
-		$conditions->add("objectTypeID = ?", array($objectTypeID));
-		$conditions->add("objectID IN (?)", array($objectIDs));
-		
-		$sql = "SELECT	labelID, objectID
-			FROM	wcf".WCF_N."_label_object
-			".$conditions;
-		$statement = WCF::getDB()->prepareStatement($sql);
-		$statement->execute($conditions->getConditions());
-		
-		$labelIDs = array();
-		while ($row = $statement->fetchArray()) {
-			if (!isset($labelIDs[$row['objectID']])) {
-				$labelIDs[$row['objectID']] = array();
-			}
-			
-			$labelIDs[$row['objectID']][] = $row['labelID'];
+	public function validateCanUse(array $labelIDs) {
+		return $this->getPermissions('canUseLabel', $labelIDs);
+	}
+	
+	/**
+	 * Returns an array with boolean values for each given label id.
+	 * 
+	 * @param	string		$optionName
+	 * @param	array<integer>	$labelIDs
+	 * @return	array
+	 */
+	public function getPermissions($optionName, array $labelIDs) {
+		if (empty($this->labelGroups['groups'])) {
+			throw new SystemException("cannot validate label ids, missing label groups");
 		}
 		
-		if (!empty($labelIDs)) {
-			$labels = $this->getLabels();
-			$labels = $labels->getObjects();
+		$optionID = $this->getOptionID($optionName);
+		if ($optionID === null) {
+			throw new SystemException("cannot validate label ids, ACL options missing");
+		}
+		
+		// validate each label
+		$data = array();
+		foreach ($labelIDs as $labelID) {
+			$isValid = false;
 			
-			foreach ($labelIDs as $objectID => $objectLabelIDs) {
-				foreach ($objectLabelIDs as $objectLabelID) {
-					if (isset($labels[$objectLabelID])) {
-						if (!isset($data[$objectID])) {
-							$data[$objectID] = array();
-						}
-						
-						$data[$objectID][$objectLabelID] = $labels[$objectLabelID];
-					}
+			foreach ($this->labelGroups['groups'] as $group) {
+				if (!$group->isValid($labelID)) {
+					continue;
+				}
+				
+				if ($group->getPermission($optionID, $labelID)) {
+					$isValid = true;
 				}
 			}
+			
+			$data[$labelID] = $isValid;
 		}
 		
 		return $data;
@@ -158,6 +177,60 @@ class LabelHandler extends SingletonFactory {
 				));
 			}
 		}
+	}
+	
+	/**
+	 * Returns all assigned labels, optionally filtered to validate permissions.
+	 * 
+	 * @param	integer		$objectTypeID
+	 * @param	array<integer>	$objectIds
+	 * @param	boolean		$validatePermissions
+	 * @return	array<array>
+	 */
+	public function getAssignedLabels($objectTypeID, array $objectIDs, $validatePermissions = true) {
+		$conditions = new PreparedStatementConditionBuilder();
+		$conditions->add("objectTypeID = ?", array($objectTypeID));
+		$conditions->add("objectID IN (?)", array($objectIDs));
+		$sql = "SELECT	objectID, labelID
+			FROM	wcf".WCF_N."_label_to_object
+			".$conditions;
+		$statement = WCF::getDB()->prepareStatement($sql);
+		$statement->execute($conditions->getParameters());
+		
+		$labels = array();
+		while ($row = $statement->fetchArray()) {
+			if (!isset($labels[$row['labelID']])) {
+				$labels[$row['labelID']] = array();
+			}
+			
+			$labels[$row['labelID']][] = $row['objectID'];
+		}
+		
+		// optionally filter out labels without permissions
+		if ($validatePermissions) {
+			$labelIDs = array_keys($labels);
+			$result = $this->validateCanView($labelIDs);
+			
+			foreach ($labelIDs as $labelID) {
+				if (!$result[$labelID]) {
+					unset($labels[$labelID]);
+				}
+			}
+		}
+		
+		// reorder the array by object id
+		$data = array();
+		foreach ($labels as $labelID => $objectIDs) {
+			foreach ($objectIDs as $objectID) {
+				if (!isset($data[$objectID])) {
+					$data[$objectID] = array();
+				}
+				
+				$data[$objectID][] = $labelID;
+			}
+		}
+		
+		return $data;
 	}
 	
 	/**
