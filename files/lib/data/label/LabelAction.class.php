@@ -17,4 +17,19 @@ class LabelAction extends AbstractDatabaseObjectAction {
 	 * @see wcf\data\AbstractDatabaseObjectAction::$className
 	 */
 	protected $className = 'wcf\data\label\LabelEditor';
+	
+	/**
+	 * @see	wcf\data\AbstractDatabaseObjectAction::$permissionsCreate
+	 */
+	protected $permissionsCreate = array('admin.content.label.canAddLabel');
+	
+	/**
+	 * @see	wcf\data\AbstractDatabaseObjectAction::$permissionsDelete
+	 */
+	protected $permissionsDelete = array('admin.content.label.canDeleteLabel');
+	
+	/**
+	 * @see	wcf\data\AbstractDatabaseObjectAction::$permissionsUpdate
+	 */
+	protected $permissionsUpdate = array('admin.content.label.canEditLabel');
 }

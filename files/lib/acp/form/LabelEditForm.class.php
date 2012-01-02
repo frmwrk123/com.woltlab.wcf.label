@@ -60,7 +60,8 @@ class LabelEditForm extends LabelAddForm {
 		// update label
 		$labelAction = new LabelAction(array($this->labelID), 'update', array('data' => array(
 			'label' => $this->label,
-			'cssClassName' => $this->cssClassName
+			'cssClassName' => $this->cssClassName,
+			'groupID' => $this->groupID
 		)));
 		$labelAction->executeAction();
 		
@@ -81,6 +82,7 @@ class LabelEditForm extends LabelAddForm {
 		if (!count($_POST)) {
 			$this->label = $this->labelObj->label;
 			$this->cssClassName = $this->labelObj->cssClassName;
+			$this->groupID = $this->labelObj->groupID;
 		}
 	}
 	
