@@ -133,7 +133,7 @@ class LabelHandler extends SingletonFactory {
 					continue;
 				}
 				
-				if ($group->getPermission($optionID, $labelID)) {
+				if ($group->getPermission($optionID)) {
 					$isValid = true;
 				}
 			}
@@ -242,5 +242,41 @@ class LabelHandler extends SingletonFactory {
 	 */
 	public function removeLabels($objectTypeID, $objectID) {
 		$this->setLabel(array(), $objectTypeID, $objectID);
+	}
+	
+	/**
+	 * Returns given label groups by id.
+	 * 
+	 * @param	array<integer>	$groupID
+	 * @param	boolean		$validatePermissions
+	 * @return	array<wcf\data\label\group\ViewableLabelGroup>
+	 */
+	public function getLabelGroups(array $groupIDs, $validatePermissions = true) {
+		$data = array();
+		
+		if ($validatePermissions) {
+			$optionID = $this->getOptionID('canSetLabel');
+			if ($optionID === null) {
+				throw new SystemException("cannot validate group ids, ACL options missing");
+			}
+		}
+		
+		foreach ($groupIDs as $groupID) {
+			// validate given group ids
+			if (!isset($this->labelGroups[$groupID])) {
+				throw new SystemException("unknown label group identified by group id '".$groupID."'");
+			}
+			
+			// validate permissions
+			if ($validatePermissions) {
+				if (!$this->labelGroups[$groupID]->getPermission($optionID)) {
+					continue;
+				}
+			}
+			
+			$data[$groupID] = $this->labelGroups[$groupID];
+		}
+		
+		return $data;
 	}
 }
