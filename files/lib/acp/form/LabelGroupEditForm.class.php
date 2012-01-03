@@ -20,7 +20,7 @@ class LabelGroupEditForm extends LabelGroupAddForm {
 	/**
 	 * @see wcf\acp\form\ACPForm::$activeMenuItem
 	 */
-	public $activeMenuItem = 'wcf.acp.menu.link.label.group';
+	public $activeMenuItem = 'wcf.acp.menu.link.label.group.list';
 	
 	/**
 	 * @see wcf\page\AbstractPage::$neededPermissions

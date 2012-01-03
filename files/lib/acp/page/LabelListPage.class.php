@@ -1,6 +1,6 @@
 <?php
 namespace wcf\acp\page;
-use wcf\page\MultipleLinkPage;
+use wcf\page\SortablePage;
 use wcf\system\menu\acp\ACPMenu;
 
 /**
@@ -13,7 +13,17 @@ use wcf\system\menu\acp\ACPMenu;
  * @subpackage	acp.page
  * @category 	Community Framework
  */
-class LabelListPage extends MultipleLinkPage {
+class LabelListPage extends SortablePage {
+	/**
+	 * @see	wcf\page\SortablePage::$defaultSortField
+	 */
+	public $defaultSortField = 'labelID';
+	
+	/**
+	 * @see	wcf\page\SortablePage::$validSortFields
+	 */
+	public $validSortFields = array('labelID', 'label', 'groupName');
+	
 	/**
 	 * @see wcf\page\AbstractPage::$neededPermissions
 	 */

@@ -17,7 +17,7 @@
 </header>
 
 <div class="contentHeader">
-	{pages print=true assign=pagesLinks controller="LabelList" link="pageNo=%d"}
+	{pages print=true assign=pagesLinks controller="LabelList" link="pageNo=%d&sortField=$sortField&sortOrder=$sortOrder"}
 	
 	{if $__wcf->session->getPermission('admin.content.label.canAddLabel')}
 		<nav>
@@ -37,9 +37,9 @@
 		<table>
 			<thead>
 				<tr>
-					<th class="columnID columnLabelID" colspan="2">{lang}wcf.global.objectID{/lang}</th>
-					<th class="columnText columnLabel">{lang}wcf.acp.label.label{/lang}</th>
-					<th class="columnText columnGroup">{lang}wcf.acp.label.group.groupName{/lang}</th>
+					<th class="columnID columnLabelID{if $sortField == 'labelID'} active{/if}" colspan="2"><a href="{link controller='LabelList'}pageNo={@$pageNo}&sortField=groupID&sortOrder={if $sortField == 'labelID' && $sortOrder == 'ASC'}DESC{else}ASC{/if}{/link}">{lang}wcf.global.objectID{/lang}{if $sortField == 'labelID'} <img src="{@RELATIVE_WCF_DIR}icon/sort{@$sortOrder}.svg" alt="" />{/if}</a></th>
+					<th class="columnText columnLabel{if $sortField == 'label'} active{/if}"><a href="{link controller='LabelList'}pageNo={@$pageNo}&sortField=label&sortOrder={if $sortField == 'label' && $sortOrder == 'ASC'}DESC{else}ASC{/if}{/link}">{lang}wcf.acp.label.label{/lang}{if $sortField == 'label'} <img src="{@RELATIVE_WCF_DIR}icon/sort{@$sortOrder}.svg" alt="" />{/if}</a></th>
+					<th class="columnText columnGroup{if $sortField == 'groupName'} active{/if}"><a href="{link controller='LabelList'}pageNo={@$pageNo}&sortField=groupName&sortOrder={if $sortField == 'groupName' && $sortOrder == 'ASC'}DESC{else}ASC{/if}{/link}">{lang}wcf.acp.label.group.groupName{/lang}{if $sortField == 'groupName'} <img src="{@RELATIVE_WCF_DIR}icon/sort{@$sortOrder}.svg" alt="" />{/if}</a></th>
 					
 					{event name='headColumns'}
 				</tr>
@@ -65,7 +65,7 @@
 							</td>
 							<td class="columnID"><p>{@$label->labelID}</p></td>
 							<td class="columnText columnLabel"><p class="{$label->cssClassName}">{lang}{$label->label}{/lang}</p></td>
-							<td class="columnText columnGroup"><p>{lang}{$label->groupName}{/lang}</p></td>
+							<td class="columnText columnGroup"><p>{$label->groupName}</p></td>
 					
 							{event name='columns'}
 						</tr>

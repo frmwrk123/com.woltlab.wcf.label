@@ -21,7 +21,7 @@ class LabelEditForm extends LabelAddForm {
 	/**
 	 * @see wcf\acp\form\ACPForm::$activeMenuItem
 	 */
-	public $activeMenuItem = 'wcf.acp.menu.link.label';
+	public $activeMenuItem = 'wcf.acp.menu.link.label.list';
 	
 	/**
 	 * @see wcf\page\AbstractPage::$neededPermissions
