@@ -17,7 +17,7 @@ class LabelGroupListPage extends MultipleLinkPage {
 	/**
 	 * @see wcf\page\AbstractPage::$neededPermissions
 	 */
-	public $neededPermissions = array('admin.content.label.canEditLabelGroup', 'admin.content.label.canDeleteLabel');
+	public $neededPermissions = array('admin.content.label.canEditLabelGroup', 'admin.content.label.canDeleteLabelGroup');
 	
 	/**
 	 * @see	wcf\page\MultipleLinkPage::$objectListClassName
