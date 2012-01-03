@@ -1,8 +1,11 @@
 <?php
 namespace wcf\acp\form;
 use wcf\data\label\LabelAction;
+use wcf\data\label\LabelEditor;
 use wcf\data\label\group\LabelGroupList;
 use wcf\system\exception\UserInputException;
+use wcf\system\language\I18nHandler;
+use wcf\system\package\PackageDependencyHandler;
 use wcf\system\WCF;
 use wcf\util\StringUtil;
 
@@ -57,12 +60,23 @@ class LabelAddForm extends ACPForm {
 	public $cssClassName = '';
 	
 	/**
+	 * @see wcf\page\IPage::readParameters()
+	 */
+	public function readParameters() {
+		parent::readParameters();
+		
+		I18nHandler::getInstance()->register('label');
+	}
+	
+	/**
 	 * @see wcf\form\IForm::readFormParameters()
 	 */
 	public function readFormParameters() {
 		parent::readFormParameters();
 		
-		if (isset($_POST['label'])) $this->label = StringUtil::trim($_POST['label']);
+		I18nHandler::getInstance()->readValues();
+		
+		if (I18nHandler::getInstance()->isPlainValue('label')) $this->label = I18nHandler::getInstance()->getValue('label');
 		if (isset($_POST['cssClassName'])) $this->cssClassName = StringUtil::trim($_POST['cssClassName']);
 		if (isset($_POST['groupID'])) $this->groupID = intval($_POST['groupID']);
 	}
@@ -73,9 +87,14 @@ class LabelAddForm extends ACPForm {
 	public function validate() {
 		parent::validate();
 		
-		// validate class name
-		if (empty($this->label)) {
-			throw new UserInputException('label');
+		// validate label
+		try {
+			if (!I18nHandler::getInstance()->validateValue('label')) {
+				throw new UserInputException('label');
+			}
+		}
+		catch (UserInputException $e) {
+			$this->errorType[$e->getField()] = $e->getType();
 		}
 		
 		// validate group
@@ -101,6 +120,19 @@ class LabelAddForm extends ACPForm {
 			'groupID' => $this->groupID
 		)));
 		$labelAction->executeAction();
+		
+		if (!I18nHandler::getInstance()->isPlainValue('label')) {
+			$returnValues = $labelAction->getReturnValues();
+			$labelID = $returnValues['returnValues']->labelID;
+			I18nHandler::getInstance()->save('label', 'wcf.acp.label.label'.$labelID, 'wcf.acp.label', PackageDependencyHandler::getPackageID('com.woltlab.wcf.label'));
+			
+			// update group name
+			$labelEditor = new LabelEditor($returnValues['returnValues']);
+			$labelEditor->update(array(
+				'label' => 'wcf.acp.label.label'.$labelID
+			));
+		}
+		
 		$this->saved();
 		
 		// reset values
@@ -126,6 +158,8 @@ class LabelAddForm extends ACPForm {
 	 */
 	public function assignVariables() {
 		parent::assignVariables();
+		
+		I18nHandler::getInstance()->assignVariables();
 		
 		WCF::getTPL()->assign(array(
 			'action' => 'add',

@@ -46,6 +46,8 @@
 					</dd>
 				</dl>
 				
+				{include file='multipleLanguageInputJavascript' elementIdentifier='label'}
+				
 				<dl{if $errorField == 'cssClassName'} class="formError"{/if}>
 					<dt><label for="cssClassName">{lang}wcf.acp.label.cssClassName{/lang}</label></dt>
 					<dd>

@@ -3,6 +3,8 @@ namespace wcf\acp\form;
 use wcf\data\label\Label;
 use wcf\data\label\LabelAction;
 use wcf\system\exception\IllegalLinkException;
+use wcf\system\language\I18nHandler;
+use wcf\system\package\PackageDependencyHandler;
 use wcf\system\WCF;
 
 /**
@@ -57,6 +59,15 @@ class LabelEditForm extends LabelAddForm {
 	public function save() {
 		ACPForm::save();
 		
+		$this->label = 'wcf.acp.label.label'.$this->labelObj->labelID;
+		if (I18nHandler::getInstance()->isPlainValue('label')) {
+			I18nHandler::getInstance()->remove($this->label, PackageDependencyHandler::getPackageID('com.woltlab.wcf.label'));
+			$this->label = I18nHandler::getInstance()->getValue('label');
+		}
+		else {
+			I18nHandler::getInstance()->save('label', $this->label, 'wcf.acp.label', PackageDependencyHandler::getPackageID('com.woltlab.wcf.label'));
+		}
+		
 		// update label
 		$labelAction = new LabelAction(array($this->labelID), 'update', array('data' => array(
 			'label' => $this->label,
@@ -80,7 +91,9 @@ class LabelEditForm extends LabelAddForm {
 		parent::readData();
 		
 		if (!count($_POST)) {
+			I18nHandler::getInstance()->setOptions('label', PackageDependencyHandler::getPackageID('com.woltlab.wcf.label'), $this->labelObj->label, 'wcf.acp.label.label\d+');
 			$this->label = $this->labelObj->label;
+			
 			$this->cssClassName = $this->labelObj->cssClassName;
 			$this->groupID = $this->labelObj->groupID;
 		}
@@ -91,6 +104,9 @@ class LabelEditForm extends LabelAddForm {
 	 */
 	public function assignVariables() {
 		parent::assignVariables();
+		
+		$useRequestData = (count($_POST)) ? true : false;
+		I18nHandler::getInstance()->assignVariables($useRequestData);
 		
 		WCF::getTPL()->assign(array(
 			'labelID' => $this->labelID,
