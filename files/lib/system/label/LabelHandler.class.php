@@ -251,30 +251,31 @@ class LabelHandler extends SingletonFactory {
 	 * @param	boolean		$validatePermissions
 	 * @return	array<wcf\data\label\group\ViewableLabelGroup>
 	 */
-	public function getLabelGroups(array $groupIDs, $validatePermissions = true) {
+	public function getLabelGroups(array $groupIDs = array(), $validatePermissions = true, $permission = 'canSetLabel') {
 		$data = array();
 		
 		if ($validatePermissions) {
-			$optionID = $this->getOptionID('canSetLabel');
+			$optionID = $this->getOptionID($permission);
 			if ($optionID === null) {
 				throw new SystemException("cannot validate group ids, ACL options missing");
 			}
 		}
 		
+		if (empty($groupIDs)) $groupIDs = array_keys($this->labelGroups['groups']);
 		foreach ($groupIDs as $groupID) {
 			// validate given group ids
-			if (!isset($this->labelGroups[$groupID])) {
+			if (!isset($this->labelGroups['groups'][$groupID])) {
 				throw new SystemException("unknown label group identified by group id '".$groupID."'");
 			}
 			
 			// validate permissions
 			if ($validatePermissions) {
-				if (!$this->labelGroups[$groupID]->getPermission($optionID)) {
+				if (!$this->labelGroups['groups'][$groupID]->getPermission($optionID)) {
 					continue;
 				}
 			}
 			
-			$data[$groupID] = $this->labelGroups[$groupID];
+			$data[$groupID] = $this->labelGroups['groups'][$groupID];
 		}
 		
 		return $data;
