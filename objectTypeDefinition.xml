@@ -3,6 +3,7 @@
 	<import>
 		<definition>
 			<name>com.woltlab.wcf.label.object</name>
+			<interfacename>wcf\system\label\manager\ILabelManager</interfacename>
 		</definition>
 	</import>
 </data>
