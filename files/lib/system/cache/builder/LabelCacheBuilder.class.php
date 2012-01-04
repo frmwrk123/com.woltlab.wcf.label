@@ -30,7 +30,8 @@ class LabelCacheBuilder implements ICacheBuilder {
 		$groupList = new LabelGroupList();
 		$groupList->sqlLimit = 0;
 		$groupList->readObjects();
-		foreach ($groupList as &$group) {
+		$groups = $groupList->getObjects();
+		foreach ($groups as &$group) {
 			$data['groups'][$group->groupID] = new ViewableLabelGroup($group);
 		}
 		unset($group);
@@ -38,7 +39,7 @@ class LabelCacheBuilder implements ICacheBuilder {
 		// get permissions for groups
 		$permissions = ACLHandler::getInstance()->getPermissions(
 			ACLHandler::getInstance()->getObjectTypeID('com.woltlab.wcf.label'),
-			array_keys($data),
+			array_keys($data['groups']),
 			false
 		);
 		
@@ -63,7 +64,7 @@ class LabelCacheBuilder implements ICacheBuilder {
 		$labelList->sqlLimit = 0;
 		$labelList->readObjects();
 		foreach ($labelList as $label) {
-			$data[$label->groupID]->addLabel($label);
+			$data['groups'][$label->groupID]->addLabel($label);
 		}
 		
 		return $data;
