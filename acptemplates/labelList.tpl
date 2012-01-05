@@ -88,11 +88,7 @@
 		{/if}
 	</div>
 {hascontentelse}
-	<div class="border content">
-		<div class="container-1">
-			<p class="warning">{lang}wcf.acp.label.noneAvailable{/lang}</p>
-		</div>
-	</div>
+	<p class="warning">{lang}wcf.acp.label.noneAvailable{/lang}</p>
 {/hascontent}
 
 {include file='footer'}
