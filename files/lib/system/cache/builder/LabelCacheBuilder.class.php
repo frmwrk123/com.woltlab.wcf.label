@@ -59,12 +59,14 @@ class LabelCacheBuilder implements ICacheBuilder {
 			}
 		}
 		
-		// get labels
-		$labelList = new LabelList();
-		$labelList->sqlLimit = 0;
-		$labelList->readObjects();
-		foreach ($labelList as $label) {
-			$data['groups'][$label->groupID]->addLabel($label);
+		if (count($groupList)) {
+			// get labels
+			$labelList = new LabelList();
+			$labelList->sqlLimit = 0;
+			$labelList->readObjects();
+			foreach ($labelList as $label) {
+				$data['groups'][$label->groupID]->addLabel($label);
+			}
 		}
 		
 		return $data;
