@@ -138,6 +138,7 @@ class LabelAddForm extends ACPForm {
 		// reset values
 		$this->label = $this->cssClassName = '';
 		$this->groupID = 0;
+		I18nHandler::getInstance()->disableAssignValueVariables();
 		
 		// show success
 		WCF::getTPL()->assign(array(
@@ -145,6 +146,9 @@ class LabelAddForm extends ACPForm {
 		));
 	}
 	
+	/**
+	 * @see wcf\page\IPage::readData()
+	 */
 	public function readData() {
 		$this->labelGroupList = new LabelGroupList();
 		$this->labelGroupList->sqlLimit = 0;
