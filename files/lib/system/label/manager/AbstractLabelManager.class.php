@@ -1,5 +1,6 @@
 <?php
 namespace wcf\system\label\manager;
+use wcf\system\exception\SystemException;
 use wcf\system\label\LabelHandler;
 use wcf\system\SingletonFactory;
 
@@ -16,16 +17,33 @@ use wcf\system\SingletonFactory;
 abstract class AbstractLabelManager extends SingletonFactory implements ILabelManager {
 	/**
 	 * list of available label groups
-	 * 
 	 * @var	array<wcf\data\label\group\ViewableLabelGroup>
 	 */
 	protected $labelGroups = array();
+	
+	/**
+	 * object type name
+	 * @var	string
+	 */
+	protected $objectType = '';
+	
+	/**
+	 * object type id
+	 * @var	integer
+	 */
+	protected $objectTypeID = 0;
 	
 	/**
 	 * @see wcf\system\SingletonFactory::init()
 	 */
 	protected function init() {
 		$this->labelGroups = LabelHandler::getInstance()->getLabelGroups();
+		
+		$objectType = LabelHandler::getInstance()->getObjectType($this->objectType);
+		if ($objectType === null) {
+			throw new SystemException("object type '".$this->objectType."' is invalid");
+		}
+		$this->objectTypeID = $objectType->objectTypeID;
 	}
 	
 	/**
@@ -33,24 +51,68 @@ abstract class AbstractLabelManager extends SingletonFactory implements ILabelMa
 	 */
 	public function getLabelGroupIDs(array $parameters = array()) {
 		return array_keys($this->labelGroups);
-		
 	}
-
+	
+	/**
+	 * @see	wcf\system\label\manager\ILabelManager::getLabelGroups()
+	 */
+	public function getLabelGroups(array $parameters = array()) {
+		$groupIDs = $this->getLabelGroupIDs($parameters);
+		
+		$data = array();
+		foreach ($groupIDs as $groupID) {
+			$data[$groupID] = $this->labelGroups[$groupID];
+		}
+		
+		return $data;
+	}
+	
 	/**
 	 * @see	wcf\system\label\manager\ILabelManager::validateLabelIDs()
 	 */
 	public function validateLabelIDs(array $labelIDs, array $parameters = array()) {
-		$data = array();
+		$result = array();
 		
 		foreach ($labelIDs as $labelID) {
+			$isValid = false;
+			
 			foreach ($this->labelGroups as $group) {
 				if ($group->isValid($labelID)) {
-					$data[] = $labelID;
+					if (!isset($result[$group->groupID])) {
+						$result[$group->groupID] = array();
+					}
+					
+					$result[$group->groupID][] = $labelID;
+					$isValid = true;
+					
 					break;
 				}
 			}
+			
+			// label id is invalid or not accessible
+			if (!$isValid) {
+				return false;
+			}
 		}
 		
-		return $data;
+		// only one label per group allowed
+		foreach ($result as $groupData) {
+			if (count($groupData) > 1) {
+				return false;
+			}
+		}
+		
+		return true;
+	}
+	
+	/**
+	 * Assigns labels to an object.
+	 * 
+	 * @param	array<integer>	$labelIDs
+	 * @param	integer		$objectID
+	 * @see		wcf\system\label\LabelHandler::setLabels()
+	 */
+	public function setLabels(array $labelIDs, $objectID) {
+		LabelHandler::getInstance()->setLabels($labelIDs, $this->objectTypeID, $objectID);
 	}
 }

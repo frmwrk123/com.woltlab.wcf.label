@@ -152,16 +152,20 @@ class LabelHandler extends SingletonFactory {
 	 * @param	integer		$objectTypeID
 	 * @param	integer		$objectID
 	 */
-	public function setLabel(array $labelIDs, $objectTypeID, $objectID) {
+	public function setLabels(array $labelIDs, $objectTypeID, $objectID) {
+		// get accessible label ids to prevent unaccessible ones to be removed
+		$accessibleLabelIDs = $this->getAccessibleLabelIDs();
+		
 		// delete previous labels
+		$conditions = new PreparedStatementConditionBuilder();
+		$conditions->add("labelID IN (?)", array($accessibleLabelIDs));
+		$conditions->add("objectTypeID = ?", array($objectTypeID));
+		$conditions->add("objectID = ?", array($objectID));
+		
 		$sql = "DELETE FROM	wcf".WCF_N."_label_object
-			WHERE		objectTypeID = ?
-					AND objectID = ?";
+			".$conditions;
 		$statement = WCF::getDB()->prepareStatement($sql);
-		$statement->execute(array(
-			$objectTypeID,
-			$objectID
-		));
+		$statement->execute($conditions->getParameters());
 		
 		// insert new labels
 		if (!empty($labelIDs)) {
@@ -279,5 +283,21 @@ class LabelHandler extends SingletonFactory {
 		}
 		
 		return $data;
+	}
+	
+	/**
+	 * Returns a list of accessible label ids.
+	 *
+	 * @return	array<integer>
+	 */
+	public function getAccessibleLabelIDs() {
+		$labelIDs = array();
+		$groups = $this->getLabelGroups();
+		
+		foreach ($groups as $group) {
+			$labelIDs = array_merge($labelIDs, $group->getLabelIDs());
+		}
+		
+		return $labelIDs;
 	}
 }

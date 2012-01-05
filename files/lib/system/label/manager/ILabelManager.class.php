@@ -21,11 +21,19 @@ interface ILabelManager {
 	public function getLabelGroupIDs(array $parameters = array());
 	
 	/**
-	 * Returns a list of valid label group ids.
+	 * Returns a list of label groups.
+	 * 
+	 * @param	array		$parameters
+	 * @return	array<wcf\data\label\group\ViewableLabelGroup>
+	 */
+	public function getLabelGroups(array $parameters = array());
+	
+	/**
+	 * Returns true, if all given label ids are valid and accessible.
 	 * 
 	 * @param	array<integer>	$labelIDs
 	 * @param	array		$parameters
-	 * @return	array<integer>
+	 * @return	boolean
 	 */
 	public function validateLabelIDs(array $labelIDs, array $parameters = array());
 }

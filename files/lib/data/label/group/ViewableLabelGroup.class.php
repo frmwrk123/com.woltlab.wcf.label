@@ -57,6 +57,7 @@ class ViewableLabelGroup extends DatabaseObjectDecorator implements \Countable, 
 	 */
 	public function addLabel(Label $label) {
 		$this->labels[$label->labelID] = $label;
+		$this->indexToObject[] = $label->labelID;
 	}
 	
 	/**
@@ -115,6 +116,24 @@ class ViewableLabelGroup extends DatabaseObjectDecorator implements \Countable, 
 		}
 		
 		return false;
+	}
+	
+	/**
+	 * Returns a list of label ids.
+	 * 
+	 * @return	array<integer>
+	 */
+	public function getLabelIDs() {
+		return array_keys($this->labels);
+	}
+	
+	/**
+	 * Returns a list of labels.
+	 * 
+	 * @return	array<wcf\data\label\Label>
+	 */
+	public function getLabels() {
+		return $this->labels;
 	}
 	
 	/**
