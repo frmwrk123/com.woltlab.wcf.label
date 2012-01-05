@@ -55,4 +55,13 @@ interface ILabelManager {
 	 * @see		wcf\system\label\LabelHandler::removeLabels()
 	 */
 	public function removeLabels($objectID, $validatePermissions = true);
+	
+	/**
+	 * Returns a list of assigned labels.
+	 * 
+	 * @param	array<integer>		$objectIDs
+	 * @param	boolean			$validatePermissions
+	 * @return	array<array>
+	 */
+	public function getAssignedLabels(array $objectIDs, $validatePermissions = true);
 }

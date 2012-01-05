@@ -118,4 +118,11 @@ abstract class AbstractLabelManager extends SingletonFactory implements ILabelMa
 	public function removeLabels($objectID, $validatePermissions = true) {
 		LabelHandler::getInstance()->removeLabels($this->objectTypeID, $objectID, $validatePermissions);
 	}
+	
+	/**
+	 * @see	wcf\system\label\manager\ILabelManager::getAssignedLabels()
+	 */
+	public function getAssignedLabels(array $objectIDs, $validatePermissions = true) {
+		return LabelHandler::getInstance()->getAssignedLabels($this->objectTypeID, $objectIDs, $validatePermissions);
+	}
 }

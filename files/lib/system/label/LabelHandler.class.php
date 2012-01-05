@@ -192,14 +192,14 @@ class LabelHandler extends SingletonFactory {
 	 * @param	integer		$objectTypeID
 	 * @param	array<integer>	$objectIds
 	 * @param	boolean		$validatePermissions
-	 * @return	array<array>
+	 * @return	array<wcf\data\label\Label>
 	 */
 	public function getAssignedLabels($objectTypeID, array $objectIDs, $validatePermissions = true) {
 		$conditions = new PreparedStatementConditionBuilder();
 		$conditions->add("objectTypeID = ?", array($objectTypeID));
 		$conditions->add("objectID IN (?)", array($objectIDs));
 		$sql = "SELECT	objectID, labelID
-			FROM	wcf".WCF_N."_label_to_object
+			FROM	wcf".WCF_N."_label_object
 			".$conditions;
 		$statement = WCF::getDB()->prepareStatement($sql);
 		$statement->execute($conditions->getParameters());
@@ -233,7 +233,12 @@ class LabelHandler extends SingletonFactory {
 					$data[$objectID] = array();
 				}
 				
-				$data[$objectID][] = $labelID;
+				foreach ($this->labelGroups['groups'] as $group) {
+					$label = $group->getLabel($labelID);
+					if ($label !== null) {
+						$data[$objectID][$labelID] = $label;
+					}
+				}
 			}
 		}
 		

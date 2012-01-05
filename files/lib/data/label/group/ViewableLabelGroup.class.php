@@ -137,6 +137,20 @@ class ViewableLabelGroup extends DatabaseObjectDecorator implements \Countable, 
 	}
 	
 	/**
+	 * Returns a label by id.
+	 * 
+	 * @param	integer		$labelID
+	 * @return	wcf\data\label\Label
+	 */
+	public function getLabel($labelID) {
+		if (isset($this->labels[$labelID])) {
+			return $this->labels[$labelID];
+		}
+		
+		return null;
+	}
+	
+	/**
 	 * @see	\Countable::count()
 	 */
 	public function count() {
