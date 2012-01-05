@@ -106,13 +106,16 @@ abstract class AbstractLabelManager extends SingletonFactory implements ILabelMa
 	}
 	
 	/**
-	 * Assigns labels to an object.
-	 * 
-	 * @param	array<integer>	$labelIDs
-	 * @param	integer		$objectID
-	 * @see		wcf\system\label\LabelHandler::setLabels()
+	 * @see	wcf\system\label\manager\ILabelManager::setLabels()
 	 */
-	public function setLabels(array $labelIDs, $objectID) {
-		LabelHandler::getInstance()->setLabels($labelIDs, $this->objectTypeID, $objectID);
+	public function setLabels(array $labelIDs, $objectID, $validatePermissions = true) {
+		LabelHandler::getInstance()->setLabels($labelIDs, $this->objectTypeID, $objectID, $validatePermissions);
+	}
+	
+	/**
+	 * @see	wcf\system\label\manager\ILabelManager::removeLabels()
+	 */
+	public function removeLabels($objectID, $validatePermissions = true) {
+		LabelHandler::getInstance()->removeLabels($this->objectTypeID, $objectID, $validatePermissions);
 	}
 }

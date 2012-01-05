@@ -36,4 +36,23 @@ interface ILabelManager {
 	 * @return	boolean
 	 */
 	public function validateLabelIDs(array $labelIDs, array $parameters = array());
+	
+	/**
+	 * Assigns labels to an object.
+	 * 
+	 * @param	array<integer>	$labelIDs
+	 * @param	integer		$objectID
+	 * @param	boolean		$validatePermissions
+	 * @see		wcf\system\label\LabelHandler::setLabels()
+	 */
+	public function setLabels(array $labelIDs, $objectID, $validatePermissions = true);
+	
+	/**
+	 * Removes all assigned labels.
+	 *
+	 * @param	integer		$objectID
+	 * @param	boolean		$validatePermissions
+	 * @see		wcf\system\label\LabelHandler::removeLabels()
+	 */
+	public function removeLabels($objectID, $validatePermissions = true);
 }

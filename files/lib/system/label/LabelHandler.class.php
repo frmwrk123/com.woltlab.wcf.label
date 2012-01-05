@@ -151,21 +151,24 @@ class LabelHandler extends SingletonFactory {
 	 * @param	array<integer>	$labelIDs
 	 * @param	integer		$objectTypeID
 	 * @param	integer		$objectID
+	 * @param	boolean		$validatePermissions
 	 */
-	public function setLabels(array $labelIDs, $objectTypeID, $objectID) {
+	public function setLabels(array $labelIDs, $objectTypeID, $objectID, $validatePermissions = true) {
 		// get accessible label ids to prevent unaccessible ones to be removed
 		$accessibleLabelIDs = $this->getAccessibleLabelIDs();
 		
 		// delete previous labels
 		$conditions = new PreparedStatementConditionBuilder();
-		$conditions->add("labelID IN (?)", array($accessibleLabelIDs));
+		if ($validatePermissions) $conditions->add("labelID IN (?)", array($accessibleLabelIDs));
 		$conditions->add("objectTypeID = ?", array($objectTypeID));
 		$conditions->add("objectID = ?", array($objectID));
 		
-		$sql = "DELETE FROM	wcf".WCF_N."_label_object
-			".$conditions;
-		$statement = WCF::getDB()->prepareStatement($sql);
-		$statement->execute($conditions->getParameters());
+		if (!$validatePermissions || ($validatePermissions && !empty($accessibleLabelIDs))) {
+			$sql = "DELETE FROM	wcf".WCF_N."_label_object
+				".$conditions;
+			$statement = WCF::getDB()->prepareStatement($sql);
+			$statement->execute($conditions->getParameters());
+		}
 		
 		// insert new labels
 		if (!empty($labelIDs)) {
@@ -242,10 +245,11 @@ class LabelHandler extends SingletonFactory {
 	 * 
 	 * @param	integer		$objectTypeID
 	 * @param	integer		$objectID
+	 * @param	boolean		$validatePermissions
 	 * @see		wcf\system\label\LabelHandler::setLabel()
 	 */
-	public function removeLabels($objectTypeID, $objectID) {
-		$this->setLabel(array(), $objectTypeID, $objectID);
+	public function removeLabels($objectTypeID, $objectID, $validatePermissions = true) {
+		$this->setLabel(array(), $objectTypeID, $objectID, $validatePermissions);
 	}
 	
 	/**
