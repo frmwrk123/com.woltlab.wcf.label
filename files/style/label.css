@@ -1,0 +1,45 @@
+/**
+ * Label Styles  
+ *
+ * @author		Harald Szekely, Alexander Ebert 
+ * @copyright	2011 WoltLab GmbH 
+ */
+ 
+/* ############## Labels ############## */
+
+/* Label List */
+
+.labelList {
+	margin: 0;
+	padding: 5px 0;
+	display: inline-block;
+}
+
+
+
+/* Label */
+
+.labelList li,
+.labelList .label {
+	font-size: 75%;
+	color: rgba(255, 255, 255, 1);
+	border: 1px solid rgba(102, 102, 102, 1);
+	border-radius: 15px;
+	background-color: rgba(102, 102, 102, 1);
+	padding: 1px 7px 2px;
+	display: inline-block;
+	vertical-align: middle;
+}
+
+.labelList li a,
+.labelList .label a {
+	font-size: 75%;
+	color: rgba(255, 255, 255, 1);
+}
+
+.labelList li a:hover,
+.labelList .label a:hover {
+	text-decoration: none;
+}
+
+/* EOF */
