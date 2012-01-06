@@ -38,7 +38,7 @@
 			<thead>
 				<tr>
 					<th class="columnID columnLabelID{if $sortField == 'labelID'} active{/if}" colspan="2"><a href="{link controller='LabelList'}pageNo={@$pageNo}&sortField=groupID&sortOrder={if $sortField == 'labelID' && $sortOrder == 'ASC'}DESC{else}ASC{/if}{/link}">{lang}wcf.global.objectID{/lang}{if $sortField == 'labelID'} <img src="{@RELATIVE_WCF_DIR}icon/sort{@$sortOrder}.svg" alt="" />{/if}</a></th>
-					<th class="columnText columnLabel{if $sortField == 'label'} active{/if}"><a href="{link controller='LabelList'}pageNo={@$pageNo}&sortField=label&sortOrder={if $sortField == 'label' && $sortOrder == 'ASC'}DESC{else}ASC{/if}{/link}">{lang}wcf.acp.label.label{/lang}{if $sortField == 'label'} <img src="{@RELATIVE_WCF_DIR}icon/sort{@$sortOrder}.svg" alt="" />{/if}</a></th>
+					<th class="columnTitle columnLabel{if $sortField == 'label'} active{/if}"><a href="{link controller='LabelList'}pageNo={@$pageNo}&sortField=label&sortOrder={if $sortField == 'label' && $sortOrder == 'ASC'}DESC{else}ASC{/if}{/link}">{lang}wcf.acp.label.label{/lang}{if $sortField == 'label'} <img src="{@RELATIVE_WCF_DIR}icon/sort{@$sortOrder}.svg" alt="" />{/if}</a></th>
 					<th class="columnText columnGroup{if $sortField == 'groupName'} active{/if}"><a href="{link controller='LabelList'}pageNo={@$pageNo}&sortField=groupName&sortOrder={if $sortField == 'groupName' && $sortOrder == 'ASC'}DESC{else}ASC{/if}{/link}">{lang}wcf.acp.label.group.groupName{/lang}{if $sortField == 'groupName'} <img src="{@RELATIVE_WCF_DIR}icon/sort{@$sortOrder}.svg" alt="" />{/if}</a></th>
 					
 					{event name='headColumns'}
@@ -64,9 +64,9 @@
 								{event name='buttons'}
 							</td>
 							<td class="columnID"><p>{@$label->labelID}</p></td>
-							<td class="columnText columnLabel"><p class="{$label->cssClassName}">{lang}{$label->label}{/lang}</p></td>
+							<td class="columnText columnLabel"><p class="label{if $label->cssClassName} {$label->cssClassName}{/if}">{lang}{$label->label}{/lang}</p></td>
 							<td class="columnText columnGroup"><p>{$label->groupName}</p></td>
-					
+							
 							{event name='columns'}
 						</tr>
 					{/foreach}
@@ -88,11 +88,7 @@
 		{/if}
 	</div>
 {hascontentelse}
-	<div class="border content">
-		<div class="container-1">
-			<p class="warning">{lang}wcf.acp.label.noneAvailable{/lang}</p>
-		</div>
-	</div>
+	<p class="warning">{lang}wcf.acp.label.noneAvailable{/lang}</p>
 {/hascontent}
 
 {include file='footer'}

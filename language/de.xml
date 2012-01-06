@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<language xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/maelstrom/language.xsd" languagecode="de">
+	<category name="wcf.acp.menu">
+		<item name="wcf.acp.menu.link.label"><![CDATA[Labels]]></item>
+		<item name="wcf.acp.menu.link.label.list"><![CDATA[Labels auflisten]]></item>
+		<item name="wcf.acp.menu.link.label.add"><![CDATA[Label hinzufügen]]></item>
+		<item name="wcf.acp.menu.link.label.group.list"><![CDATA[Labelgruppen auflisten]]></item>
+		<item name="wcf.acp.menu.link.label.group.add"><![CDATA[Labelgruppe hinzufügen]]></item>
+	</category>
+</language>
