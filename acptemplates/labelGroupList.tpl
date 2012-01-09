@@ -38,7 +38,7 @@
 			<thead>
 				<tr>
 					<th class="columnID columnLabelGroupID{if $sortField == 'groupID'} active{/if}" colspan="2"><a href="{link controller='LabelGroupList'}pageNo={@$pageNo}&sortField=groupID&sortOrder={if $sortField == 'groupID' && $sortOrder == 'ASC'}DESC{else}ASC{/if}{/link}">{lang}wcf.global.objectID{/lang}{if $sortField == 'groupID'} <img src="{@RELATIVE_WCF_DIR}icon/sort{@$sortOrder}.svg" alt="" />{/if}</a></th>
-					<th class="columnText columnGroupName{if $sortField == 'columnGroupName'} active{/if}"><a href="{link controller='LabelGroupList'}pageNo={@$pageNo}&sortField=groupName&sortOrder={if $sortField == 'groupName' && $sortOrder == 'ASC'}DESC{else}ASC{/if}{/link}">{lang}wcf.acp.label.group.label{/lang}{if $sortField == 'groupName'} <img src="{@RELATIVE_WCF_DIR}icon/sort{@$sortOrder}.svg" alt="" />{/if}</a></th>
+					<th class="columnTitle columnGroupName{if $sortField == 'columnGroupName'} active{/if}"><a href="{link controller='LabelGroupList'}pageNo={@$pageNo}&sortField=groupName&sortOrder={if $sortField == 'groupName' && $sortOrder == 'ASC'}DESC{else}ASC{/if}{/link}">{lang}wcf.acp.label.group.label{/lang}{if $sortField == 'groupName'} <img src="{@RELATIVE_WCF_DIR}icon/sort{@$sortOrder}.svg" alt="" />{/if}</a></th>
 					
 					{event name='headColumns'}
 				</tr>
@@ -63,7 +63,7 @@
 								{event name='buttons'}
 							</td>
 							<td class="columnID"><p>{@$group->groupID}</p></td>
-							<td class="columnText columnGroupName"><p class="{$group->cssClassName}">{$group->groupName}</p></td>
+							<td class="columnTitle columnGroupName"><p class="{$group->cssClassName}">{$group->groupName}</p></td>
 					
 							{event name='columns'}
 						</tr>
