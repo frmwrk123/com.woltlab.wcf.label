@@ -62,9 +62,9 @@
 
 								{event name='buttons'}
 							</td>
-							<td class="columnID"><p>{@$group->groupID}</p></td>
-							<td class="columnTitle columnGroupName"><p class="{$group->cssClassName}">{$group->groupName}</p></td>
-					
+							<td class="columnID"><p>{@$group->groupID}</p></td>					
+							<td class="columnTitle columnGroupName">{if $group->isEditable()}<p class="labelGroup{if $group->cssClassName} {$group->cssClassName}{/if}"><a href="{link controller='LabelGroupEdit' id=$group->groupID}{/link}">{$group->groupName}</a>{else}{$group->groupName}</p>{/if}</td>
+							
 							{event name='columns'}
 						</tr>
 					{/foreach}
