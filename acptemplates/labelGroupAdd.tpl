@@ -45,7 +45,7 @@
 			<dl{if $errorField == 'groupName'} class="formError"{/if}>
 				<dt><label for="groupName">{lang}wcf.acp.label.group.groupName{/lang}</label></dt>
 				<dd>
-					<input type="text" id="groupName" name="groupName" value="{$groupName}" class="long" />
+					<input type="text" id="groupName" name="groupName" value="{$groupName}" autofocus="autofocus" class="long" />
 					{if $errorField == 'groupName'}
 						<small class="innerError">
 							{if $errorType == 'empty'}
