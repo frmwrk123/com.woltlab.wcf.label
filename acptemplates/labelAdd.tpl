@@ -19,7 +19,7 @@
 <div class="contentHeader">
 	<nav>
 		<ul class="largeButtons">
-			<li><a href="{link controller='LabelList'}{/link}" title="{lang}wcf.acp.menu.link.label.list{/lang}"><img src="{@RELATIVE_WCF_DIR}icon/label1.svg" alt="" /> <span>{lang}wcf.acp.menu.link.label.list{/lang}</span></a></li>
+			<li><a href="{link controller='LabelList'}{/link}" title="{lang}wcf.acp.menu.link.label.list{/lang}" class="button"><img src="{@RELATIVE_WCF_DIR}icon/label1.svg" alt="" /> <span>{lang}wcf.acp.menu.link.label.list{/lang}</span></a></li>
 		</ul>
 	</nav>
 </div>
