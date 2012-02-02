@@ -1,6 +1,6 @@
 {include file='header'}
 
-<header class="mainHeading">
+<header class="wcf-mainHeading">
 	<img src="{@RELATIVE_WCF_DIR}icon/label1.svg" alt="" />
 	<hgroup>
 		<h1>{lang}wcf.acp.label.group.list{/lang}</h1>
@@ -16,7 +16,7 @@
 	</script>
 </header>
 
-<div class="contentHeader">
+<div class="wcf-contentHeader">
 	{pages print=true assign=pagesLinks controller="LabelGroupList" link="pageNo=%d&sortField=$sortField&sortOrder=$sortOrder"}
 	
 	{if $__wcf->session->getPermission('admin.content.label.group.canAddLabelGroup')}
@@ -29,7 +29,7 @@
 </div>
 
 {hascontent}
-	<div class="border boxTitle">
+	<div class="wcf-border wcf-boxTitle">
 		<hgroup>
 			<h1>{lang}wcf.acp.label.group.list{/lang} <span class="badge" title="{lang}wcf.acp.label.group.list.count{/lang}">{#$items}</span></h1>
 		</hgroup>
@@ -74,7 +74,7 @@
 		
 	</div>
 	
-	<div class="contentFooter">
+	<div class="wcf-contentFooter">
 		{@$pagesLinks}
 		
 		{if $__wcf->session->getPermission('admin.content.label.group.canAddLabelGroup')}
@@ -86,7 +86,7 @@
 		{/if}
 	</div>
 {hascontentelse}
-	<p class="warning">{lang}wcf.acp.label.group.noneAvailable{/lang}</p>
+	<p class="wcf-warning">{lang}wcf.acp.label.group.noneAvailable{/lang}</p>
 {/hascontent}
 
 {include file='footer'}

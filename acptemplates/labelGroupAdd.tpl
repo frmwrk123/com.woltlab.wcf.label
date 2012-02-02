@@ -1,7 +1,7 @@
 {include file='header'}
 
 <!-- ToDo: DEBUG ONLY -->
-<link rel="Stylesheet" type="text/css" href="{@RELATIVE_WCF_DIR}style/acl.css" />
+<link rel="stylesheet" type="text/css" href="{@RELATIVE_WCF_DIR}style/acl.css" />
 <!-- /DEBUG ONLY -->
 
 <script type="text/javascript" src="{@RELATIVE_WCF_DIR}js/WCF.ACL.js"></script>
@@ -13,7 +13,7 @@
 	//]]>
 </script>
 
-<header class="mainHeading">
+<header class="wcf-mainHeading">
 	<img src="{@RELATIVE_WCF_DIR}icon/{$action}1.svg" alt="" />
 	<hgroup>
 		<h1>{lang}wcf.acp.label.group.{$action}{/lang}</h1>
@@ -22,14 +22,14 @@
 </header>
 
 {if $errorField}
-	<p class="error">{lang}wcf.global.form.error{/lang}</p>
+	<p class="wcf-error">{lang}wcf.global.form.error{/lang}</p>
 {/if}
 
 {if $success|isset}
-	<p class="success">{lang}wcf.global.form.{$action}.success{/lang}</p>	
+	<p class="wcf-success">{lang}wcf.global.form.{$action}.success{/lang}</p>	
 {/if}
 
-<div class="contentHeader">
+<div class="wcf-contentHeader">
 	<nav>
 		<ul class="largeButtons">
 			<li><a href="{link controller='LabelGroupList'}{/link}" title="{lang}wcf.acp.menu.link.label.group.list{/lang}" class="button"><img src="{@RELATIVE_WCF_DIR}icon/label1.svg" alt="" /> <span>{lang}wcf.acp.menu.link.label.group.list{/lang}</span></a></li>
@@ -38,7 +38,7 @@
 </div>
 
 <form method="post" action="{if $action == 'add'}{link controller='LabelGroupAdd'}{/link}{else}{link controller='LabelGroupEdit'}{/link}{/if}">
-	<div class="border content">
+	<div class="wcf-border wcf-content">
 		<fieldset>
 			<legend>{lang}wcf.acp.label.group.data{/lang}</legend>
 			
