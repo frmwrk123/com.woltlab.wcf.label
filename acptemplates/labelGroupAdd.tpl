@@ -42,7 +42,7 @@
 		<fieldset>
 			<legend>{lang}wcf.acp.label.group.data{/lang}</legend>
 			
-			<dl{if $errorField == 'groupName'} class="formError"{/if}>
+			<dl{if $errorField == 'groupName'} class="wcf-formError"{/if}>
 				<dt><label for="groupName">{lang}wcf.acp.label.group.groupName{/lang}</label></dt>
 				<dd>
 					<input type="text" id="groupName" name="groupName" value="{$groupName}" autofocus="autofocus" class="long" />
@@ -65,7 +65,7 @@
 		</fieldset>
 	</div>
 	
-	<div class="formSubmit">
+	<div class="wcf-formSubmit">
 		<input type="reset" value="{lang}wcf.global.button.reset{/lang}" accesskey="r" />
 		<input type="submit" value="{lang}wcf.global.button.submit{/lang}" accesskey="s" />
 		{@SID_INPUT_TAG}
