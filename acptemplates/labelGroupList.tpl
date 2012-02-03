@@ -21,8 +21,8 @@
 	
 	{if $__wcf->session->getPermission('admin.content.label.group.canAddLabelGroup')}
 		<nav>
-			<ul class="largeButtons">
-				<li><a href="{link controller='LabelGroupAdd'}{/link}" title="{lang}wcf.acp.label.group.add{/lang}" class="button"><img src="{@RELATIVE_WCF_DIR}icon/add1.svg" alt="" /> <span>{lang}wcf.acp.label.group.add{/lang}</span></a></li>
+			<ul class="wcf-largeButtons">
+				<li><a href="{link controller='LabelGroupAdd'}{/link}" title="{lang}wcf.acp.label.group.add{/lang}" class="wcf-button"><img src="{@RELATIVE_WCF_DIR}icon/add1.svg" alt="" /> <span>{lang}wcf.acp.label.group.add{/lang}</span></a></li>
 			</ul>
 		</nav>
 	{/if}
@@ -79,8 +79,8 @@
 		
 		{if $__wcf->session->getPermission('admin.content.label.group.canAddLabelGroup')}
 			<nav>
-				<ul class="largeButtons">
-					<li><a href="{link controller='LabelGroupAdd'}{/link}" title="{lang}wcf.acp.label.group.add{/lang}" class="button"><img src="{@RELATIVE_WCF_DIR}icon/add1.svg" alt="" /> <span>{lang}wcf.acp.label.group.add{/lang}</span></a></li>
+				<ul class="wcf-largeButtons">
+					<li><a href="{link controller='LabelGroupAdd'}{/link}" title="{lang}wcf.acp.label.group.add{/lang}" class="wcf-button"><img src="{@RELATIVE_WCF_DIR}icon/add1.svg" alt="" /> <span>{lang}wcf.acp.label.group.add{/lang}</span></a></li>
 				</ul>
 			</nav>
 		{/if}

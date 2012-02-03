@@ -18,8 +18,8 @@
 
 <div class="wcf-contentHeader">
 	<nav>
-		<ul class="largeButtons">
-			<li><a href="{link controller='LabelList'}{/link}" title="{lang}wcf.acp.menu.link.label.list{/lang}" class="button"><img src="{@RELATIVE_WCF_DIR}icon/label1.svg" alt="" /> <span>{lang}wcf.acp.menu.link.label.list{/lang}</span></a></li>
+		<ul class="wcf-largeButtons">
+			<li><a href="{link controller='LabelList'}{/link}" title="{lang}wcf.acp.menu.link.label.list{/lang}" class="wcf-button"><img src="{@RELATIVE_WCF_DIR}icon/label1.svg" alt="" /> <span>{lang}wcf.acp.menu.link.label.list{/lang}</span></a></li>
 		</ul>
 	</nav>
 </div>
@@ -30,7 +30,7 @@
 			<fieldset>
 				<legend>{lang}wcf.acp.label.data{/lang}</legend>
 				
-				<dl{if $errorField == 'label'} class="formError"{/if}>
+				<dl{if $errorField == 'label'} class="wcf-formError"{/if}>
 					<dt><label for="label">{lang}wcf.acp.label.label{/lang}</label></dt>
 					<dd>
 						<input type="text" id="label" name="label" value="{$label}" autofocus="autofocus" class="long" />
@@ -48,7 +48,7 @@
 				
 				{include file='multipleLanguageInputJavascript' elementIdentifier='label'}
 				
-				<dl{if $errorField == 'cssClassName'} class="formError"{/if}>
+				<dl{if $errorField == 'cssClassName'} class="wcf-formError"{/if}>
 					<dt><label for="cssClassName">{lang}wcf.acp.label.cssClassName{/lang}</label></dt>
 					<dd>
 						<input type="text" id="cssClassName" name="cssClassName" value="{$cssClassName}" class="long" />
@@ -60,7 +60,7 @@
 					</dd>
 				</dl>
 				
-				<dl{if $errorField == 'groupID'} class="formError"{/if}>
+				<dl{if $errorField == 'groupID'} class="wcf-formError"{/if}>
 					<dt><label for="groupID">{lang}wcf.acp.label.group{/lang}</label></dt>
 					<dd>
 						<select id="groupID" name="groupID">
@@ -83,7 +83,7 @@
 			</fieldset>
 		</div>
 		
-		<div class="formSubmit">
+		<div class="wcf-formSubmit">
 			<input type="reset" value="{lang}wcf.global.button.reset{/lang}" accesskey="r" />
 			<input type="submit" value="{lang}wcf.global.button.submit{/lang}" accesskey="s" />
 			{@SID_INPUT_TAG}
