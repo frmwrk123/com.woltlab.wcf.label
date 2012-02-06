@@ -34,7 +34,7 @@
 			<h1>{lang}wcf.acp.label.list{/lang} <span class="badge" title="{lang}wcf.acp.label.list.count{/lang}">{#$items}</span></h1>
 		</hgroup>
 		
-		<table>
+		<table class="wcf-table">
 			<thead>
 				<tr>
 					<th class="columnID columnLabelID{if $sortField == 'labelID'} active{/if}" colspan="2"><a href="{link controller='LabelList'}pageNo={@$pageNo}&sortField=groupID&sortOrder={if $sortField == 'labelID' && $sortOrder == 'ASC'}DESC{else}ASC{/if}{/link}">{lang}wcf.global.objectID{/lang}{if $sortField == 'labelID'} <img src="{@RELATIVE_WCF_DIR}icon/sort{@$sortOrder}.svg" alt="" />{/if}</a></th>
