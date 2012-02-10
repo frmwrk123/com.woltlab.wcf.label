@@ -59,10 +59,10 @@ class LabelGroupEditForm extends LabelGroupAddForm {
 		ACPForm::save();
 		
 		// update label
-		$groupAction = new LabelGroupAction(array($this->groupID), 'update', array('data' => array(
+		$this->objectAction = new LabelGroupAction(array($this->groupID), 'update', array('data' => array(
 			'groupName' => $this->groupName
 		)));
-		$groupAction->executeAction();
+		$this->objectAction->executeAction();
 		
 		// update acl
 		ACLHandler::getInstance()->save($this->groupID, $this->objectTypeID);

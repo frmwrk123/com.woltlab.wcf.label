@@ -69,12 +69,12 @@ class LabelEditForm extends LabelAddForm {
 		}
 		
 		// update label
-		$labelAction = new LabelAction(array($this->labelID), 'update', array('data' => array(
+		$this->objectAction = new LabelAction(array($this->labelID), 'update', array('data' => array(
 			'label' => $this->label,
 			'cssClassName' => $this->cssClassName,
 			'groupID' => $this->groupID
 		)));
-		$labelAction->executeAction();
+		$this->objectAction->executeAction();
 		
 		$this->saved();
 		

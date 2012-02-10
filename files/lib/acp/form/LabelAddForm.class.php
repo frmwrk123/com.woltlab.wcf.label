@@ -114,15 +114,15 @@ class LabelAddForm extends ACPForm {
 		parent::save();
 		
 		// save label
-		$labelAction = new LabelAction(array(), 'create', array('data' => array(
+		$this->objectAction = new LabelAction(array(), 'create', array('data' => array(
 			'label' => $this->label,
 			'cssClassName' => $this->cssClassName,
 			'groupID' => $this->groupID
 		)));
-		$labelAction->executeAction();
+		$this->objectAction->executeAction();
 		
 		if (!I18nHandler::getInstance()->isPlainValue('label')) {
-			$returnValues = $labelAction->getReturnValues();
+			$returnValues = $this->objectAction->getReturnValues();
 			$labelID = $returnValues['returnValues']->labelID;
 			I18nHandler::getInstance()->save('label', 'wcf.acp.label.label'.$labelID, 'wcf.acp.label', PackageDependencyHandler::getPackageID('com.woltlab.wcf.label'));
 			

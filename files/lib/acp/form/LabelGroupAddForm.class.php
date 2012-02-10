@@ -81,13 +81,12 @@ class LabelGroupAddForm extends ACPForm {
 		parent::save();
 		
 		// save label
-		$groupAction = new LabelGroupAction(array(), 'create', array('data' => array(
+		$this->objectAction = new LabelGroupAction(array(), 'create', array('data' => array(
 			'groupName' => $this->groupName
 		)));
-		$groupAction->executeAction();
+		$returnValues = $this->objectAction->executeAction();
 				
 		// save acl
-		$returnValues = $groupAction->getReturnValues();
 		ACLHandler::getInstance()->save($returnValues['returnValues']->groupID, $this->objectTypeID);
 				
 		$this->saved();
