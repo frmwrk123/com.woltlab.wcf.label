@@ -2,10 +2,10 @@
 <language xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/maelstrom/language.xsd" languagecode="de">
 	<category name="wcf.acp.menu">
 		<item name="wcf.acp.menu.link.label"><![CDATA[Labels]]></item>
-		<item name="wcf.acp.menu.link.label.list"><![CDATA[Labels auflisten]]></item>
-		<item name="wcf.acp.menu.link.label.add"><![CDATA[Label hinzufügen]]></item>
-		<item name="wcf.acp.menu.link.label.group.list"><![CDATA[Labelgruppen auflisten]]></item>
-		<item name="wcf.acp.menu.link.label.group.add"><![CDATA[Labelgruppe hinzufügen]]></item>
+		<item name="wcf.acp.menu.link.label.list"><![CDATA[List labels]]></item>
+		<item name="wcf.acp.menu.link.label.add"><![CDATA[Add label]]></item>
+		<item name="wcf.acp.menu.link.label.group.list"><![CDATA[List labelgroups]]></item>
+		<item name="wcf.acp.menu.link.label.group.add"><![CDATA[Add labelgroup]]></item>
 	</category>
 	
 	<!-- empty category for i18n label values -->
