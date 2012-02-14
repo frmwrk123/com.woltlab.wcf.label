@@ -8,6 +8,12 @@
 <script type="text/javascript">
 	//<![CDATA[
 	$(function() {
+		WCF.Icon.addObject({
+			'wcf.icon.delete': '{icon size=\'S\'}delete1{/icon}',
+			'wcf.icon.user': '{icon size=\'S\'}user1{/icon}',
+			'wcf.icon.users': '{icon size=\'S\'}users1{/icon}'
+		});
+		
 		new WCF.ACL.List($('#groupPermissions'), {@$objectTypeID}{if $groupID|isset}, {@$groupID}{/if});
 	});
 	//]]>
