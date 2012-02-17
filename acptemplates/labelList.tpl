@@ -31,7 +31,7 @@
 {hascontent}
 	<div class="wcf-border wcf-boxTitle">
 		<hgroup>
-			<h1>{lang}wcf.acp.label.list{/lang} <span class="badge" title="{lang}wcf.acp.label.list.count{/lang}">{#$items}</span></h1>
+			<h1>{lang}wcf.acp.label.list{/lang} <span class="wcf-badge" title="{lang}wcf.acp.label.list.count{/lang}">{#$items}</span></h1>
 		</hgroup>
 		
 		<table class="wcf-table">

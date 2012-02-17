@@ -53,7 +53,7 @@
 				<dd>
 					<input type="text" id="groupName" name="groupName" value="{$groupName}" autofocus="autofocus" class="long" />
 					{if $errorField == 'groupName'}
-						<small class="innerError">
+						<small class="wcf-innerError">
 							{if $errorType == 'empty'}
 								{lang}wcf.global.form.error.empty{/lang}
 							{else}
