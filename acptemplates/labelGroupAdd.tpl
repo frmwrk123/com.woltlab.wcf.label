@@ -14,7 +14,7 @@
 			'wcf.icon.users': '{icon size=\'S\'}users1{/icon}'
 		});
 		
-		new WCF.ACL.List($('#groupPermissions'), {@$objectTypeID}{if $groupID|isset}, {@$groupID}{/if});
+		new WCF.ACL.List($('#groupPermissions'), {@$objectTypeID}{if $groupID|isset}, '', {@$groupID}{/if});
 	});
 	//]]>
 </script>
