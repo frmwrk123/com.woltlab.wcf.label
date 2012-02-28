@@ -40,6 +40,7 @@ class LabelCacheBuilder implements ICacheBuilder {
 		$permissions = ACLHandler::getInstance()->getPermissions(
 			ACLHandler::getInstance()->getObjectTypeID('com.woltlab.wcf.label'),
 			array_keys($data['groups']),
+			null,
 			false
 		);
 		
