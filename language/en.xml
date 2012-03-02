@@ -1,14 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <language xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/maelstrom/language.xsd" languagecode="de">
+	<category name="wcf.acp.group">
+		<item name="wcf.acp.group.option.admin.content.label.canAddLabel"><![CDATA[Can add new labels]]></item>
+		<item name="wcf.acp.group.option.admin.content.label.canAddLabelGroup"><![CDATA[Can add new label groups]]></item>
+		<item name="wcf.acp.group.option.admin.content.label.canDeleteLabel"><![CDATA[Can delete labels]]></item>
+		<item name="wcf.acp.group.option.admin.content.label.canDeleteLabelGroup"><![CDATA[Can delete label groups]]></item>
+		<item name="wcf.acp.group.option.admin.content.label.canEditLabel"><![CDATA[Can edit labels]]></item>
+		<item name="wcf.acp.group.option.admin.content.label.canEditLabelGroup"><![CDATA[Can edit label groups]]></item>
+		<item name="wcf.acp.group.option.category.admin.content.label"><![CDATA[Labels]]></item>
+	</category>
+	
+	<category name="wcf.acp.label">
+		<item name="wcf.acp.label.add"><![CDATA[Add label]]></item>
+		<item name="wcf.acp.label.cssClassName"><![CDATA[CSS classes]]></item>
+		<item name="wcf.acp.label.data"><![CDATA[General label information]]></item>
+		<item name="wcf.acp.label.error.noGroups"><![CDATA[Before adding a label, you need to <a href="{link controller='LabelGroupAdd'}{/link}">add a label group</a> first.]]></item>
+		<item name="wcf.acp.label.group"><![CDATA[Label group]]></item>
+		<item name="wcf.acp.label.group.add"><![CDATA[Add label group]]></item>
+		<item name="wcf.acp.label.group.data"><![CDATA[General label group information]]></item>
+		<item name="wcf.acp.label.group.groupName"><![CDATA[Group name]]></item>
+		<item name="wcf.acp.label.group.list"><![CDATA[Label groups]]></item>
+		<item name="wcf.acp.label.group.noneAvailable"><![CDATA[No label group has been added yet.]]></item>
+		<item name="wcf.acp.label.label"><![CDATA[Label]]></item>
+		<item name="wcf.acp.label.list"><![CDATA[Labels]]></item>
+		<item name="wcf.acp.label.noneAvailable"><![CDATA[No label has been added yet.]]></item>
+	</category>
+	
 	<category name="wcf.acp.menu">
 		<item name="wcf.acp.menu.link.label"><![CDATA[Labels]]></item>
 		<item name="wcf.acp.menu.link.label.list"><![CDATA[List labels]]></item>
 		<item name="wcf.acp.menu.link.label.add"><![CDATA[Add label]]></item>
 		<item name="wcf.acp.menu.link.label.group.list"><![CDATA[List labelgroups]]></item>
 		<item name="wcf.acp.menu.link.label.group.add"><![CDATA[Add labelgroup]]></item>
-	</category>
-	
-	<!-- empty category for i18n label values -->
-	<category name="wcf.acp.label">
 	</category>
 </language>
