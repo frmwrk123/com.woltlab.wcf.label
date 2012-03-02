@@ -91,7 +91,7 @@
 		</div>
 	</form>
 {else}
-	<p class="wcf-error">{lang}wcf.label.label.error.noGroups{/lang}</p>
+	<p class="wcf-error">{lang}wcf.acp.label.error.noGroups{/lang}</p>
 {/if}
 
 {include file='footer'}
