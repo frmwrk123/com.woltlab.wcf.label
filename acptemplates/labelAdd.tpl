@@ -1,7 +1,7 @@
 {include file='header'}
 
 <header class="wcf-container wcf-mainHeading">
-	<img src="{@RELATIVE_WCF_DIR}icon/{$action}1.svg" alt="" class="wcf-containerIcon" />
+	<img src="{@$__wcf->getPath()}icon/{$action}1.svg" alt="" class="wcf-containerIcon" />
 	<hgroup class="wcf-containerContent">
 		<h1>{lang}wcf.acp.label.{$action}{/lang}</h1>
 		<h2>{lang}wcf.acp.label.subtitle{/lang}</h2>
@@ -19,7 +19,7 @@
 <div class="wcf-contentHeader">
 	<nav>
 		<ul class="wcf-largeButtons">
-			<li><a href="{link controller='LabelList'}{/link}" title="{lang}wcf.acp.menu.link.label.list{/lang}" class="wcf-button"><img src="{@RELATIVE_WCF_DIR}icon/label1.svg" alt="" /> <span>{lang}wcf.acp.menu.link.label.list{/lang}</span></a></li>
+			<li><a href="{link controller='LabelList'}{/link}" title="{lang}wcf.acp.menu.link.label.list{/lang}" class="wcf-button"><img src="{@$__wcf->getPath()}icon/label1.svg" alt="" /> <span>{lang}wcf.acp.menu.link.label.list{/lang}</span></a></li>
 		</ul>
 	</nav>
 </div>

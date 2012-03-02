@@ -1,10 +1,10 @@
 {include file='header'}
 
 <!-- ToDo: DEBUG ONLY -->
-<link rel="stylesheet" type="text/css" href="{@RELATIVE_WCF_DIR}style/acl.css" />
+<link rel="stylesheet" type="text/css" href="{@$__wcf->getPath()}style/acl.css" />
 <!-- /DEBUG ONLY -->
 
-<script type="text/javascript" src="{@RELATIVE_WCF_DIR}js/WCF.ACL.js"></script>
+<script type="text/javascript" src="{@$__wcf->getPath()}js/WCF.ACL.js"></script>
 <script type="text/javascript">
 	//<![CDATA[
 	$(function() {
@@ -20,7 +20,7 @@
 </script>
 
 <header class="wcf-container wcf-mainHeading">
-	<img src="{@RELATIVE_WCF_DIR}icon/{$action}1.svg" alt="" class="wcf-containerIcon" />
+	<img src="{@$__wcf->getPath()}icon/{$action}1.svg" alt="" class="wcf-containerIcon" />
 	<hgroup class="wcf-containerContent">
 		<h1>{lang}wcf.acp.label.group.{$action}{/lang}</h1>
 		<h2>{lang}wcf.acp.label.group.subtitle{/lang}</h2>
@@ -38,7 +38,7 @@
 <div class="wcf-contentHeader">
 	<nav>
 		<ul class="wcf-largeButtons">
-			<li><a href="{link controller='LabelGroupList'}{/link}" title="{lang}wcf.acp.menu.link.label.group.list{/lang}" class="wcf-button"><img src="{@RELATIVE_WCF_DIR}icon/label1.svg" alt="" /> <span>{lang}wcf.acp.menu.link.label.group.list{/lang}</span></a></li>
+			<li><a href="{link controller='LabelGroupList'}{/link}" title="{lang}wcf.acp.menu.link.label.group.list{/lang}" class="wcf-button"><img src="{@$__wcf->getPath()}icon/label1.svg" alt="" /> <span>{lang}wcf.acp.menu.link.label.group.list{/lang}</span></a></li>
 		</ul>
 	</nav>
 </div>
