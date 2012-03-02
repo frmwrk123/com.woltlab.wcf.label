@@ -9,9 +9,9 @@
 	//<![CDATA[
 	$(function() {
 		WCF.Icon.addObject({
-			'wcf.icon.delete': '{icon size=\'S\'}delete1{/icon}',
-			'wcf.icon.user': '{icon size=\'S\'}user1{/icon}',
-			'wcf.icon.users': '{icon size=\'S\'}users1{/icon}'
+			'wcf.icon.delete': '{@$__wcf->getPath()}icon/delete1.svg',
+			'wcf.icon.user': '{@$__wcf->getPath()}icon/user1.svg',
+			'wcf.icon.users': '{@$__wcf->getPath()}icon/users1.svg'
 		});
 		
 		new WCF.ACL.List($('#groupPermissions'), {@$objectTypeID}{if $groupID|isset}, '', {@$groupID}{/if});
