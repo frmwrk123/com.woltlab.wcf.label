@@ -124,7 +124,7 @@ class LabelAddForm extends ACPForm {
 		if (!I18nHandler::getInstance()->isPlainValue('label')) {
 			$returnValues = $this->objectAction->getReturnValues();
 			$labelID = $returnValues['returnValues']->labelID;
-			I18nHandler::getInstance()->save('label', 'wcf.acp.label.label'.$labelID, 'wcf.acp.label', PackageDependencyHandler::getPackageID('com.woltlab.wcf.label'));
+			I18nHandler::getInstance()->save('label', 'wcf.acp.label.label'.$labelID, 'wcf.acp.label', PackageDependencyHandler::getInstance()->getPackageID('com.woltlab.wcf.label'));
 			
 			// update group name
 			$labelEditor = new LabelEditor($returnValues['returnValues']);
