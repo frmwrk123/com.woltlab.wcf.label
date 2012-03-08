@@ -72,7 +72,7 @@ WCF.Label.Preview = Class.extend({
 		
 		this._previews[elementID].removeClass().empty().hide();
 		if ($selectedOption.prop('value')) {
-			this._previews[elementID].addClass('label').addClass($selectedOption.data('cssClassName')).html($selectedOption.text()).show();
+			this._previews[elementID].addClass('wcf-label').addClass($selectedOption.data('cssClassName')).html($selectedOption.text()).show();
 		}
 	}
 });
