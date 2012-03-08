@@ -64,7 +64,7 @@
 								{event name='buttons'}
 							</td>
 							<td class="columnID"><p>{@$label->labelID}</p></td>
-							<td class="columnTitle columnLabel">{if $label->isEditable()}<p class="label{if $label->cssClassName} {$label->cssClassName}{/if}"><a href="{link controller='LabelEdit' id=$label->labelID}{/link}" title="{lang}{$label->label}{/lang}">{lang}{$label->label}{/lang}</a>{else}{lang}{$label->label}{/lang}</p>{/if}</td>
+							<td class="columnTitle columnLabel">{if $label->isEditable()}<p class="wcf-label{if $label->cssClassName} {$label->cssClassName}{/if}"><a href="{link controller='LabelEdit' id=$label->labelID}{/link}" title="{lang}{$label->label}{/lang}">{lang}{$label->label}{/lang}</a>{else}{lang}{$label->label}{/lang}</p>{/if}</td>
 							<td class="columnText columnGroup"><p>{$label->groupName}</p></td>
 							
 							{event name='columns'}
