@@ -1,19 +1,9 @@
 {include file='header'}
 
-<!-- ToDo: DEBUG ONLY -->
-<link rel="stylesheet" type="text/css" href="{@$__wcf->getPath()}style/acl.css" />
-<!-- /DEBUG ONLY -->
-
-<script type="text/javascript" src="{@$__wcf->getPath()}js/WCF.ACL.js"></script>
+{include file='aclPermissions' sandbox=false}
 <script type="text/javascript">
 	//<![CDATA[
 	$(function() {
-		WCF.Icon.addObject({
-			'wcf.icon.delete': '{@$__wcf->getPath()}icon/delete1.svg',
-			'wcf.icon.user': '{@$__wcf->getPath()}icon/user1.svg',
-			'wcf.icon.users': '{@$__wcf->getPath()}icon/users1.svg'
-		});
-		
 		new WCF.ACL.List($('#groupPermissions'), {@$objectTypeID}{if $groupID|isset}, '', {@$groupID}{/if});
 	});
 	//]]>
