@@ -29,7 +29,7 @@ class LabelGroupEditor extends DatabaseObjectEditor implements IEditableCachedOb
 		
 		// remove ACL values
 		$objectTypeID = ACLHandler::getInstance()->getObjectTypeID('com.woltlab.wcf.label');
-		ACLHandler::getInstance()->removeValues($objectIDs, $objectIDs);
+		ACLHandler::getInstance()->removeValues($objectTypeID, $objectIDs);
 		
 		return $count;
 	}
