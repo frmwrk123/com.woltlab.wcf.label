@@ -45,6 +45,10 @@
 		</nav>
 		
 		<div id="general" class="wcf-box wcf-boxPadding wcf-tabMenuContainer wcf-tabMenuContent">
+			<hgroup class="wcf-subHeading">
+				<h1>{lang}wcf.acp.label.group.category.general{/lang}</h1>
+			</hgroup>
+			
 			<fieldset>
 				<legend>{lang}wcf.acp.label.group.data{/lang}</legend>
 				
@@ -72,7 +76,47 @@
 		</div>
 		
 		<div id="connect" class="wcf-box wcf-boxPadding wcf-tabMenuContainer wcf-tabMenuContent">
+			<hgroup class="wcf-subHeading">
+				<h1>{lang}wcf.acp.label.group.category.connect{/lang}</h1>
+			</hgroup>
 			
+			<style type="text/css">
+				#test li {
+					background-color: rgba(224, 224, 224, .3);
+					padding: 3px 40px 3px 3px;
+					text-align: right;
+				}
+				
+				#test li.category {
+					background-color: rgba(192, 192, 192, .3);
+				}
+				
+				#test li span:first-child {
+					float: left;
+				}
+			</style>
+			
+			{foreach from=$labelObjectTypeContainers item=container}
+				{if $container->isBooleanOption()}
+					<!-- TODO: Implement boolean option mode -->
+				{else}
+					<dl>
+						<dt>objectTypeID = {@$container->getObjectTypeID()}</dt>
+						<dd>
+							<ul id="test" class="wcf-box wcf-boxPadding">
+								{foreach from=$container item=objectType}
+									<li class="{if $objectType->isCategory()} category{/if}"{if $objectType->getDepth()} style="padding-left: {40 * $objectType->getDepth()}px"{/if}>
+										<label for="checkbox_{@$container->getObjectTypeID()}_{@$objectType->getObjectID()}">
+											<span>{$objectType->getLabel()}</span>
+											<span><input id="checkbox_{@$container->getObjectTypeID()}_{@$objectType->getObjectID()}" type="checkbox" name="objectTypes[{@$container->getObjectTypeID()}][]" value="{@$objectType->getObjectID()}" /></span>
+										</label>
+									</li>
+								{/foreach}
+							</ul>
+						</dd>
+					</dl>
+				{/if}
+			{/foreach}
 		</div>
 	</div>
 	
