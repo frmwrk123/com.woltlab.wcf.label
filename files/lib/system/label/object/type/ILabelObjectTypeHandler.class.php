@@ -15,7 +15,7 @@ interface ILabelObjectTypeHandler {
 	/**
 	 * Returns a list of connectable objects.
 	 * 
-	 * @return	array<wcf\data\DatabaseObject>
+	 * @return	wcf\system\label\object\type\LabelObjectTypeContainer
 	 */
 	public function getObjects();
 	
