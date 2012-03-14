@@ -5,6 +5,8 @@
 	//<![CDATA[
 	$(function() {
 		new WCF.ACL.List($('#groupPermissions'), {@$objectTypeID}{if $groupID|isset}, '', {@$groupID}{/if});
+		
+		WCF.TabMenu.init();
 	});
 	//]]>
 </script>
@@ -34,31 +36,44 @@
 </div>
 
 <form method="post" action="{if $action == 'add'}{link controller='LabelGroupAdd'}{/link}{else}{link controller='LabelGroupEdit'}{/link}{/if}">
-	<div class="wcf-box wcf-marginTop wcf-boxPadding wcf-boxDecor wcf-shadow1">
-		<fieldset>
-			<legend>{lang}wcf.acp.label.group.data{/lang}</legend>
+	<div class="wcf-tabMenuContainer">
+		<nav class="wcf-tabMenu">
+			<ul>
+				<li><a href="#general">{lang}wcf.acp.label.group.category.general{/lang}</a></li>
+				<li><a href="#connect">{lang}wcf.acp.label.group.category.connect{/lang}</a></li>
+			</ul>
+		</nav>
+		
+		<div id="general" class="wcf-box wcf-boxPadding wcf-tabMenuContainer wcf-tabMenuContent">
+			<fieldset>
+				<legend>{lang}wcf.acp.label.group.data{/lang}</legend>
+				
+				<dl{if $errorField == 'groupName'} class="wcf-formError"{/if}>
+					<dt><label for="groupName">{lang}wcf.acp.label.group.groupName{/lang}</label></dt>
+					<dd>
+						<input type="text" id="groupName" name="groupName" value="{$groupName}" autofocus="autofocus" class="long" />
+						{if $errorField == 'groupName'}
+							<small class="wcf-innerError">
+								{if $errorType == 'empty'}
+									{lang}wcf.global.form.error.empty{/lang}
+								{else}
+									{lang}wcf.acp.label.group.groupName.error.{@$errorType}{/lang}
+								{/if}
+							</small>
+						{/if}
+					</dd>
+				</dl>
+	
+				<dl id="groupPermissions">
+					<dt>{lang}wcf.acp.acl.permissions{/lang}</dt>
+					<dd></dd>
+				</dl>
+			</fieldset>
+		</div>
+		
+		<div id="connect" class="wcf-box wcf-boxPadding wcf-tabMenuContainer wcf-tabMenuContent">
 			
-			<dl{if $errorField == 'groupName'} class="wcf-formError"{/if}>
-				<dt><label for="groupName">{lang}wcf.acp.label.group.groupName{/lang}</label></dt>
-				<dd>
-					<input type="text" id="groupName" name="groupName" value="{$groupName}" autofocus="autofocus" class="long" />
-					{if $errorField == 'groupName'}
-						<small class="wcf-innerError">
-							{if $errorType == 'empty'}
-								{lang}wcf.global.form.error.empty{/lang}
-							{else}
-								{lang}wcf.acp.label.group.groupName.error.{@$errorType}{/lang}
-							{/if}
-						</small>
-					{/if}
-				</dd>
-			</dl>
-
-			<dl id="groupPermissions">
-				<dt>{lang}wcf.acp.acl.permissions{/lang}</dt>
-				<dd></dd>
-			</dl>
-		</fieldset>
+		</div>
 	</div>
 	
 	<div class="wcf-formSubmit">

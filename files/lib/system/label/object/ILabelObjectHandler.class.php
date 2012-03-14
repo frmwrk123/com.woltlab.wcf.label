@@ -1,17 +1,17 @@
 <?php
-namespace wcf\system\label\manager;
+namespace wcf\system\label\object;
 
 /**
- * Default interface for label manager.
+ * Default interface for label object handler.
  *
  * @author	Alexander Ebert
  * @copyright	2001-2012 WoltLab GmbH
  * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
  * @package	com.woltlab.wcf.label
- * @subpackage	system.label.manager
+ * @subpackage	system.label.object
  * @category 	Community Framework
  */
-interface ILabelManager {
+interface ILabelObjectHandler {
 	/**
 	 * Returns a list of label group ids.
 	 * 

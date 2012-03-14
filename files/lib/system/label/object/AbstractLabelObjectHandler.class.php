@@ -1,20 +1,20 @@
 <?php
-namespace wcf\system\label\manager;
+namespace wcf\system\label\object;
 use wcf\system\exception\SystemException;
 use wcf\system\label\LabelHandler;
 use wcf\system\SingletonFactory;
 
 /**
- * Default implementation for label manager.
+ * Default implementation for label object handler.
  *
  * @author	Alexander Ebert
  * @copyright	2001-2012 WoltLab GmbH
  * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
  * @package	com.woltlab.wcf.label
- * @subpackage	system.label.manager
+ * @subpackage	system.label.object
  * @category 	Community Framework
  */
-abstract class AbstractLabelManager extends SingletonFactory implements ILabelManager {
+abstract class AbstractLabelObjectHandler extends SingletonFactory implements ILabelObjectHandler {
 	/**
 	 * list of available label groups
 	 * @var	array<wcf\data\label\group\ViewableLabelGroup>
