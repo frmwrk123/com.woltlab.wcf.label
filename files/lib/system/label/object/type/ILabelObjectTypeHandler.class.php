@@ -13,16 +13,28 @@ namespace wcf\system\label\object\type;
  */
 interface ILabelObjectTypeHandler {
 	/**
-	 * Returns a list of connectable objects.
+	 * Sets object type id.
+	 * 
+	 * @param	integer		$objectTypeID
+	 */
+	public function setObjectTypeID($objectTypeID);
+	
+	/**
+	 * Returns object type id.
+	 * 
+	 * @return	integer
+	 */
+	public function getObjectTypeID();
+	
+	/**
+	 * Returns a label object type container.
 	 * 
 	 * @return	wcf\system\label\object\type\LabelObjectTypeContainer
 	 */
-	public function getObjects();
+	public function getContainer();
 	
 	/**
-	 * Saves connected objects.
-	 * 
-	 * @param	array		$data
+	 * Performs save actions.
 	 */
-	public function saveObjects(array &$data);
+	public function saveObjects();
 }

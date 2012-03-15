@@ -52,6 +52,12 @@ class LabelGroupAddForm extends ACPForm {
 	public $labelObjectTypeContainers = array();
 	
 	/**
+	 * list of label group to object type relations
+	 * @var	array<array>
+	 */
+	public $objectTypes = array();
+	
+	/**
 	 * object type id
 	 * @var	integer
 	 */
@@ -64,12 +70,6 @@ class LabelGroupAddForm extends ACPForm {
 		parent::readParameters();
 		
 		$this->objectTypeID = ACLHandler::getInstance()->getObjectTypeID('com.woltlab.wcf.label');
-		
-		// get label object type handlers
-		$objectTypes = ObjectTypeCache::getInstance()->getObjectTypes('com.woltlab.wcf.label.objectType');
-		foreach ($objectTypes as $objectType) {
-			$this->labelObjectTypes[] = $objectType->getProcessor();
-		}
 	}
 	
 	/**
@@ -79,16 +79,46 @@ class LabelGroupAddForm extends ACPForm {
 		parent::readFormParameters();
 		
 		if (isset($_POST['groupName'])) $this->groupName = StringUtil::trim($_POST['groupName']);
+		if (isset($_POST['objectTypes']) && is_array($_POST['objectTypes'])) $this->objectTypes = $_POST['objectTypes'];
 	}
 	
 	/**
 	 * @see wcf\page\IPage::readData()
 	 */
 	public function readData() {
+		// get label object type handlers
+		$objectTypes = ObjectTypeCache::getInstance()->getObjectTypes('com.woltlab.wcf.label.objectType');
+		foreach ($objectTypes as $objectType) {
+			$this->labelObjectTypes[$objectType->objectTypeID] = $objectType->getProcessor();
+			$this->labelObjectTypes[$objectType->objectTypeID]->setObjectTypeID($objectType->objectTypeID);
+		}
+		
+		foreach ($this->labelObjectTypes as $objectTypeID => $labelObjectType) {
+			$this->labelObjectTypeContainers[$objectTypeID] = $labelObjectType->getContainer();
+		}
+		
 		parent::readData();
 		
-		foreach ($this->labelObjectTypes as $labelObjectType) {
-			$this->labelObjectTypeContainers[] = $labelObjectType->getObjects();
+		// assign new values for object relations
+		if (!empty($_POST)) {
+			foreach ($this->labelObjectTypeContainers as $objectTypeID => $container) {
+				if ($container->isBooleanOption()) {
+					$optionValue = (isset($this->objectTypes[$objectTypeID])) ? 1 : 0;
+					$container->setOptionValue($optionValue);
+				}
+				else {
+					$hasData = (isset($this->objectTypes[$objectTypeID]));
+					foreach ($container as $object) {
+						if (!$hasData) {
+							$object->setOptionValue(0);
+						}
+						else {
+							$optionValue = (in_array($object->getObjectID(), $this->objectTypes[$objectTypeID])) ? 1 : 0;
+							$object->setOptionValue($optionValue);
+						}
+					}
+				}
+			}
 		}
 	}
 	
@@ -101,6 +131,13 @@ class LabelGroupAddForm extends ACPForm {
 		// validate class name
 		if (empty($this->groupName)) {
 			throw new UserInputException('groupName');
+		}
+		
+		// validate object type relations
+		foreach ($this->objectTypes as $objectTypeID => $data) {
+			if (!isset($this->labelObjectTypes[$objectTypeID])) {
+				unset($this->objectTypes[$objectTypeID]);
+			}
 		}
 	}
 	
@@ -118,6 +155,9 @@ class LabelGroupAddForm extends ACPForm {
 				
 		// save acl
 		ACLHandler::getInstance()->save($returnValues['returnValues']->groupID, $this->objectTypeID);
+		
+		// save object type relations
+		$this->saveObjectTypeRelations($returnValues['returnValues']->groupID);
 				
 		$this->saved();
 		
@@ -142,5 +182,45 @@ class LabelGroupAddForm extends ACPForm {
 			'labelObjectTypeContainers' => $this->labelObjectTypeContainers,
 			'objectTypeID' => $this->objectTypeID
 		));
+	}
+	
+	/**
+	 * Saves label group to object relations.
+	 * 
+	 * @param	integer		$groupID
+	 */
+	protected function saveObjectTypeRelations($groupID) {
+		WCF::getDB()->beginTransaction();
+		
+		// remove old relations
+		if ($groupID !== null) {
+			$sql = "DELETE FROM	wcf".WCF_N."_label_group_to_object
+				WHERE		groupID = ?";
+			$statement = WCF::getDB()->prepareStatement($sql);
+			$statement->execute(array($groupID));
+		}
+		
+		// insert new relations
+		if (!empty($this->objectTypes)) {
+			$sql = "INSERT INTO	wcf".WCF_N."_label_group_to_object
+						(groupID, objectTypeID, objectID)
+				VALUES		(?, ?, ?)";
+			$statement = WCF::getDB()->prepareStatement($sql);
+			
+			foreach ($this->objectTypes as $objectTypeID => $data) {
+				foreach ($data as $objectID) {
+					// use "0" (stored as NULL) for simple true/false states
+					if (!$objectID) $objectID = null;
+					
+					$statement->execute(array(
+						$groupID,
+						$objectTypeID,
+						$objectID
+					));
+				}
+			}
+		}
+		
+		WCF::getDB()->commitTransaction();
 	}
 }

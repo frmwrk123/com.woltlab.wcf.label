@@ -37,6 +37,12 @@ class LabelObjectType {
 	public $objectID = 0;
 	
 	/**
+	 * option value
+	 * @var	integer
+	 */
+	public $optionValue = 0;
+	
+	/**
 	 * Creates a new LabelObjectType object.
 	 * 
 	 * @param	string		$label
@@ -84,5 +90,23 @@ class LabelObjectType {
 	 */
 	public function getDepth() {
 		return $this->depth;
+	}
+	
+	/**
+	 * Sets option value.
+	 * 
+	 * @param	integer		$optionValue
+	 */
+	public function setOptionValue($optionValue) {
+		$this->optionValue = $optionValue;
+	}
+	
+	/**
+	 * Returns option value.
+	 * 
+	 * @return	integer
+	 */
+	public function getOptionValue() {
+		return $this->optionValue;
 	}
 }
