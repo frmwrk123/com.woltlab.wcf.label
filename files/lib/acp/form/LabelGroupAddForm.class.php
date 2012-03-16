@@ -100,26 +100,7 @@ class LabelGroupAddForm extends ACPForm {
 		parent::readData();
 		
 		// assign new values for object relations
-		if (!empty($_POST)) {
-			foreach ($this->labelObjectTypeContainers as $objectTypeID => $container) {
-				if ($container->isBooleanOption()) {
-					$optionValue = (isset($this->objectTypes[$objectTypeID])) ? 1 : 0;
-					$container->setOptionValue($optionValue);
-				}
-				else {
-					$hasData = (isset($this->objectTypes[$objectTypeID]));
-					foreach ($container as $object) {
-						if (!$hasData) {
-							$object->setOptionValue(0);
-						}
-						else {
-							$optionValue = (in_array($object->getObjectID(), $this->objectTypes[$objectTypeID])) ? 1 : 0;
-							$object->setOptionValue($optionValue);
-						}
-					}
-				}
-			}
-		}
+		$this->setObjectTypeRelations();
 	}
 	
 	/**
@@ -222,5 +203,40 @@ class LabelGroupAddForm extends ACPForm {
 		}
 		
 		WCF::getDB()->commitTransaction();
+	}
+	
+	/**
+	 * Sets object type relations.
+	 */
+	protected function setObjectTypeRelations($data = null) {
+		if (!empty($_POST)) {
+			// use POST data
+			$data = &$this->objectTypes;
+		}
+		
+		// no data provided and no POST data exists
+		if ($data === null || !is_array($data)) {
+			// nothing to do here
+			return;
+		}
+		
+		foreach ($this->labelObjectTypeContainers as $objectTypeID => $container) {
+			if ($container->isBooleanOption()) {
+				$optionValue = (isset($data[$objectTypeID])) ? 1 : 0;
+				$container->setOptionValue($optionValue);
+			}
+			else {
+				$hasData = (isset($data[$objectTypeID]));
+				foreach ($container as $object) {
+					if (!$hasData) {
+						$object->setOptionValue(0);
+					}
+					else {
+						$optionValue = (in_array($object->getObjectID(), $data[$objectTypeID])) ? 1 : 0;
+						$object->setOptionValue($optionValue);
+					}
+				}
+			}
+		}
 	}
 }

@@ -67,6 +67,9 @@ class LabelGroupEditForm extends LabelGroupAddForm {
 		// update acl
 		ACLHandler::getInstance()->save($this->groupID, $this->objectTypeID);
 		
+		// update object type relations
+		$this->saveObjectTypeRelations($this->groupID);
+		
 		$this->saved();
 		
 		// show success
@@ -96,5 +99,32 @@ class LabelGroupEditForm extends LabelGroupAddForm {
 			'groupID' => $this->groupID,
 			'action' => 'edit'
 		));
+	}
+	
+	/**
+	 * @see	wcf\acp\form\LabelGroupAddForm::setObjectTypeRelations()
+	 */
+	protected function setObjectTypeRelations($data = null) {
+		if (empty($_POST)) {
+			$data = array();
+			
+			// read database values
+			$sql = "SELECT	objectTypeID, objectID
+				FROM	wcf".WCF_N."_label_group_to_object
+				WHERE	groupID = ?";
+			$statement = WCF::getDB()->prepareStatement($sql);
+			$statement->execute(array($this->groupID));
+			$data = array();
+			while ($row = $statement->fetchArray()) {
+				if (!isset($data[$row['objectTypeID']])) {
+					$data[$row['objectTypeID']] = array();
+				}
+	
+				// prevent NULL values which confuse isset()
+				$data[$row['objectTypeID']][] = ($row['objectID']) ?: 0;
+			}
+		}
+		
+		parent::setObjectTypeRelations($data);
 	}
 }
