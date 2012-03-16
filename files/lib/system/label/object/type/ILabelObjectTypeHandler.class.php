@@ -36,5 +36,5 @@ interface ILabelObjectTypeHandler {
 	/**
 	 * Performs save actions.
 	 */
-	public function saveObjects();
+	public function save();
 }

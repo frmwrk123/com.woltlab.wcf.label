@@ -144,6 +144,8 @@ class LabelGroupAddForm extends ACPForm {
 		
 		// reset values
 		$this->groupName = '';
+		$this->objectTypes = array();
+		$this->setObjectTypeRelations();
 		
 		// show success
 		WCF::getTPL()->assign(array(

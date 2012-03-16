@@ -108,7 +108,7 @@
 									<li class="{if $objectType->isCategory()} category{/if}"{if $objectType->getDepth()} style="padding-left: {40 * $objectType->getDepth()}px"{/if}>
 										<label for="checkbox_{@$container->getObjectTypeID()}_{@$objectType->getObjectID()}">
 											<span>{$objectType->getLabel()}</span>
-											<span><input id="checkbox_{@$container->getObjectTypeID()}_{@$objectType->getObjectID()}" type="checkbox" name="objectTypes[{@$container->getObjectTypeID()}][]" value="{@$objectType->getObjectID()}"{if $ojectType->getOptionValue()} checked="checked"{/if} /></span>
+											<span><input id="checkbox_{@$container->getObjectTypeID()}_{@$objectType->getObjectID()}" type="checkbox" name="objectTypes[{@$container->getObjectTypeID()}][]" value="{@$objectType->getObjectID()}"{if $objectType->getOptionValue()} checked="checked"{/if} /></span>
 										</label>
 									</li>
 								{/foreach}
