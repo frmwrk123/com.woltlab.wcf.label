@@ -11,53 +11,53 @@
 	//]]>
 </script>
 
-<header class="wcf-container wcf-mainHeading">
-	<img src="{@$__wcf->getPath()}icon/{$action}1.svg" alt="" class="wcf-containerIcon" />
-	<hgroup class="wcf-containerContent">
+<header class="box48 boxHeadline">
+	<img src="{@$__wcf->getPath()}icon/{$action}1.svg" alt="" class="icon48" />
+	<hgroup>
 		<h1>{lang}wcf.acp.label.group.{$action}{/lang}</h1>
 		<h2>{lang}wcf.acp.label.group.subtitle{/lang}</h2>
 	</hgroup>
 </header>
 
 {if $errorField}
-	<p class="wcf-error">{lang}wcf.global.form.error{/lang}</p>
+	<p class="error">{lang}wcf.global.form.error{/lang}</p>
 {/if}
 
 {if $success|isset}
-	<p class="wcf-success">{lang}wcf.global.form.{$action}.success{/lang}</p>	
+	<p class="success">{lang}wcf.global.form.{$action}.success{/lang}</p>	
 {/if}
 
-<div class="wcf-contentHeader">
+<div class="contentNavigation">
 	<nav>
-		<ul class="wcf-largeButtons">
-			<li><a href="{link controller='LabelGroupList'}{/link}" title="{lang}wcf.acp.menu.link.label.group.list{/lang}" class="wcf-button"><img src="{@$__wcf->getPath()}icon/label1.svg" alt="" /> <span>{lang}wcf.acp.menu.link.label.group.list{/lang}</span></a></li>
+		<ul>
+			<li><a href="{link controller='LabelGroupList'}{/link}" title="{lang}wcf.acp.menu.link.label.group.list{/lang}" class="button"><img src="{@$__wcf->getPath()}icon/label1.svg" alt="" class="icon24" /> <span>{lang}wcf.acp.menu.link.label.group.list{/lang}</span></a></li>
 		</ul>
 	</nav>
 </div>
 
 <form method="post" action="{if $action == 'add'}{link controller='LabelGroupAdd'}{/link}{else}{link controller='LabelGroupEdit'}{/link}{/if}">
-	<div class="wcf-tabMenuContainer">
-		<nav class="wcf-tabMenu">
+	<div class="tabMenuContainer">
+		<nav class="tabMenu">
 			<ul>
 				<li><a href="#general">{lang}wcf.acp.label.group.category.general{/lang}</a></li>
 				<li><a href="#connect">{lang}wcf.acp.label.group.category.connect{/lang}</a></li>
 			</ul>
 		</nav>
 		
-		<div id="general" class="wcf-box wcf-boxPadding wcf-tabMenuContainer wcf-tabMenuContent">
-			<hgroup class="wcf-subHeading">
+		<div id="general" class="container containerPadding tabMenuContainer tabMenuContent">
+			<hgroup class="boxSubHeadline">
 				<h1>{lang}wcf.acp.label.group.category.general{/lang}</h1>
 			</hgroup>
 			
 			<fieldset>
 				<legend>{lang}wcf.acp.label.group.data{/lang}</legend>
 				
-				<dl{if $errorField == 'groupName'} class="wcf-formError"{/if}>
+				<dl{if $errorField == 'groupName'} class="formError"{/if}>
 					<dt><label for="groupName">{lang}wcf.acp.label.group.groupName{/lang}</label></dt>
 					<dd>
 						<input type="text" id="groupName" name="groupName" value="{$groupName}" autofocus="autofocus" class="long" />
 						{if $errorField == 'groupName'}
-							<small class="wcf-innerError">
+							<small class="innerError">
 								{if $errorType == 'empty'}
 									{lang}wcf.global.form.error.empty{/lang}
 								{else}
@@ -75,8 +75,8 @@
 			</fieldset>
 		</div>
 		
-		<div id="connect" class="wcf-box wcf-boxPadding wcf-tabMenuContainer wcf-tabMenuContent">
-			<hgroup class="wcf-subHeading">
+		<div id="connect" class="container containerPadding tabMenuContainer tabMenuContent">
+			<hgroup class="boxSubHeadline">
 				<h1>{lang}wcf.acp.label.group.category.connect{/lang}</h1>
 			</hgroup>
 			
@@ -120,11 +120,9 @@
 		</div>
 	</div>
 	
-	<div class="wcf-formSubmit">
-		<input type="reset" value="{lang}wcf.global.button.reset{/lang}" accesskey="r" />
+	<div class="formSubmit">
 		<input type="submit" value="{lang}wcf.global.button.submit{/lang}" accesskey="s" />
-		{@SID_INPUT_TAG}
- 		{if $groupID|isset}<input type="hidden" name="id" value="{@$groupID}" />{/if}
+		{if $groupID|isset}<input type="hidden" name="id" value="{@$groupID}" />{/if}
 	</div>
 </form>
 

@@ -1,10 +1,9 @@
 {include file='header'}
 
-<header class="wcf-container wcf-mainHeading">
-	<img src="{@$__wcf->getPath()}icon/label1.svg" alt="" class="wcf-containerIcon" />
+<header class="box48 boxHeadline">
+	<img src="{@$__wcf->getPath()}icon/label1.svg" alt="" class="icon48" />
 	<hgroup class="wcf-containerContent">
 		<h1>{lang}wcf.acp.label.group.list{/lang}</h1>
-		<h2>{lang}wcf.acp.label.group.subtitle{/lang}</h2>
 	</hgroup>
 	
 	<script type="text/javascript">
@@ -16,25 +15,25 @@
 	</script>
 </header>
 
-<div class="wcf-contentHeader">
+<div class="contentNavigation">
 	{pages print=true assign=pagesLinks controller="LabelGroupList" link="pageNo=%d&sortField=$sortField&sortOrder=$sortOrder"}
 	
 	{if $__wcf->session->getPermission('admin.content.label.group.canAddLabelGroup')}
 		<nav>
-			<ul class="wcf-largeButtons">
-				<li><a href="{link controller='LabelGroupAdd'}{/link}" title="{lang}wcf.acp.label.group.add{/lang}" class="wcf-button"><img src="{@$__wcf->getPath()}icon/add1.svg" alt="" /> <span>{lang}wcf.acp.label.group.add{/lang}</span></a></li>
+			<ul>
+				<li><a href="{link controller='LabelGroupAdd'}{/link}" title="{lang}wcf.acp.label.group.add{/lang}" class="button"><img src="{@$__wcf->getPath()}icon/add1.svg" alt="" class="icon24" /> <span>{lang}wcf.acp.label.group.add{/lang}</span></a></li>
 			</ul>
 		</nav>
 	{/if}
 </div>
 
 {hascontent}
-	<div class="wcf-box wcf-boxTitle wcf-marginTop wcf-shadow1">
+	<div class="tabularBox tabularBoxTitle marginTop shadow">
 		<hgroup>
-			<h1>{lang}wcf.acp.label.group.list{/lang} <span class="wcf-badge" title="{lang}wcf.acp.label.group.list.count{/lang}">{#$items}</span></h1>
+			<h1>{lang}wcf.acp.label.group.list{/lang} <span class="badge" title="{lang}wcf.acp.label.group.list.count{/lang}">{#$items}</span></h1>
 		</hgroup>
 		
-		<table class="wcf-table">
+		<table class="table">
 			<thead>
 				<tr>
 					<th class="columnID columnLabelGroupID{if $sortField == 'groupID'} active{/if}" colspan="2"><a href="{link controller='LabelGroupList'}pageNo={@$pageNo}&sortField=groupID&sortOrder={if $sortField == 'groupID' && $sortOrder == 'ASC'}DESC{else}ASC{/if}{/link}">{lang}wcf.global.objectID{/lang}{if $sortField == 'groupID'} <img src="{@$__wcf->getPath()}icon/sort{@$sortOrder}.svg" alt="" />{/if}</a></th>
@@ -50,14 +49,14 @@
 						<tr class="jsLabelGroupRow">
 							<td class="columnIcon">
 								{if $group->isEditable()}
-									<a href="{link controller='LabelGroupEdit' id=$group->groupID}{/link}"><img src="{@$__wcf->getPath()}icon/edit1.svg" alt="" title="{lang}wcf.global.button.edit{/lang}" class="jsTooltip" /></a>
+									<a href="{link controller='LabelGroupEdit' id=$group->groupID}{/link}"><img src="{@$__wcf->getPath()}icon/edit1.svg" alt="" title="{lang}wcf.global.button.edit{/lang}" class="icon16 jsTooltip" /></a>
 								{else}
-									<img src="{@$__wcf->getPath()}icon/edit1D.svg" alt="" title="{lang}wcf.global.button.edit{/lang}" />
+									<img src="{@$__wcf->getPath()}icon/edit1D.svg" alt="" title="{lang}wcf.global.button.edit{/lang}" class="icon16" />
 								{/if}
 								{if $group->isDeletable()}
-									<img src="{@$__wcf->getPath()}icon/delete1.svg" alt="" title="{lang}wcf.global.button.delete{/lang}" class="jsDeleteButton jsTooltip" data-object-id="{@$group->groupID}" data-confirm-message="{lang}wcf.acp.label.group.delete.sure{/lang}" />
+									<img src="{@$__wcf->getPath()}icon/delete1.svg" alt="" title="{lang}wcf.global.button.delete{/lang}" class="icon16 jsDeleteButton jsTooltip" data-object-id="{@$group->groupID}" data-confirm-message="{lang}wcf.acp.label.group.delete.sure{/lang}" />
 								{else}
-									<img src="{@$__wcf->getPath()}icon/delete1D.svg" alt="" title="{lang}wcf.global.button.delete{/lang}" />
+									<img src="{@$__wcf->getPath()}icon/delete1D.svg" alt="" title="{lang}wcf.global.button.delete{/lang}" class="icon16" />
 								{/if}
 
 								{event name='buttons'}
@@ -74,19 +73,19 @@
 		
 	</div>
 	
-	<div class="wcf-contentFooter">
+	<div class="contentNavigation">
 		{@$pagesLinks}
 		
 		{if $__wcf->session->getPermission('admin.content.label.group.canAddLabelGroup')}
 			<nav>
-				<ul class="wcf-largeButtons">
-					<li><a href="{link controller='LabelGroupAdd'}{/link}" title="{lang}wcf.acp.label.group.add{/lang}" class="wcf-button"><img src="{@$__wcf->getPath()}icon/add1.svg" alt="" /> <span>{lang}wcf.acp.label.group.add{/lang}</span></a></li>
+				<ul>
+					<li><a href="{link controller='LabelGroupAdd'}{/link}" title="{lang}wcf.acp.label.group.add{/lang}" class="button"><img src="{@$__wcf->getPath()}icon/add1.svg" alt="" class="icon24" /> <span>{lang}wcf.acp.label.group.add{/lang}</span></a></li>
 				</ul>
 			</nav>
 		{/if}
 	</div>
 {hascontentelse}
-	<p class="wcf-warning">{lang}wcf.acp.label.group.noneAvailable{/lang}</p>
+	<p class="warning">{lang}wcf.acp.label.group.noneAvailable{/lang}</p>
 {/hascontent}
 
 {include file='footer'}
