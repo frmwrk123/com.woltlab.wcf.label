@@ -1,4 +1,16 @@
 {include file='header'}
+<script type="text/javascript" src="{@$__wcf->getPath()}js/WCF.Label.js"></script>
+<script type="text/javascript">
+	//<![CDATA[
+	$(function() {
+		WCF.Language.addObject({
+			'wcf.acp.label.defaultValue': '{lang}wcf.acp.label.defaultValue{/lang}'
+		});
+		
+		new WCF.Label.ACPList();
+	});
+	//]]>
+</script>
 
 <header class="box48 boxHeadline">
 	<img src="{@$__wcf->getPath()}icon/{$action}1.svg" alt="" class="icon48" />
@@ -29,6 +41,27 @@
 			<fieldset>
 				<legend>{lang}wcf.acp.label.data{/lang}</legend>
 				
+				<dl{if $errorField == 'groupID'} class="formError"{/if}>
+					<dt><label for="groupID">{lang}wcf.acp.label.group{/lang}</label></dt>
+					<dd>
+						<select id="groupID" name="groupID">
+							<option value="0"></option>
+							{foreach from=$labelGroupList item=group}
+								<option value="{$group->groupID}"{if $group->groupID == $groupID} selected="selected"{/if}>{$group->groupName}</option>
+							{/foreach}
+						</select>
+						{if $errorField == 'groupID'}
+							<small class="innerError">
+								{if $errorType == 'empty'}
+									{lang}wcf.global.form.error.empty{/lang}
+								{else}
+									{lang}wcf.acp.label.group.error.{@$errorType}{/lang}
+								{/if}
+							</small>
+						{/if}
+					</dd>
+				</dl>
+				
 				<dl{if $errorField == 'label'} class="formError"{/if}>
 					<dt><label for="label">{lang}wcf.acp.label.label{/lang}</label></dt>
 					<dd>
@@ -50,31 +83,19 @@
 				<dl{if $errorField == 'cssClassName'} class="formError"{/if}>
 					<dt><label for="cssClassName">{lang}wcf.acp.label.cssClassName{/lang}</label></dt>
 					<dd>
-						<input type="text" id="cssClassName" name="cssClassName" value="{$cssClassName}" class="long" />
+						<ul id="labelList">
+							{foreach from=$availableCssClassNames item=className}
+								{if $className == 'custom'}
+									<li class="labelCustomClass"><label><input type="radio" name="cssClassName" value="custom"{if $cssClassName == 'custom'} checked="checked"{/if} /> <span><input type="text" id="customCssClassName" name="customCssClassName" value="{$customCssClassName}" class="long" /></span></label></li>
+								{else}
+									<li><label><input type="radio" name="cssClassName" value="{$className}"{if $cssClassName == $className} checked="checked"{/if} /> <span class="badge label{if $className != 'none'} {$className}{/if}">Label</span></label></li>
+								{/if}
+							{/foreach}
+						</ul>
+						
 						{if $errorField == 'cssClassName'}
 							<small class="innerError">
 								{lang}wcf.acp.label.label.error.{@$errorType}{/lang}
-							</small>
-						{/if}
-					</dd>
-				</dl>
-				
-				<dl{if $errorField == 'groupID'} class="formError"{/if}>
-					<dt><label for="groupID">{lang}wcf.acp.label.group{/lang}</label></dt>
-					<dd>
-						<select id="groupID" name="groupID">
-							<option value="0"></option>
-							{foreach from=$labelGroupList item=group}
-								<option value="{$group->groupID}"{if $group->groupID == $groupID} selected="selected"{/if}>{$group->groupName}</option>
-							{/foreach}
-						</select>
-						{if $errorField == 'groupID'}
-							<small class="innerError">
-								{if $errorType == 'empty'}
-									{lang}wcf.global.form.error.empty{/lang}
-								{else}
-									{lang}wcf.acp.label.group.error.{@$errorType}{/lang}
-								{/if}
 							</small>
 						{/if}
 					</dd>

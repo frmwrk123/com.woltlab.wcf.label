@@ -71,12 +71,15 @@ class LabelEditForm extends LabelAddForm {
 		// update label
 		$this->objectAction = new LabelAction(array($this->labelID), 'update', array('data' => array(
 			'label' => $this->label,
-			'cssClassName' => $this->cssClassName,
+			'cssClassName' => ($this->cssClassName == 'custom' ? $this->customCssClassName : $this->cssClassName),
 			'groupID' => $this->groupID
 		)));
 		$this->objectAction->executeAction();
 		
 		$this->saved();
+		
+		// reset values if non-custom value was choosen
+		if ($this->cssClassName != 'custom') $this->customCssClassName = '';
 		
 		// show success
 		WCF::getTPL()->assign(array(
@@ -95,6 +98,11 @@ class LabelEditForm extends LabelAddForm {
 			$this->label = $this->labelObj->label;
 			
 			$this->cssClassName = $this->labelObj->cssClassName;
+			if (!in_array($this->cssClassName, $this->availableCssClassNames)) {
+				$this->customCssClassName = $this->cssClassName;
+				$this->cssClassName = 'custom';
+			}
+			
 			$this->groupID = $this->labelObj->groupID;
 		}
 	}

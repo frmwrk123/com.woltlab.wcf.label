@@ -14,6 +14,7 @@
 		<item name="wcf.acp.label.add"><![CDATA[Add label]]></item>
 		<item name="wcf.acp.label.cssClassName"><![CDATA[CSS classes]]></item>
 		<item name="wcf.acp.label.data"><![CDATA[General label-information]]></item>
+		<item naem="wcf.acp.label.defaultValue"><![CDATA[Label]]></item>
 		<item name="wcf.acp.label.error.noGroups"><![CDATA[Before adding a label, you have to <a href="{link controller='LabelGroupAdd'}{/link}">add a label group</a> first.]]></item>
 		<item name="wcf.acp.label.group"><![CDATA[Label group]]></item>
 		<item name="wcf.acp.label.group.add"><![CDATA[Add label group]]></item>

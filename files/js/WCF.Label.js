@@ -4,6 +4,51 @@
 WCF.Label = {};
 
 /**
+ * Provides enhancements for ACP label management.
+ */
+WCF.Label.ACPList = Class.extend({
+	/**
+	 * input element
+	 * @var	jQuery
+	 */
+	_labelInput: null,
+	
+	/**
+	 * list of pre-defined label items
+	 * @var	array<jQuery>
+	 */
+	_labelList: [ ],
+	
+	/**
+	 * Intitializes the ACP label list.
+	 */
+	init: function() {
+		this._labelInput = $('#label').keydown($.proxy(this._keyPressed, this)).keyup($.proxy(this._keyPressed, this)).blur($.proxy(this._keyPressed, this));
+		
+		$('#labelList').find('input[type="radio"]').each($.proxy(function(index, input) {
+			var $input = $(input);
+			
+			// ignore custom values
+			if ($input.prop('value') !== 'custom') {
+				this._labelList.push($($input.next('span')));
+			}
+		}, this));
+	},
+	
+	/**
+	 * Renders label name as label or falls back to a default value if label is empty.
+	 */
+	_keyPressed: function() {
+		var $text = this._labelInput.prop('value');
+		if ($text === '') $text = WCF.Language.get('wcf.acp.label.defaultValue');
+		
+		for (var $i = 0, $length = this._labelList.length; $i < $length; $i++) {
+			this._labelList[$i].text($text);
+		}
+	}
+});
+
+/**
  * Provides a preview for label selections.
  * 
  * @param	string		elementSelector

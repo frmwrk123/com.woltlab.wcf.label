@@ -60,6 +60,31 @@ class LabelAddForm extends ACPForm {
 	public $cssClassName = '';
 	
 	/**
+	 * custom CSS class name
+	 * @var	string
+	 */
+	public $customCssClassName = '';
+	
+	/**
+	 * list of pre-defined css class names
+	 * @var	array<string>
+	 */
+	public $availableCssClassNames = array(
+		'yellow',
+		'orange',
+		'brown',
+		'red',
+		'pink',
+		'purple',
+		'blue',
+		'green',
+		'black',
+		
+		'none', /* not a real value */
+		'custom' /* not a real value */
+	);
+	
+	/**
 	 * @see wcf\page\IPage::readParameters()
 	 */
 	public function readParameters() {
@@ -78,6 +103,7 @@ class LabelAddForm extends ACPForm {
 		
 		if (I18nHandler::getInstance()->isPlainValue('label')) $this->label = I18nHandler::getInstance()->getValue('label');
 		if (isset($_POST['cssClassName'])) $this->cssClassName = StringUtil::trim($_POST['cssClassName']);
+		if (isset($_POST['customCssClassName'])) $this->customCssClassName = StringUtil::trim($_POST['customCssClassName']);
 		if (isset($_POST['groupID'])) $this->groupID = intval($_POST['groupID']);
 	}
 	
@@ -105,6 +131,13 @@ class LabelAddForm extends ACPForm {
 		if (!isset($groups[$this->groupID])) {
 			throw new UserInputException('groupID', 'invalid');
 		}
+		
+		if (empty($this->cssClassName)) {
+			throw new UserInputException('cssClassName', 'empty');
+		}
+		else if (!in_array($this->cssClassName, $this->availableCssClassNames)) {
+			throw new UserInputException('cssClassName', 'notValid');
+		}
 	}
 	
 	/**
@@ -116,7 +149,7 @@ class LabelAddForm extends ACPForm {
 		// save label
 		$this->objectAction = new LabelAction(array(), 'create', array('data' => array(
 			'label' => $this->label,
-			'cssClassName' => $this->cssClassName,
+			'cssClassName' => ($this->cssClassName == 'custom' ? $this->customCssClassName : $this->cssClassName),
 			'groupID' => $this->groupID
 		)));
 		$this->objectAction->executeAction();
@@ -136,7 +169,7 @@ class LabelAddForm extends ACPForm {
 		$this->saved();
 		
 		// reset values
-		$this->label = $this->cssClassName = '';
+		$this->label = $this->cssClassName = $this->customCssClassName = '';
 		$this->groupID = 0;
 		I18nHandler::getInstance()->disableAssignValueVariables();
 		
@@ -167,7 +200,9 @@ class LabelAddForm extends ACPForm {
 		
 		WCF::getTPL()->assign(array(
 			'action' => 'add',
+			'availableCssClassNames' => $this->availableCssClassNames,
 			'cssClassName' => $this->cssClassName,
+			'customCssClassName' => $this->customCssClassName,
 			'groupID' => $this->groupID,
 			'label' => $this->label,
 			'labelGroupList' => $this->labelGroupList
