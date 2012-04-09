@@ -80,43 +80,29 @@
 				<h1>{lang}wcf.acp.label.group.category.connect{/lang}</h1>
 			</hgroup>
 			
-			<style type="text/css">
-				#test li {
-					background-color: rgba(224, 224, 224, .3);
-					padding: 3px 40px 3px 3px;
-					text-align: right;
-				}
-				
-				#test li.category {
-					background-color: rgba(192, 192, 192, .3);
-				}
-				
-				#test li span:first-child {
-					float: left;
-				}
-			</style>
+			<fieldset>
+				<legend>{lang}wcf.acp.label.group.category.connect{/lang}</legend>
 			
-			{foreach from=$labelObjectTypeContainers item=container}
-				{if $container->isBooleanOption()}
-					<!-- TODO: Implement boolean option mode -->
-				{else}
-					<dl>
-						<dt>objectTypeID = {@$container->getObjectTypeID()}</dt>
-						<dd>
-							<ul id="test" class="wcf-box wcf-boxPadding">
-								{foreach from=$container item=objectType}
-									<li class="{if $objectType->isCategory()} category{/if}"{if $objectType->getDepth()} style="padding-left: {40 * $objectType->getDepth()}px"{/if}>
-										<label for="checkbox_{@$container->getObjectTypeID()}_{@$objectType->getObjectID()}">
+				{foreach from=$labelObjectTypeContainers item=container}
+					{if $container->isBooleanOption()}
+						<!-- TODO: Implement boolean option mode -->
+					{else}
+						<dl>
+							<dt>objectTypeID = {@$container->getObjectTypeID()}</dt>
+							<dd>
+								<ul class="container structuredList">
+									{foreach from=$container item=objectType}
+										<li class="{if $objectType->isCategory()} category{/if}"{if $objectType->getDepth()} style="padding-left: {21 * $objectType->getDepth()}px"{/if}>
 											<span>{$objectType->getLabel()}</span>
-											<span><input id="checkbox_{@$container->getObjectTypeID()}_{@$objectType->getObjectID()}" type="checkbox" name="objectTypes[{@$container->getObjectTypeID()}][]" value="{@$objectType->getObjectID()}"{if $objectType->getOptionValue()} checked="checked"{/if} /></span>
-										</label>
-									</li>
-								{/foreach}
-							</ul>
-						</dd>
-					</dl>
-				{/if}
-			{/foreach}
+											<label><input id="checkbox_{@$container->getObjectTypeID()}_{@$objectType->getObjectID()}" type="checkbox" name="objectTypes[{@$container->getObjectTypeID()}][]" value="{@$objectType->getObjectID()}"{if $objectType->getOptionValue()} checked="checked"{/if} /></label>
+										</li>
+									{/foreach}
+								</ul>
+							</dd>
+						</dl>
+					{/if}
+				{/foreach}
+			</fieldset>
 		</div>
 	</div>
 	
