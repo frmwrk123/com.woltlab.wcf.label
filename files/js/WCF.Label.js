@@ -166,3 +166,90 @@ WCF.Label.Preview = Class.extend({
 		}
 	}
 });
+
+WCF.Label.Chooser = Class.extend({
+	_containers: { },
+	
+	init: function(selectedLabelIDs) {
+		this._containers = { };
+		
+		// init containers
+		this._initContainers();
+		
+		// pre-select labels
+		if (selectedLabelIDs.length) {
+			for (var $containerID in this._containers) {
+				this._containers[$containerID].find('.dropdownMenu > li').each($.proxy(function(index, label) {
+					var $label = $(label);
+					var $labelID = $label.data('labelID') || 0;
+					if ($labelID && WCF.inArray($labelID, selectedLabelIDs)) {
+						this._selectLabel($label);
+					}
+				}, this));
+			}
+		}
+		
+		$('#postContainer').submit($.proxy(this._submit, this));
+	},
+	
+	_initContainers: function() {
+		$('.labelChooser').each($.proxy(function(index, container) {
+			var $container = $(container);
+			var $containerID = $container.wcfIdentify();
+			
+			if (!this._containers[$containerID]) {
+				this._containers[$containerID] = $container;
+				var $dropdownMenu = $container.find('.dropdownMenu');
+				$dropdownMenu.find('li').click($.proxy(this._click, this));
+				
+				if (!$container.data('forceSelection')) {
+					$('<li class="dropdownDivider" />').appendTo($dropdownMenu);
+					
+					var $buttonEmpty = $('<li><span><span class="badge label">' + WCF.Language.get('wcf.label.none') + '</span></span></li>').appendTo($dropdownMenu);
+					$buttonEmpty.click($.proxy(this._click, this));
+				}
+			}
+		}, this));
+	},
+	
+	_click: function(event) {
+		this._selectLabel($(event.currentTarget));
+	},
+	
+	_selectLabel: function(label) {
+		var $container = label.parents('.dropdown');
+		
+		// save label id
+		if (label.data('labelID')) {
+			$container.data('labelID', label.data('labelID'));
+		}
+		else {
+			$container.data('labelID', 0);
+		}
+		
+		// replace button
+		label = label.find('span > span');
+		$container.find('.dropdownToggle > span').removeClass().addClass(label.attr('class')).text(label.text());
+	},
+	
+	_submit: function() {
+		// get form submit area
+		var $formSubmit = $('#postContainer').find('.formSubmit');
+		
+		// remove old, hidden values
+		$formSubmit.find('input[type="hidden"]').each(function(index, input) {
+			var $input = $(input);
+			if ($input.attr('name') === 'labelIDs[]') {
+				$input.remove();
+			}
+		});
+		
+		// insert label ids
+		for (var $containerID in this._containers) {
+			var $container = this._containers[$containerID];
+			if ($container.data('labelID')) {
+				$('<input type="hidden" name="labelIDs[]" value="' + $container.data('labelID') + '" />').appendTo($formSubmit);
+			}
+		}
+	}
+});
