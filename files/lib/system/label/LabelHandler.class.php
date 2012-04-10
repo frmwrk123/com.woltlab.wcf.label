@@ -114,8 +114,17 @@ class LabelHandler extends SingletonFactory {
 	 * @return	array
 	 */
 	public function getPermissions($optionName, array $labelIDs) {
+		if (empty($labelIDs)) {
+			// nothing to validate anyway
+			return array();
+		}
+		
 		if (empty($this->labelGroups['groups'])) {
-			throw new SystemException("cannot validate label ids, missing label groups");
+			// pretend given label ids aren't valid
+			$data = array();
+			foreach ($labelIDs as $labelID) $data[$labelID] = false;
+			
+			return $data;
 		}
 		
 		$optionID = $this->getOptionID($optionName);
