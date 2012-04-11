@@ -94,83 +94,33 @@ WCF.Label.ACPList.Connect = Class.extend({
 });
 
 /**
- * Provides a preview for label selections.
+ * Provides a flexible label chooser.
  * 
- * @param	string		elementSelector
- * @param	boolean		previewOnInit
+ * @param	array<integer>	selectedLabelIDs
+ * @param	string		containerSelector
+ * @param	string		submitButtonSelector
  */
-WCF.Label.Preview = Class.extend({
-	/**
-	 * list of selections
-	 * @var	object
-	 */
-	_elements: { },
-	
-	/**
-	 * list of preview elements
-	 * @var	object
-	 */
-	_previews: { },
-	
-	/**
-	 * Creates a new label preview for affected select elements.
-	 * 
-	 * @param	string		elementSelector
-	 * @param	boolean		previewOnInit
-	 */
-	init: function(elementSelector, previewOnInit) {
-		var $elements = $(elementSelector);
-		if (!$elements.length) {
-			return;
-		}
-		
-		$elements.each($.proxy(function(index, element) {
-			var $element = $(element);
-			var $elementID = $element.wcfIdentify();
-			
-			this._elements[$elementID] = $element;
-			this._previews[$elementID] = $('&nbsp;<span />').hide().insertAfter($element);
-			
-			$element.change($.proxy(this._change, this));
-			
-			if (previewOnInit) {
-				this._showPreview($elementID);
-			}
-		}, this));
-	},
-	
-	/**
-	 * Updates preview on change.
-	 * 
-	 * @param	object		event
-	 */
-	_change: function(event) {
-		var $elementID = $(event.currentTarget).wcfIdentify();
-		this._showPreview($elementID);
-	},
-	
-	/**
-	 * Shows (or hides) preview for labels.
-	 * 
-	 * @param	string		elementID
-	 */
-	_showPreview: function(elementID) {
-		var $element = this._elements[elementID];
-		
-		// get selected option
-		var $selectedOption = $element.children('option:selected');
-		
-		this._previews[elementID].removeClass().empty().hide();
-		if ($selectedOption.prop('value')) {
-			this._previews[elementID].addClass('wcf-label').addClass($selectedOption.data('cssClassName')).html($selectedOption.text()).show();
-		}
-	}
-});
-
 WCF.Label.Chooser = Class.extend({
+	/**
+	 * label container
+	 * @var	jQuery
+	 */
+	_container: null,
+	
+	/**
+	 * list of label groups
+	 * @var	object
+	 */
 	_containers: { },
 	
-	init: function(selectedLabelIDs) {
+	/**
+	 * Initializes a new label chooser.
+	 * 
+	 * @param	array<integer>	selectedLabelIDs
+	 * @param	string		containerSelector
+	 * @param	string		submitButtonSelector
+	 */
+	init: function(selectedLabelIDs, containerSelector, submitButtonSelector) {
 		this._containers = { };
 		
 		// init containers
@@ -189,9 +139,20 @@ WCF.Label.Chooser = Class.extend({
 			}
 		}
 		
-		$('#postContainer').submit($.proxy(this._submit, this));
+		if (containerSelector) {
+			this._container = $(containerSelector);
+			if (submitButtonSelector) {
+				$(submitButtonSelector).click($.proxy(this._submit, this));
+			}
+			else {
+				this._container.submit($.proxy(this._submit, this));
+			}
+		}
 	},
 	
+	/**
+	 * Initializes label groups.
+	 */
 	_initContainers: function() {
 		$('.labelChooser').each($.proxy(function(index, container) {
 			var $container = $(container);
@@ -212,10 +173,20 @@ WCF.Label.Chooser = Class.extend({
 		}, this));
 	},
 	
+	/**
+	 * Handles label selections.
+	 * 
+	 * @param	object		event
+	 */
 	_click: function(event) {
 		this._selectLabel($(event.currentTarget));
 	},
 	
+	/**
+	 * Selects a label.
+	 * 
+	 * @param	jQuery		label
+	 */
 	_selectLabel: function(label) {
 		var $container = label.parents('.dropdown');
 		
@@ -232,9 +203,12 @@ WCF.Label.Chooser = Class.extend({
 		$container.find('.dropdownToggle > span').removeClass().addClass(label.attr('class')).text(label.text());
 	},
 	
+	/**
+	 * Creates hidden input elements on submit.
+	 */
 	_submit: function() {
 		// get form submit area
-		var $formSubmit = $('#postContainer').find('.formSubmit');
+		var $formSubmit = this._container.find('.formSubmit');
 		
 		// remove old, hidden values
 		$formSubmit.find('input[type="hidden"]').each(function(index, input) {
