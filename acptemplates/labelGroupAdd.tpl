@@ -13,8 +13,7 @@
 	//]]>
 </script>
 
-<header class="box48 boxHeadline">
-	<img src="{@$__wcf->getPath()}icon/{$action}1.svg" alt="" class="icon48" />
+<header class="boxHeadline">
 	<hgroup>
 		<h1>{lang}wcf.acp.label.group.{$action}{/lang}</h1>
 		<h2>{lang}wcf.acp.label.group.subtitle{/lang}</h2>
@@ -47,10 +46,6 @@
 		</nav>
 		
 		<div id="general" class="container containerPadding tabMenuContainer tabMenuContent">
-			<hgroup class="boxSubHeadline">
-				<h1>{lang}wcf.acp.label.group.category.general{/lang}</h1>
-			</hgroup>
-			
 			<fieldset>
 				<legend>{lang}wcf.acp.label.group.data{/lang}</legend>
 				
@@ -78,10 +73,6 @@
 		</div>
 		
 		<div id="connect" class="container containerPadding tabMenuContainer tabMenuContent">
-			<hgroup class="boxSubHeadline">
-				<h1>{lang}wcf.acp.label.group.category.connect{/lang}</h1>
-			</hgroup>
-			
 			<fieldset>
 				<legend>{lang}wcf.acp.label.group.category.connect{/lang}</legend>
 			

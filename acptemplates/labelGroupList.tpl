@@ -1,7 +1,6 @@
 {include file='header'}
 
-<header class="box48 boxHeadline">
-	<img src="{@$__wcf->getPath()}icon/label1.svg" alt="" class="icon48" />
+<header class="boxHeadline">
 	<hgroup class="wcf-containerContent">
 		<h1>{lang}wcf.acp.label.group.list{/lang}</h1>
 	</hgroup>
