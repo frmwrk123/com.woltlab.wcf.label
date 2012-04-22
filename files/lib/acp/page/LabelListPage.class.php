@@ -17,7 +17,7 @@ class LabelListPage extends SortablePage {
 	/**
 	 * @see	wcf\page\SortablePage::$defaultSortField
 	 */
-	public $defaultSortField = 'labelID';
+	public $defaultSortField = 'label';
 	
 	/**
 	 * @see	wcf\page\SortablePage::$validSortFields

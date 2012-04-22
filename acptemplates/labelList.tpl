@@ -29,7 +29,7 @@
 {hascontent}
 	<div class="tabularBox tabularBoxTitle marginTop shadow">
 		<hgroup>
-			<h1>{lang}wcf.acp.label.list{/lang} <span class="badge" title="{lang}wcf.acp.label.list.count{/lang}">{#$items}</span></h1>
+			<h1>{lang}wcf.acp.label.list{/lang} <span class="badge badgeInverse" title="{lang}wcf.acp.label.list.count{/lang}">{#$items}</span></h1>
 		</hgroup>
 		
 		<table class="table">
@@ -86,7 +86,7 @@
 		{/if}
 	</div>
 {hascontentelse}
-	<p class="warning">{lang}wcf.acp.label.noneAvailable{/lang}</p>
+	<p class="info">{lang}wcf.acp.label.noneAvailable{/lang}</p>
 {/hascontent}
 
 {include file='footer'}

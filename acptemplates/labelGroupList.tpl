@@ -17,7 +17,7 @@
 <div class="contentNavigation">
 	{pages print=true assign=pagesLinks controller="LabelGroupList" link="pageNo=%d&sortField=$sortField&sortOrder=$sortOrder"}
 	
-	{if $__wcf->session->getPermission('admin.content.label.group.canAddLabelGroup')}
+	{if $__wcf->session->getPermission('admin.content.label.canAddLabelGroup')}
 		<nav>
 			<ul>
 				<li><a href="{link controller='LabelGroupAdd'}{/link}" title="{lang}wcf.acp.label.group.add{/lang}" class="button"><img src="{@$__wcf->getPath()}icon/add1.svg" alt="" class="icon24" /> <span>{lang}wcf.acp.label.group.add{/lang}</span></a></li>
@@ -29,7 +29,7 @@
 {hascontent}
 	<div class="tabularBox tabularBoxTitle marginTop shadow">
 		<hgroup>
-			<h1>{lang}wcf.acp.label.group.list{/lang} <span class="badge" title="{lang}wcf.acp.label.group.list.count{/lang}">{#$items}</span></h1>
+			<h1>{lang}wcf.acp.label.group.list{/lang} <span class="badge badgeInverse" title="{lang}wcf.acp.label.group.list.count{/lang}">{#$items}</span></h1>
 		</hgroup>
 		
 		<table class="table">
@@ -75,7 +75,7 @@
 	<div class="contentNavigation">
 		{@$pagesLinks}
 		
-		{if $__wcf->session->getPermission('admin.content.label.group.canAddLabelGroup')}
+		{if $__wcf->session->getPermission('admin.content.label.canAddLabelGroup')}
 			<nav>
 				<ul>
 					<li><a href="{link controller='LabelGroupAdd'}{/link}" title="{lang}wcf.acp.label.group.add{/lang}" class="button"><img src="{@$__wcf->getPath()}icon/add1.svg" alt="" class="icon24" /> <span>{lang}wcf.acp.label.group.add{/lang}</span></a></li>
@@ -84,7 +84,7 @@
 		{/if}
 	</div>
 {hascontentelse}
-	<p class="warning">{lang}wcf.acp.label.group.noneAvailable{/lang}</p>
+	<p class="info">{lang}wcf.acp.label.group.noneAvailable{/lang}</p>
 {/hascontent}
 
 {include file='footer'}

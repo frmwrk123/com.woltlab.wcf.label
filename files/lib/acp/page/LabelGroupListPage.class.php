@@ -17,7 +17,7 @@ class LabelGroupListPage extends SortablePage {
 	/**
 	 * @see	wcf\page\SortablePage::$defaultSortField
 	 */
-	public $defaultSortField = 'groupID';
+	public $defaultSortField = 'groupName';
 	
 	/**
 	 * @see	wcf\page\SortablePage::$validSortFields
