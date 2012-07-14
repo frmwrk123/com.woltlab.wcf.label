@@ -12,7 +12,7 @@
 				options.updatePageNumber = -1;
 			{/if}
 		{else}
-			options.emptyMessage: '{lang}wcf.acp.label.group.noneAvailable{/lang}';
+			options.emptyMessage = '{lang}wcf.acp.label.group.noneAvailable{/lang}';
 		{/if}
 
 		new WCF.Table.EmptyTableHandler($('#labelGroupTableContainer'), 'jsLabelGroupRow', options);
