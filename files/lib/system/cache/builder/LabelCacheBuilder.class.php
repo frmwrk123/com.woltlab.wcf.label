@@ -1,6 +1,5 @@
 <?php
 namespace wcf\system\cache\builder;
-use wcf\data\acl\option\ACLOptionAction;
 use wcf\data\label\group\LabelGroupList;
 use wcf\data\label\group\ViewableLabelGroup;
 use wcf\data\label\LabelList;

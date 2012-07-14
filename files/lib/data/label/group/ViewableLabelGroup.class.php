@@ -1,6 +1,5 @@
 <?php
 namespace wcf\data\label\group;
-use wcf\data\acl\option\ACLOptionList;
 use wcf\data\label\Label;
 use wcf\data\DatabaseObjectDecorator;
 use wcf\data\ITraversableObject;
