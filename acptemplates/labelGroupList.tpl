@@ -1,17 +1,29 @@
 {include file='header'}
 
+<script type="text/javascript">
+	//<![CDATA[
+	$(function() {
+		new WCF.Action.Delete('wcf\\data\\label\\group\\LabelGroupAction', $('.jsLabelGroupRow'));
+		
+		var options = { };
+		{if $pages > 1}
+			options.refreshPage = true;
+			{if $pages == $pageNo}
+				options.updatePageNumber = -1;
+			{/if}
+		{else}
+			options.emptyMessage = '{lang}wcf.acp.label.group.noneAvailable{/lang}';
+		{/if}
+
+		new WCF.Table.EmptyTableHandler($('#labelGroupTableContainer'), 'jsLabelGroupRow', options);
+	});
+	//]]>
+</script>
+
 <header class="boxHeadline">
 	<hgroup class="wcf-containerContent">
 		<h1>{lang}wcf.acp.label.group.list{/lang}</h1>
 	</hgroup>
-	
-	<script type="text/javascript">
-		//<![CDATA[
-		$(function() {
-			new WCF.Action.Delete('wcf\\data\\label\\group\\LabelGroupAction', $('.jsLabelGroupRow'));
-		});
-		//]]>
-	</script>
 </header>
 
 <div class="contentNavigation">
@@ -27,7 +39,7 @@
 </div>
 
 {hascontent}
-	<div class="tabularBox tabularBoxTitle marginTop shadow">
+	<div id="labelGroupTableContainer" class="tabularBox tabularBoxTitle marginTop shadow">
 		<hgroup>
 			<h1>{lang}wcf.acp.label.group.list{/lang} <span class="badge badgeInverse" title="{lang}wcf.acp.label.group.list.count{/lang}">{#$items}</span></h1>
 		</hgroup>
