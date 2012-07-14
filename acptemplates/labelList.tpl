@@ -4,6 +4,18 @@
 	//<![CDATA[
 	$(function() {
 		new WCF.Action.Delete('wcf\\data\\label\\LabelAction', $('.jsLabelRow'));
+		
+		var options = { };
+		{if $pages > 1}
+			options.refreshPage = true;
+			{if $pages == $pageNo}
+				options.updatePageNumber = -1;
+			{/if}
+		{else}
+			options.emptyMessage: '{lang}wcf.acp.label.noneAvailable{/lang}';
+		{/if}
+
+		new WCF.Table.EmptyTableHandler($('#labelTableContainer'), 'jsLabelRow', options);
 	});
 	//]]>
 </script>
@@ -27,7 +39,7 @@
 </div>
 
 {hascontent}
-	<div class="tabularBox tabularBoxTitle marginTop shadow">
+	<div id="labelTableContainer" class="tabularBox tabularBoxTitle marginTop shadow">
 		<hgroup>
 			<h1>{lang}wcf.acp.label.list{/lang} <span class="badge badgeInverse" title="{lang}wcf.acp.label.list.count{/lang}">{#$items}</span></h1>
 		</hgroup>
