@@ -1,6 +1,6 @@
 {include file='header'}
 
-{include file='aclPermissions' sandbox=false}
+{include file='aclPermissions'}
 <script type="text/javascript" src="{@$__wcf->getPath()}js/WCF.Label.js"></script>
 <script type="text/javascript">
 	//<![CDATA[
