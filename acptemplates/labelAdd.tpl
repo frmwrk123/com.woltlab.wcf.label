@@ -69,6 +69,8 @@
 							<small class="innerError">
 								{if $errorType == 'empty'}
 									{lang}wcf.global.form.error.empty{/lang}
+								{else if $errorType == 'multilingual'}
+									{lang}wcf.global.form.error.multilingual{/lang}
 								{else}
 									{lang}wcf.acp.label.label.error.{@$errorType}{/lang}
 								{/if}

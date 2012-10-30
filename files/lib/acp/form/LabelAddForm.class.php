@@ -6,6 +6,7 @@ use wcf\data\label\group\LabelGroupList;
 use wcf\system\exception\UserInputException;
 use wcf\system\language\I18nHandler;
 use wcf\system\package\PackageDependencyHandler;
+use wcf\system\Regex;
 use wcf\system\WCF;
 use wcf\util\StringUtil;
 
@@ -114,13 +115,13 @@ class LabelAddForm extends ACPForm {
 		parent::validate();
 		
 		// validate label
-		try {
-			if (!I18nHandler::getInstance()->validateValue('label')) {
+		if (!I18nHandler::getInstance()->validateValue('label')) {
+			if (I18nHandler::getInstance()->isPlainValue('label')) {
 				throw new UserInputException('label');
 			}
-		}
-		catch (UserInputException $e) {
-			$this->errorType[$e->getField()] = $e->getType();
+			else {
+				throw new UserInputException('label', 'multilingual');
+			}
 		}
 		
 		// validate group
@@ -137,6 +138,11 @@ class LabelAddForm extends ACPForm {
 		}
 		else if (!in_array($this->cssClassName, $this->availableCssClassNames)) {
 			throw new UserInputException('cssClassName', 'notValid');
+		}
+		else if ($this->cssClassName == 'custom') {
+			if (!empty($this->customCssClassName) && !Regex::compile('^-?[_a-zA-Z]+[_a-zA-Z0-9-]+$')->match($this->customCssClassName)) {
+				throw new UserInputException('cssClassName', 'notValid');
+			}
 		}
 	}
 	
