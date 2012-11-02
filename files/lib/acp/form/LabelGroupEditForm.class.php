@@ -84,7 +84,7 @@ class LabelGroupEditForm extends LabelGroupAddForm {
 	public function readData() {
 		parent::readData();
 		
-		if (!count($_POST)) {
+		if (empty($_POST)) {
 			$this->groupName = $this->group->groupName;
 		}
 	}
