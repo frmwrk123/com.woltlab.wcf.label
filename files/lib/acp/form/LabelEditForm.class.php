@@ -93,7 +93,7 @@ class LabelEditForm extends LabelAddForm {
 	public function readData() {
 		parent::readData();
 		
-		if (!count($_POST)) {
+		if (empty($_POST)) {
 			I18nHandler::getInstance()->setOptions('label', PackageDependencyHandler::getInstance()->getPackageID('com.woltlab.wcf.label'), $this->labelObj->label, 'wcf.acp.label.label\d+');
 			$this->label = $this->labelObj->label;
 			
@@ -113,8 +113,7 @@ class LabelEditForm extends LabelAddForm {
 	public function assignVariables() {
 		parent::assignVariables();
 		
-		$useRequestData = (count($_POST)) ? true : false;
-		I18nHandler::getInstance()->assignVariables($useRequestData);
+		I18nHandler::getInstance()->assignVariables(!empty($_POST));
 		
 		WCF::getTPL()->assign(array(
 			'labelID' => $this->labelID,
