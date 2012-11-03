@@ -15,16 +15,16 @@ use wcf\system\WCF;
  * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
  * @package	com.woltlab.wcf.label
  * @subpackage	acp.form
- * @category 	Community Framework
+ * @category	Community Framework
  */
 class LabelEditForm extends LabelAddForm {
 	/**
-	 * @see wcf\acp\form\ACPForm::$activeMenuItem
+	 * @see	wcf\acp\form\ACPForm::$activeMenuItem
 	 */
 	public $activeMenuItem = 'wcf.acp.menu.link.label.list';
 	
 	/**
-	 * @see wcf\page\AbstractPage::$neededPermissions
+	 * @see	wcf\page\AbstractPage::$neededPermissions
 	 */
 	public $neededPermissions = array('admin.content.label.canEditLabel');
 	
@@ -41,7 +41,7 @@ class LabelEditForm extends LabelAddForm {
 	public $labelObj = null;
 	
 	/**
-	 * @see wcf\page\IPage::readParameters()
+	 * @see	wcf\page\IPage::readParameters()
 	 */
 	public function readParameters() {
 		parent::readParameters();
@@ -54,7 +54,7 @@ class LabelEditForm extends LabelAddForm {
 	}
 	
 	/**
-	 * @see wcf\form\IForm::save()
+	 * @see	wcf\form\IForm::save()
 	 */
 	public function save() {
 		ACPForm::save();
@@ -88,7 +88,7 @@ class LabelEditForm extends LabelAddForm {
 	}
 	
 	/**
-	 * @see wcf\page\IPage::readData()
+	 * @see	wcf\page\IPage::readData()
 	 */
 	public function readData() {
 		parent::readData();
@@ -108,7 +108,7 @@ class LabelEditForm extends LabelAddForm {
 	}
 	
 	/**
-	 * @see wcf\page\IPage::assignVariables()
+	 * @see	wcf\page\IPage::assignVariables()
 	 */
 	public function assignVariables() {
 		parent::assignVariables();

@@ -15,21 +15,21 @@ use wcf\util\StringUtil;
  * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
  * @package	com.woltlab.wcf.label
  * @subpackage	acp.form
- * @category 	Community Framework
+ * @category	Community Framework
  */
 class LabelGroupAddForm extends ACPForm {
 	/**
-	 * @see wcf\page\AbstractPage::$templateName
+	 * @see	wcf\page\AbstractPage::$templateName
 	 */
 	public $templateName = 'labelGroupAdd';
 	
 	/**
-	 * @see wcf\acp\form\ACPForm::$activeMenuItem
+	 * @see	wcf\acp\form\ACPForm::$activeMenuItem
 	 */
 	public $activeMenuItem = 'wcf.acp.menu.link.label.group.add';
 	
 	/**
-	 * @see wcf\page\AbstractPage::$neededPermissions
+	 * @see	wcf\page\AbstractPage::$neededPermissions
 	 */
 	public $neededPermissions = array('admin.content.label.canAddLabelGroup');
 	
@@ -73,7 +73,7 @@ class LabelGroupAddForm extends ACPForm {
 	}
 	
 	/**
-	 * @see wcf\form\IForm::readFormParameters()
+	 * @see	wcf\form\IForm::readFormParameters()
 	 */
 	public function readFormParameters() {
 		parent::readFormParameters();
@@ -83,7 +83,7 @@ class LabelGroupAddForm extends ACPForm {
 	}
 	
 	/**
-	 * @see wcf\page\IPage::readData()
+	 * @see	wcf\page\IPage::readData()
 	 */
 	public function readData() {
 		// get label object type handlers
@@ -104,7 +104,7 @@ class LabelGroupAddForm extends ACPForm {
 	}
 	
 	/**
-	 * @see wcf\form\IForm::validate()
+	 * @see	wcf\form\IForm::validate()
 	 */
 	public function validate() {
 		parent::validate();
@@ -123,7 +123,7 @@ class LabelGroupAddForm extends ACPForm {
 	}
 	
 	/**
-	 * @see wcf\form\IForm::save()
+	 * @see	wcf\form\IForm::save()
 	 */
 	public function save() {
 		parent::save();
@@ -154,7 +154,7 @@ class LabelGroupAddForm extends ACPForm {
 	}
 	
 	/**
-	 * @see wcf\page\IPage::assignVariables()
+	 * @see	wcf\page\IPage::assignVariables()
 	 */
 	public function assignVariables() {
 		parent::assignVariables();

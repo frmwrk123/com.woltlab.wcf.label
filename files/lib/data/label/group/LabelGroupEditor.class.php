@@ -13,7 +13,7 @@ use wcf\system\cache\CacheHandler;
  * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
  * @package	com.woltlab.wcf.label
  * @subpackage	data.label.group
- * @category 	Community Framework
+ * @category	Community Framework
  */
 class LabelGroupEditor extends DatabaseObjectEditor implements IEditableCachedObject {
 	/**
@@ -22,7 +22,7 @@ class LabelGroupEditor extends DatabaseObjectEditor implements IEditableCachedOb
 	protected static $baseClass = 'wcf\data\label\group\LabelGroup';
 	
 	/**
-	 * @see wcf\data\IEditableObject::deleteAll()
+	 * @see	wcf\data\IEditableObject::deleteAll()
 	 */
 	public static function deleteAll(array $objectIDs = array()) {
 		$count = parent::deleteAll($objectIDs);

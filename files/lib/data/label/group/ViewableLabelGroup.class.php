@@ -14,7 +14,7 @@ use wcf\system\WCF;
  * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
  * @package	com.woltlab.wcf.label
  * @subpackage	data.label.group
- * @category 	Community Framework
+ * @category	Community Framework
  */
 class ViewableLabelGroup extends DatabaseObjectDecorator implements \Countable, ITraversableObject {
 	/**

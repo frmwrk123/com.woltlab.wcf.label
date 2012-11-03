@@ -5,12 +5,12 @@ use wcf\data\DatabaseObjectList;
 /**
  * Represents a list of labels.
  * 
- * @author 	Alexander Ebert
+ * @author	Alexander Ebert
  * @copyright	2001-2011 WoltLab GmbH
  * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
  * @package	com.woltlab.wcf.label
  * @subpackage	data.label
- * @category 	Community Framework
+ * @category	Community Framework
  */
 class LabelList extends DatabaseObjectList {
 	/**

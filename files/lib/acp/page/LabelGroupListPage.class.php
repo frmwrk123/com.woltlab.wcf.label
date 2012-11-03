@@ -11,7 +11,7 @@ use wcf\system\menu\acp\ACPMenu;
  * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
  * @package	com.woltlab.wcf.label
  * @subpackage	acp.page
- * @category 	Community Framework
+ * @category	Community Framework
  */
 class LabelGroupListPage extends SortablePage {
 	/**
@@ -25,7 +25,7 @@ class LabelGroupListPage extends SortablePage {
 	public $validSortFields = array('groupID', 'groupName');
 	
 	/**
-	 * @see wcf\page\AbstractPage::$neededPermissions
+	 * @see	wcf\page\AbstractPage::$neededPermissions
 	 */
 	public $neededPermissions = array('admin.content.label.canEditLabelGroup', 'admin.content.label.canDeleteLabelGroup');
 	
@@ -35,7 +35,7 @@ class LabelGroupListPage extends SortablePage {
 	public $objectListClassName = 'wcf\data\label\group\LabelGroupList';
 	
 	/**
-	 * @see wcf\page\IPage::show()
+	 * @see	wcf\page\IPage::show()
 	 */
 	public function show() {
 		// set active menu item.

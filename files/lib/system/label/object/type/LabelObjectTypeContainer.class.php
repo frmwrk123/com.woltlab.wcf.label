@@ -9,7 +9,7 @@ namespace wcf\system\label\object\type;
  * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
  * @package	com.woltlab.wcf.label
  * @subpackage	system.label.object.type
- * @category 	Community Framework
+ * @category	Community Framework
  */
 class LabelObjectTypeContainer implements \Countable, \Iterator {
 	/**
@@ -92,42 +92,42 @@ class LabelObjectTypeContainer implements \Countable, \Iterator {
 	}
 	
 	/**
-	 * @see \Iterator::current()
+	 * @see	\Iterator::current()
 	 */
 	public function current() {
 		return $this->objectTypes[$this->position];
 	}
 	
 	/**
-	 * @see \Iterator::key()
+	 * @see	\Iterator::key()
 	 */
 	public function key() {
 		return $this->position;
 	}
 	
 	/**
-	 * @see \Iterator::next()
+	 * @see	\Iterator::next()
 	 */
 	public function next() {
 		$this->position++;
 	}
 	
 	/**
-	 * @see \Iterator::rewind()
+	 * @see	\Iterator::rewind()
 	 */
 	public function rewind() {
 		$this->position = 0;
 	}
 	
 	/**
-	 * @see \Iterator::valid()
+	 * @see	\Iterator::valid()
 	 */
 	public function valid() {
 		return isset($this->objectTypes[$this->position]);
 	}
 	
 	/**
-	 * @see \Countable::count()
+	 * @see	\Countable::count()
 	 */
 	public function count() {
 		return count($this->objectTypes);

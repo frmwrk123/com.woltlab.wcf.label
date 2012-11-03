@@ -13,11 +13,11 @@ use wcf\system\WCF;
  * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
  * @package	com.woltlab.wcf.label
  * @subpackage	data.label
- * @category 	Community Framework
+ * @category	Community Framework
  */
 class LabelAction extends AbstractDatabaseObjectAction {
 	/**
-	 * @see wcf\data\AbstractDatabaseObjectAction::$className
+	 * @see	wcf\data\AbstractDatabaseObjectAction::$className
 	 */
 	protected $className = 'wcf\data\label\LabelEditor';
 	
@@ -37,7 +37,7 @@ class LabelAction extends AbstractDatabaseObjectAction {
 	protected $permissionsUpdate = array('admin.content.label.canEditLabel');
 	
 	/**
-	 * @see wcf\data\AbstractDatabaseObjectAction::delete()
+	 * @see	wcf\data\AbstractDatabaseObjectAction::delete()
 	 */
 	public function delete() {
 		$count = parent::delete();
