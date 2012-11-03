@@ -9,7 +9,7 @@ namespace wcf\system\label\object\type;
  * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
  * @package	com.woltlab.wcf.label
  * @subpackage	system.label.object.type
- * @category 	Community Framework
+ * @category	Community Framework
  */
 interface ILabelObjectTypeHandler {
 	/**

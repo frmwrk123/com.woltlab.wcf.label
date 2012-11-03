@@ -15,7 +15,7 @@ use wcf\system\WCF;
  * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
  * @package	com.woltlab.wcf.label
  * @subpackage	system.label
- * @category 	Community Framework
+ * @category	Community Framework
  */
 class LabelHandler extends SingletonFactory {
 	/**

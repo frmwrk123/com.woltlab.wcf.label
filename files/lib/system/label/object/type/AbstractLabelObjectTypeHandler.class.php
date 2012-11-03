@@ -10,7 +10,7 @@ use wcf\system\SingletonFactory;
  * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
  * @package	com.woltlab.wcf.label
  * @subpackage	system.label.object.type
- * @category 	Community Framework
+ * @category	Community Framework
  */
 abstract class AbstractLabelObjectTypeHandler extends SingletonFactory implements ILabelObjectTypeHandler {
 	/**
@@ -26,14 +26,14 @@ abstract class AbstractLabelObjectTypeHandler extends SingletonFactory implement
 	public $objectTypeID = 0;
 	
 	/**
-	 * @see wcf\system\label\object\type\ILabelObjectTypeHandler::setObjectTypeID()
+	 * @see	wcf\system\label\object\type\ILabelObjectTypeHandler::setObjectTypeID()
 	 */
 	public function setObjectTypeID($objectTypeID) {
 		$this->objectTypeID = $objectTypeID;
 	}
 	
 	/**
-	 * @see wcf\system\label\object\type\ILabelObjectTypeHandler::getObjectTypeID()
+	 * @see	wcf\system\label\object\type\ILabelObjectTypeHandler::getObjectTypeID()
 	 */
 	public function getObjectTypeID() {
 		return $this->objectTypeID;
