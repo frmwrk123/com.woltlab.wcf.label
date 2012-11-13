@@ -34,4 +34,8 @@
 		<item name="wcf.acp.menu.link.label.group.list"><![CDATA[Labelgruppen auflisten]]></item>
 		<item name="wcf.acp.menu.link.label.group.add"><![CDATA[Labelgruppe hinzufügen]]></item>
 	</category>
+	
+	<category name="wcf.label">
+		<item name="wcf.label.none"><![CDATA[Keine Auswahl]]></item>
+	</category>
 </language>
