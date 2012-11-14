@@ -37,5 +37,7 @@
 	
 	<category name="wcf.label">
 		<item name="wcf.label.none"><![CDATA[Keine Auswahl]]></item>
+		<item name="wcf.label.label"><![CDATA[Label]]></item>
+		<item name="wcf.label.labels"><![CDATA[Labels]]></item>
 	</category>
 </language>
