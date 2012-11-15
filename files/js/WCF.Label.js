@@ -121,8 +121,6 @@ WCF.Label.Chooser = Class.extend({
 	 * @param	string		submitButtonSelector
 	 */
 	init: function(selectedLabelIDs, containerSelector, submitButtonSelector) {
-		this._containers = { };
-		
 		// init containers
 		this._initContainers();
 		
