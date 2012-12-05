@@ -46,7 +46,7 @@
 						<select id="groupID" name="groupID">
 							<option value="0"></option>
 							{foreach from=$labelGroupList item=group}
-								<option value="{$group->groupID}"{if $group->groupID == $groupID} selected="selected"{/if}>{$group->groupName}</option>
+								<option value="{@$group->groupID}"{if $group->groupID == $groupID} selected="selected"{/if}>{$group->groupName}</option>
 							{/foreach}
 						</select>
 						{if $errorField == 'groupID'}
@@ -96,7 +96,7 @@
 						
 						{if $errorField == 'cssClassName'}
 							<small class="innerError">
-								{lang}wcf.acp.label.label.error.{@$errorType}{/lang}
+								{lang}wcf.acp.label.cssClassName.error.{@$errorType}{/lang}
 							</small>
 						{/if}
 					</dd>
