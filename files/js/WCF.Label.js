@@ -121,8 +121,6 @@ WCF.Label.Chooser = Class.extend({
 	 * @param	string		submitButtonSelector
 	 */
 	init: function(selectedLabelIDs, containerSelector, submitButtonSelector) {
-		this._containers = { };
-		
 		// init containers
 		this._initContainers();
 		
@@ -133,9 +131,17 @@ WCF.Label.Chooser = Class.extend({
 					var $label = $(label);
 					var $labelID = $label.data('labelID') || 0;
 					if ($labelID && WCF.inArray($labelID, selectedLabelIDs)) {
-						this._selectLabel($label);
+						this._selectLabel($label, true);
 					}
 				}, this));
+			}
+		}
+		
+		// mark all containers as initialized
+		for (var $containerID in this._containers) {
+			var $dropdown = this._containers[$containerID];
+			if ($dropdown.data('labelID') === undefined) {
+				$dropdown.data('labelID', 0);
 			}
 		}
 		
@@ -179,16 +185,22 @@ WCF.Label.Chooser = Class.extend({
 	 * @param	object		event
 	 */
 	_click: function(event) {
-		this._selectLabel($(event.currentTarget));
+		this._selectLabel($(event.currentTarget), false);
 	},
 	
 	/**
 	 * Selects a label.
 	 * 
 	 * @param	jQuery		label
+	 * @param	boolean		onInit
 	 */
-	_selectLabel: function(label) {
+	_selectLabel: function(label, onInit) {
 		var $container = label.parents('.dropdown');
+		
+		// already initialized, ignore
+		if (onInit && $container.data('labelID') !== undefined) {
+			return;
+		}
 		
 		// save label id
 		if (label.data('labelID')) {

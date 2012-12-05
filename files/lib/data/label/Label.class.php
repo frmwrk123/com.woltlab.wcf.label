@@ -25,6 +25,16 @@ class Label extends DatabaseObject {
 	protected static $databaseTableIndexName = 'labelID';
 	
 	/**
+	 * Returns the label's textual representation if a label is treated as a
+	 * string.
+	 * 
+	 * @return	string
+	 */
+	public function __toString() {
+		return WCF::getLanguage()->get($this->label);
+	}
+	
+	/**
 	 * Returns true, if label is editable by current user.
 	 * 
 	 * @return	boolean

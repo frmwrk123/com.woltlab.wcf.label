@@ -3,9 +3,9 @@ namespace wcf\acp\form;
 use wcf\data\label\LabelAction;
 use wcf\data\label\LabelEditor;
 use wcf\data\label\group\LabelGroupList;
+use wcf\data\package\PackageCache;
 use wcf\system\exception\UserInputException;
 use wcf\system\language\I18nHandler;
-use wcf\system\package\PackageDependencyHandler;
 use wcf\system\Regex;
 use wcf\system\WCF;
 use wcf\util\StringUtil;
@@ -163,7 +163,7 @@ class LabelAddForm extends ACPForm {
 		if (!I18nHandler::getInstance()->isPlainValue('label')) {
 			$returnValues = $this->objectAction->getReturnValues();
 			$labelID = $returnValues['returnValues']->labelID;
-			I18nHandler::getInstance()->save('label', 'wcf.acp.label.label'.$labelID, 'wcf.acp.label', PackageDependencyHandler::getInstance()->getPackageID('com.woltlab.wcf.label'));
+			I18nHandler::getInstance()->save('label', 'wcf.acp.label.label'.$labelID, 'wcf.acp.label', PackageCache::getInstance()->getPackageID('com.woltlab.wcf.label'));
 			
 			// update group name
 			$labelEditor = new LabelEditor($returnValues['returnValues']);
