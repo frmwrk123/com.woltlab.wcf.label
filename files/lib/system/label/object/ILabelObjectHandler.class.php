@@ -2,8 +2,8 @@
 namespace wcf\system\label\object;
 
 /**
- * Default interface for label object handler.
- *
+ * Every label object handler has to implement this interface.
+ * 
  * @author	Alexander Ebert
  * @copyright	2001-2012 WoltLab GmbH
  * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
@@ -31,8 +31,8 @@ interface ILabelObjectHandler {
 	/**
 	 * Returns true, if all given label ids are valid and accessible.
 	 * 
-	 * @param	array<integer>	$labelIDs
-	 * @param	array		$parameters
+	 * @param	array<integer>		$labelIDs
+	 * @param	array			$parameters
 	 * @return	boolean
 	 */
 	public function validateLabelIDs(array $labelIDs, array $parameters = array());
@@ -40,16 +40,16 @@ interface ILabelObjectHandler {
 	/**
 	 * Assigns labels to an object.
 	 * 
-	 * @param	array<integer>	$labelIDs
-	 * @param	integer		$objectID
-	 * @param	boolean		$validatePermissions
+	 * @param	array<integer>		$labelIDs
+	 * @param	integer			$objectID
+	 * @param	boolean			$validatePermissions
 	 * @see		wcf\system\label\LabelHandler::setLabels()
 	 */
 	public function setLabels(array $labelIDs, $objectID, $validatePermissions = true);
 	
 	/**
 	 * Removes all assigned labels.
-	 *
+	 * 
 	 * @param	integer		$objectID
 	 * @param	boolean		$validatePermissions
 	 * @see		wcf\system\label\LabelHandler::removeLabels()

@@ -8,9 +8,9 @@ use wcf\system\WCF;
 
 /**
  * Represents a viewable label group.
- *
+ * 
  * @author	Alexander Ebert
- * @copyright	2001-2011 WoltLab GmbH
+ * @copyright	2001-2012 WoltLab GmbH
  * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
  * @package	com.woltlab.wcf.label
  * @subpackage	data.label.group
@@ -167,7 +167,7 @@ class ViewableLabelGroup extends DatabaseObjectDecorator implements \Countable, 
 	/**
 	 * CAUTION: This methods does not return the current iterator index,
 	 * rather than the object key which maps to that index.
-	 *
+	 * 
 	 * @see	\Iterator::key()
 	 */
 	public function key() {
@@ -200,7 +200,7 @@ class ViewableLabelGroup extends DatabaseObjectDecorator implements \Countable, 
 	 */
 	public function seek($index) {
 		$this->index = $index;
-	
+		
 		if (!$this->valid()) {
 			throw new \OutOfBoundsException();
 		}
@@ -211,7 +211,7 @@ class ViewableLabelGroup extends DatabaseObjectDecorator implements \Countable, 
 	 */
 	public function seekTo($objectID) {
 		$this->index = array_search($objectID, $this->indexToObject);
-	
+		
 		if ($this->index === false) {
 			throw new SystemException("object id '".$objectID."' is invalid");
 		}
