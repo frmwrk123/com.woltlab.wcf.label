@@ -6,10 +6,10 @@ use wcf\system\acl\ACLHandler;
 use wcf\system\cache\CacheHandler;
 
 /**
- * Extends the label group object with functions to create, update and delete label groups.
- *
+ * Provides functions to edit label groups.
+ * 
  * @author	Alexander Ebert
- * @copyright	2001-2011 WoltLab GmbH
+ * @copyright	2001-2012 WoltLab GmbH
  * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
  * @package	com.woltlab.wcf.label
  * @subpackage	data.label.group

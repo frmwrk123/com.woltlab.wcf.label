@@ -5,10 +5,10 @@ use wcf\data\IEditableCachedObject;
 use wcf\system\cache\CacheHandler;
 
 /**
- * Extends the label object with functions to create, update and delete labels.
- *
+ * Provides functions to edit labels.
+ * 
  * @author	Alexander Ebert
- * @copyright	2001-2011 WoltLab GmbH
+ * @copyright	2001-2012 WoltLab GmbH
  * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
  * @package	com.woltlab.wcf.label
  * @subpackage	data.label

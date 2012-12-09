@@ -3,8 +3,8 @@ namespace wcf\system\label\object\type;
 use wcf\system\SingletonFactory;
 
 /**
- * Default implementation for label object type handler.
- *
+ * Abstract implementation of a label object type handler.
+ * 
  * @author	Alexander Ebert
  * @copyright	2001-2012 WoltLab GmbH
  * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>

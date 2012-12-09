@@ -119,7 +119,7 @@ class LabelGroupEditForm extends LabelGroupAddForm {
 				if (!isset($data[$row['objectTypeID']])) {
 					$data[$row['objectTypeID']] = array();
 				}
-	
+				
 				// prevent NULL values which confuse isset()
 				$data[$row['objectTypeID']][] = ($row['objectID']) ?: 0;
 			}

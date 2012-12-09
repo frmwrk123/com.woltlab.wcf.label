@@ -9,7 +9,7 @@ use wcf\system\WCF;
  * Executes label-related actions.
  * 
  * @author	Alexander Ebert
- * @copyright	2001-2011 WoltLab GmbH
+ * @copyright	2001-2012 WoltLab GmbH
  * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
  * @package	com.woltlab.wcf.label
  * @subpackage	data.label
@@ -40,7 +40,7 @@ class LabelAction extends AbstractDatabaseObjectAction {
 	 * @see	wcf\data\AbstractDatabaseObjectAction::delete()
 	 */
 	public function delete() {
-		$count = parent::delete();
+		parent::delete();
 		
 		if (!empty($this->objects)) {
 			// identify i18n labels

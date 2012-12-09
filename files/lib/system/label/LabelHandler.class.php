@@ -54,7 +54,8 @@ class LabelHandler extends SingletonFactory {
 	}
 	
 	/**
-	 * Returns an ACL option id by option name.
+	 * Returns the id of the label ACL option with the given name or null if
+	 * no such option exists.
 	 * 
 	 * @param	string		$optionName
 	 * @return	integer
@@ -70,7 +71,8 @@ class LabelHandler extends SingletonFactory {
 	}
 	
 	/**
-	 * Returns an object type by name.
+	 * Returns the label object type with the given name or null of no such
+	 * object.
 	 * 
 	 * @param	string		$objectType
 	 * @return	wcf\data\object\type\ObjectType
@@ -85,9 +87,9 @@ class LabelHandler extends SingletonFactory {
 	}
 	
 	/**
-	 * Returns an array with view permissions for each label id.
+	 * Returns an array with view permissions for the labels with the given id.
 	 * 
-	 * @param	array<integer>	$labelIDs
+	 * @param	array<integer>		$labelIDs
 	 * @return	array
 	 * @see		wcf\system\label\LabelHandler::getPermissions()
 	 */
@@ -96,9 +98,9 @@ class LabelHandler extends SingletonFactory {
 	}
 	
 	/**
-	 * Returns an array with use permissions for each label id.
-	 *
-	 * @param	array<integer>	$labelIDs
+	 * Returns an array with use permissions for the labels with the given id.
+	 * 
+	 * @param	array<integer>		$labelIDs
 	 * @return	array
 	 * @see		wcf\system\label\LabelHandler::getPermissions()
 	 */
@@ -109,8 +111,8 @@ class LabelHandler extends SingletonFactory {
 	/**
 	 * Returns an array with boolean values for each given label id.
 	 * 
-	 * @param	string		$optionName
-	 * @param	array<integer>	$labelIDs
+	 * @param	string			$optionName
+	 * @param	array<integer>		$labelIDs
 	 * @return	array
 	 */
 	public function getPermissions($optionName, array $labelIDs) {
@@ -154,13 +156,13 @@ class LabelHandler extends SingletonFactory {
 	}
 	
 	/**
-	 * Sets labels for given object id, pass an empty array to remove
-	 * all previously assigned labels.
+	 * Sets labels for given object id, pass an empty array to remove all previously
+	 * assigned labels.
 	 * 
-	 * @param	array<integer>	$labelIDs
-	 * @param	integer		$objectTypeID
-	 * @param	integer		$objectID
-	 * @param	boolean		$validatePermissions
+	 * @param	array<integer>		$labelIDs
+	 * @param	integer			$objectTypeID
+	 * @param	integer			$objectID
+	 * @param	boolean			$validatePermissions
 	 */
 	public function setLabels(array $labelIDs, $objectTypeID, $objectID, $validatePermissions = true) {
 		// get accessible label ids to prevent unaccessible ones to be removed
@@ -198,9 +200,9 @@ class LabelHandler extends SingletonFactory {
 	/**
 	 * Returns all assigned labels, optionally filtered to validate permissions.
 	 * 
-	 * @param	integer		$objectTypeID
-	 * @param	array<integer>	$objectIds
-	 * @param	boolean		$validatePermissions
+	 * @param	integer			$objectTypeID
+	 * @param	array<integer>		$objectIds
+	 * @param	boolean			$validatePermissions
 	 * @return	array<wcf\data\label\Label>
 	 */
 	public function getAssignedLabels($objectTypeID, array $objectIDs, $validatePermissions = true) {
@@ -269,8 +271,9 @@ class LabelHandler extends SingletonFactory {
 	/**
 	 * Returns given label groups by id.
 	 * 
-	 * @param	array<integer>	$groupID
-	 * @param	boolean		$validatePermissions
+	 * @param	array<integer>		$groupID
+	 * @param	boolean			$validatePermissions
+	 * @param	string			$permission
 	 * @return	array<wcf\data\label\group\ViewableLabelGroup>
 	 */
 	public function getLabelGroups(array $groupIDs = array(), $validatePermissions = true, $permission = 'canSetLabel') {
@@ -305,7 +308,7 @@ class LabelHandler extends SingletonFactory {
 	
 	/**
 	 * Returns a list of accessible label ids.
-	 *
+	 * 
 	 * @return	array<integer>
 	 */
 	public function getAccessibleLabelIDs() {

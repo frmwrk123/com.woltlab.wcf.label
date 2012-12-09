@@ -2,8 +2,8 @@
 namespace wcf\system\label\object\type;
 
 /**
- * Default interface for label object type handler.
- *
+ * Every label object type handler has to implement this interface.
+ * 
  * @author	Alexander Ebert
  * @copyright	2001-2012 WoltLab GmbH
  * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
