@@ -39,7 +39,7 @@
 </div>
 
 {hascontent}
-	<div id="labelTableContainer" class="tabularBox tabularBoxTitle marginTop shadow">
+	<div id="labelTableContainer" class="tabularBox tabularBoxTitle marginTop">
 		<hgroup>
 			<h1>{lang}wcf.acp.label.list{/lang} <span class="badge badgeInverse" title="{lang}wcf.acp.label.list.count{/lang}">{#$items}</span></h1>
 		</hgroup>

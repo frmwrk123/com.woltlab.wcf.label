@@ -36,7 +36,7 @@
 
 {if $labelGroupList|count}
 	<form method="post" action="{if $action == 'add'}{link controller='LabelAdd'}{/link}{else}{link controller='LabelEdit'}{/link}{/if}">
-		<div class="container containerPadding marginTop shadow">
+		<div class="container containerPadding marginTop">
 			<fieldset>
 				<legend>{lang}wcf.acp.label.data{/lang}</legend>
 				
