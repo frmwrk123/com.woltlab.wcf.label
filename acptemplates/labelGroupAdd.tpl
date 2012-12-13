@@ -40,8 +40,8 @@
 	<div class="tabMenuContainer">
 		<nav class="tabMenu">
 			<ul>
-				<li><a href="#general">{lang}wcf.acp.label.group.category.general{/lang}</a></li>
-				<li><a href="#connect">{lang}wcf.acp.label.group.category.connect{/lang}</a></li>
+				<li><a href="{@$__wcf->getAnchor('general')}">{lang}wcf.acp.label.group.category.general{/lang}</a></li>
+				<li><a href="{@$__wcf->getAnchor('connect')}">{lang}wcf.acp.label.group.category.connect{/lang}</a></li>
 			</ul>
 		</nav>
 		
