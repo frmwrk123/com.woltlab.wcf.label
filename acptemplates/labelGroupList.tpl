@@ -3,7 +3,7 @@
 <script type="text/javascript">
 	//<![CDATA[
 	$(function() {
-		new WCF.Action.Delete('wcf\\data\\label\\group\\LabelGroupAction', $('.jsLabelGroupRow'));
+		new WCF.Action.Delete('wcf\\data\\label\\group\\LabelGroupAction', '.jsLabelGroupRow');
 		
 		var options = { };
 		{if $pages > 1}
