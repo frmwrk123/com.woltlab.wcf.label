@@ -78,8 +78,7 @@
 						{/if}
 					</dd>
 				</dl>
-				
-				{include file='multipleLanguageInputJavascript' elementIdentifier='label'}
+				{include file='multipleLanguageInputJavascript' elementIdentifier='label' forceSelection=false}
 				
 				<dl{if $errorField == 'cssClassName'} class="formError"{/if}>
 					<dt><label for="cssClassName">{lang}wcf.acp.label.cssClassName{/lang}</label></dt>
