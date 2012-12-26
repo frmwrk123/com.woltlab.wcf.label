@@ -203,7 +203,7 @@ class LabelHandler extends SingletonFactory {
 	 * @param	integer			$objectTypeID
 	 * @param	array<integer>		$objectIds
 	 * @param	boolean			$validatePermissions
-	 * @return	array<wcf\data\label\Label>
+	 * @return	array
 	 */
 	public function getAssignedLabels($objectTypeID, array $objectIDs, $validatePermissions = true) {
 		$conditions = new PreparedStatementConditionBuilder();
