@@ -6,28 +6,28 @@
 		</acpmenuitem>
 		
 		<acpmenuitem name="wcf.acp.menu.link.label.list">
-			<link>index.php/LabelList/</link>
+			<controller><![CDATA[wcf\acp\page\LabelListPage]]></controller>
 			<parent>wcf.acp.menu.link.label</parent>
 			<permissions>admin.content.label.canEditLabel,admin.content.label.canDeleteLabel</permissions>
 			<showorder>1</showorder>
 		</acpmenuitem>
 
 		<acpmenuitem name="wcf.acp.menu.link.label.add">
-			<link>index.php/LabelAdd/</link>
+			<controller><![CDATA[wcf\acp\form\LabelAddForm]]></controller>
 			<parent>wcf.acp.menu.link.label</parent>
 			<permissions>admin.content.label.canAddLabel</permissions>
 			<showorder>2</showorder>
 		</acpmenuitem>
 		
 		<acpmenuitem name="wcf.acp.menu.link.label.group.list">
-			<link>index.php/LabelGroupList/</link>
+			<controller><![CDATA[wcf\acp\page\LabelGroupListPage]]></controller>
 			<parent>wcf.acp.menu.link.label</parent>
 			<permissions>admin.content.label.canEditLabelGroup,admin.content.label.canDeleteLabelGroup</permissions>
 			<showorder>3</showorder>
 		</acpmenuitem>
 
 		<acpmenuitem name="wcf.acp.menu.link.label.group.add">
-			<link>index.php/LabelGroupAdd/</link>
+			<controller><![CDATA[wcf\acp\form\LabelGroupAddForm]]></controller>
 			<parent>wcf.acp.menu.link.label</parent>
 			<permissions>admin.content.label.canAddLabelGroup</permissions>
 			<showorder>4</showorder>
