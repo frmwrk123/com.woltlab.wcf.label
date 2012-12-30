@@ -3,6 +3,7 @@ namespace wcf\acp\form;
 use wcf\data\label\Label;
 use wcf\data\label\LabelAction;
 use wcf\data\package\PackageCache;
+use wcf\form\AbstractForm;
 use wcf\system\exception\IllegalLinkException;
 use wcf\system\language\I18nHandler;
 use wcf\system\WCF;
@@ -11,7 +12,7 @@ use wcf\system\WCF;
  * Shows the label edit form.
  * 
  * @author	Alexander Ebert
- * @copyright	2001-2011 WoltLab GmbH
+ * @copyright	2001-2012 WoltLab GmbH
  * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
  * @package	com.woltlab.wcf.label
  * @subpackage	acp.form
@@ -19,9 +20,9 @@ use wcf\system\WCF;
  */
 class LabelEditForm extends LabelAddForm {
 	/**
-	 * @see	wcf\acp\form\ACPForm::$activeMenuItem
+	 * @see	wcf\page\AbstractPage::$activeMenuItem
 	 */
-	public $activeMenuItem = 'wcf.acp.menu.link.label.list';
+	public $activeMenuItem = 'wcf.acp.menu.link.label';
 	
 	/**
 	 * @see	wcf\page\AbstractPage::$neededPermissions
@@ -57,7 +58,7 @@ class LabelEditForm extends LabelAddForm {
 	 * @see	wcf\form\IForm::save()
 	 */
 	public function save() {
-		ACPForm::save();
+		AbstractForm::save();
 		
 		$this->label = 'wcf.acp.label.label'.$this->labelObj->labelID;
 		if (I18nHandler::getInstance()->isPlainValue('label')) {
