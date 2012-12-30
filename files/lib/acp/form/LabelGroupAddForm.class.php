@@ -2,6 +2,7 @@
 namespace wcf\acp\form;
 use wcf\data\label\group\LabelGroupAction;
 use wcf\data\object\type\ObjectTypeCache;
+use wcf\form\AbstractForm;
 use wcf\system\acl\ACLHandler;
 use wcf\system\exception\UserInputException;
 use wcf\system\WCF;
@@ -11,20 +12,15 @@ use wcf\util\StringUtil;
  * Shows the label group add form.
  * 
  * @author	Alexander Ebert
- * @copyright	2001-2011 WoltLab GmbH
+ * @copyright	2001-2012 WoltLab GmbH
  * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
  * @package	com.woltlab.wcf.label
  * @subpackage	acp.form
  * @category	Community Framework
  */
-class LabelGroupAddForm extends ACPForm {
+class LabelGroupAddForm extends AbstractForm {
 	/**
-	 * @see	wcf\page\AbstractPage::$templateName
-	 */
-	public $templateName = 'labelGroupAdd';
-	
-	/**
-	 * @see	wcf\acp\form\ACPForm::$activeMenuItem
+	 * @see	wcf\page\AbstractPage::$activeMenuItem
 	 */
 	public $activeMenuItem = 'wcf.acp.menu.link.label.group.add';
 	

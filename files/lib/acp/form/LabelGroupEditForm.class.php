@@ -2,6 +2,7 @@
 namespace wcf\acp\form;
 use wcf\data\label\group\LabelGroup;
 use wcf\data\label\group\LabelGroupAction;
+use wcf\form\AbstractForm;
 use wcf\system\acl\ACLHandler;
 use wcf\system\exception\IllegalLinkException;
 use wcf\system\WCF;
@@ -10,7 +11,7 @@ use wcf\system\WCF;
  * Shows the label group edit form.
  * 
  * @author	Alexander Ebert
- * @copyright	2001-2011 WoltLab GmbH
+ * @copyright	2001-2012 WoltLab GmbH
  * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
  * @package	com.woltlab.wcf.label
  * @subpackage	acp.form
@@ -18,9 +19,9 @@ use wcf\system\WCF;
  */
 class LabelGroupEditForm extends LabelGroupAddForm {
 	/**
-	 * @see	wcf\acp\form\ACPForm::$activeMenuItem
+	 * @see	wcf\page\AbstractPage::$activeMenuItem
 	 */
-	public $activeMenuItem = 'wcf.acp.menu.link.label.group.list';
+	public $activeMenuItem = 'wcf.acp.menu.link.label';
 	
 	/**
 	 * @see	wcf\page\AbstractPage::$neededPermissions
@@ -56,7 +57,7 @@ class LabelGroupEditForm extends LabelGroupAddForm {
 	 * @see	wcf\form\IForm::save()
 	 */
 	public function save() {
-		ACPForm::save();
+		AbstractForm::save();
 		
 		// update label
 		$this->objectAction = new LabelGroupAction(array($this->groupID), 'update', array('data' => array(

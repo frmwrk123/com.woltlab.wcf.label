@@ -4,6 +4,7 @@ use wcf\data\label\LabelAction;
 use wcf\data\label\LabelEditor;
 use wcf\data\label\group\LabelGroupList;
 use wcf\data\package\PackageCache;
+use wcf\form\AbstractForm;
 use wcf\system\exception\UserInputException;
 use wcf\system\language\I18nHandler;
 use wcf\system\Regex;
@@ -14,20 +15,15 @@ use wcf\util\StringUtil;
  * Shows the label add form.
  * 
  * @author	Alexander Ebert
- * @copyright	2001-2011 WoltLab GmbH
+ * @copyright	2001-2012 WoltLab GmbH
  * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
  * @package	com.woltlab.wcf.label
  * @subpackage	acp.form
  * @category	Community Framework
  */
-class LabelAddForm extends ACPForm {
+class LabelAddForm extends AbstractForm {
 	/**
-	 * @see	wcf\page\AbstractPage::$templateName
-	 */
-	public $templateName = 'labelAdd';
-	
-	/**
-	 * @see	wcf\acp\form\ACPForm::$activeMenuItem
+	 * @see	wcf\page\AbstractPage::$activeMenuItem
 	 */
 	public $activeMenuItem = 'wcf.acp.menu.link.label.add';
 	
