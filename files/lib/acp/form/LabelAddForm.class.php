@@ -23,12 +23,6 @@ use wcf\util\StringUtil;
  */
 class LabelAddForm extends AbstractForm {
 	/**
-	 * @see	wcf\page\AbstractPage::$templateName
-	 * @todo: still needed?
-	 */
-	public $templateName = 'labelAdd';
-	
-	/**
 	 * @see	wcf\page\AbstractPage::$activeMenuItem
 	 */
 	public $activeMenuItem = 'wcf.acp.menu.link.label.add';

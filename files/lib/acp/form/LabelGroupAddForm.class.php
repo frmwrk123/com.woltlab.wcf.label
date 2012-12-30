@@ -20,12 +20,6 @@ use wcf\util\StringUtil;
  */
 class LabelGroupAddForm extends AbstractForm {
 	/**
-	 * @see	wcf\page\AbstractPage::$templateName
-	 * @todo: still needed?
-	 */
-	public $templateName = 'labelGroupAdd';
-	
-	/**
 	 * @see	wcf\page\AbstractPage::$activeMenuItem
 	 */
 	public $activeMenuItem = 'wcf.acp.menu.link.label.group.add';
