@@ -186,7 +186,6 @@ class LabelAddForm extends AbstractForm {
 	 */
 	public function readData() {
 		$this->labelGroupList = new LabelGroupList();
-		$this->labelGroupList->sqlLimit = 0;
 		$this->labelGroupList->readObjects();
 		
 		parent::readData();

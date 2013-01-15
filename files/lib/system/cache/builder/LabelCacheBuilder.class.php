@@ -27,7 +27,6 @@ class LabelCacheBuilder implements ICacheBuilder {
 		
 		// get label groups
 		$groupList = new LabelGroupList();
-		$groupList->sqlLimit = 0;
 		$groupList->readObjects();
 		$groups = $groupList->getObjects();
 		foreach ($groups as &$group) {
@@ -60,7 +59,6 @@ class LabelCacheBuilder implements ICacheBuilder {
 		if (count($groupList)) {
 			// get labels
 			$labelList = new LabelList();
-			$labelList->sqlLimit = 0;
 			$labelList->readObjects();
 			foreach ($labelList as $label) {
 				$data['groups'][$label->groupID]->addLabel($label);
