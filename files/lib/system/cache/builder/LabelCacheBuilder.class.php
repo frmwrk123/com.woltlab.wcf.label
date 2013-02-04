@@ -9,17 +9,17 @@ use wcf\system\acl\ACLHandler;
  * Caches labels and groups.
  * 
  * @author	Alexander Ebert
- * @copyright	2001-2011 WoltLab GmbH
+ * @copyright	2001-2013 WoltLab GmbH
  * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
  * @package	com.woltlab.wcf.label
  * @subpackage	system.cache.builder
  * @category	Community Framework
  */
-class LabelCacheBuilder implements ICacheBuilder {
+class LabelCacheBuilder extends AbstractCacheBuilder {
 	/**
-	 * @see	wcf\system\cache\ICacheBuilder::getData()
+	 * @see	wcf\system\cache\builder\AbstractCacheBuilder::rebuild()
 	 */
-	public function getData(array $cacheResource) {
+	protected function rebuild(array $parameters) {
 		$data = array(
 			'options' => array(),
 			'groups' => array()

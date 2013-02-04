@@ -1,7 +1,7 @@
 <?php
 namespace wcf\system\label;
 use wcf\data\object\type\ObjectTypeCache;
-use wcf\system\cache\CacheHandler;
+use wcf\system\cache\builder\LabelCacheBuilder;
 use wcf\system\database\util\PreparedStatementConditionBuilder;
 use wcf\system\exception\SystemException;
 use wcf\system\SingletonFactory;
@@ -11,7 +11,7 @@ use wcf\system\WCF;
  * Manages labels and label-to-object associations.
  * 
  * @author	Alexander Ebert
- * @copyright	2001-2011 WoltLab GmbH
+ * @copyright	2001-2013 WoltLab GmbH
  * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
  * @package	com.woltlab.wcf.label
  * @subpackage	system.label
@@ -45,12 +45,7 @@ class LabelHandler extends SingletonFactory {
 			$this->cache['objectTypeNames'][$objectType->objectType] = $objectType->objectTypeID;
 		}
 		
-		CacheHandler::getInstance()->addResource(
-			'label',
-			WCF_DIR.'cache/cache.label.php',
-			'wcf\system\cache\builder\LabelCacheBuilder'
-		);
-		$this->labelGroups = CacheHandler::getInstance()->get('label');
+		$this->labelGroups = LabelCacheBuilder::getInstance()->getData();
 	}
 	
 	/**
