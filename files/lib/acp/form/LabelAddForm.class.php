@@ -1,8 +1,8 @@
 <?php
 namespace wcf\acp\form;
+use wcf\data\label\group\LabelGroupList;
 use wcf\data\label\LabelAction;
 use wcf\data\label\LabelEditor;
-use wcf\data\label\group\LabelGroupList;
 use wcf\data\package\PackageCache;
 use wcf\form\AbstractForm;
 use wcf\system\exception\UserInputException;
@@ -15,7 +15,7 @@ use wcf\util\StringUtil;
  * Shows the label add form.
  * 
  * @author	Alexander Ebert
- * @copyright	2001-2012 WoltLab GmbH
+ * @copyright	2001-2013 WoltLab GmbH
  * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
  * @package	com.woltlab.wcf.label
  * @subpackage	acp.form

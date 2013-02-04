@@ -1,7 +1,7 @@
 <?php
 namespace wcf\data\label;
-use wcf\data\AbstractDatabaseObjectAction;
 use wcf\data\language\item\LanguageItemAction;
+use wcf\data\AbstractDatabaseObjectAction;
 use wcf\system\database\util\PreparedStatementConditionBuilder;
 use wcf\system\WCF;
 
@@ -9,7 +9,7 @@ use wcf\system\WCF;
  * Executes label-related actions.
  * 
  * @author	Alexander Ebert
- * @copyright	2001-2012 WoltLab GmbH
+ * @copyright	2001-2013 WoltLab GmbH
  * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
  * @package	com.woltlab.wcf.label
  * @subpackage	data.label
