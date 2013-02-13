@@ -24,7 +24,10 @@ DROP TABLE IF EXISTS wcf1_label_object;
 CREATE TABLE wcf1_label_object (
 	labelID INT(10) NOT NULL,
 	objectTypeID INT(10) NOT NULL,
-	objectID INT(10) NOT NULL
+	objectID INT(10) NOT NULL,
+	
+	KEY (objectTypeID, labelID),
+	KEY (objectTypeID, objectID)
 );
 
 ALTER TABLE wcf1_label ADD FOREIGN KEY (groupID) REFERENCES wcf1_label_group (groupID) ON DELETE CASCADE;
