@@ -64,7 +64,13 @@
 						{/if}
 					</dd>
 				</dl>
-	
+				
+				<dl>
+					<dd><label>
+						<input type="checkbox" name="forceSelection" id="forceSelection" value="1"{if $forceSelection} checked="checked"{/if} /> {lang}wcf.acp.label.group.forceSelection{/lang}
+					</label></dd>
+				</dl>
+				
 				<dl id="groupPermissions">
 					<dt>{lang}wcf.acp.acl.permissions{/lang}</dt>
 					<dd></dd>
