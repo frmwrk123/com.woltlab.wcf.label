@@ -61,6 +61,7 @@ class LabelGroupEditForm extends LabelGroupAddForm {
 		
 		// update label
 		$this->objectAction = new LabelGroupAction(array($this->groupID), 'update', array('data' => array(
+			'forceSelection' => ($this->forceSelection ? 1 : 0),
 			'groupName' => $this->groupName
 		)));
 		$this->objectAction->executeAction();
@@ -86,6 +87,7 @@ class LabelGroupEditForm extends LabelGroupAddForm {
 		parent::readData();
 		
 		if (empty($_POST)) {
+			$this->forceSelection = ($this->group->forceSelection ? true : false);
 			$this->groupName = $this->group->groupName;
 		}
 	}

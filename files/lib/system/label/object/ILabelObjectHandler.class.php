@@ -32,10 +32,10 @@ interface ILabelObjectHandler {
 	 * Returns true, if all given label ids are valid and accessible.
 	 * 
 	 * @param	array<integer>		$labelIDs
-	 * @param	array			$parameters
+	 * @param	array			$optionName
 	 * @return	boolean
 	 */
-	public function validateLabelIDs(array $labelIDs, array $parameters = array());
+	public function validateLabelIDs(array $labelIDs, $optionName = '');
 	
 	/**
 	 * Assigns labels to an object.

@@ -225,7 +225,7 @@ WCF.Label.Chooser = Class.extend({
 		// remove old, hidden values
 		$formSubmit.find('input[type="hidden"]').each(function(index, input) {
 			var $input = $(input);
-			if ($input.attr('name') === 'labelIDs[]') {
+			if ($input.attr('name').indexOf('labelIDs[') === 0) {
 				$input.remove();
 			}
 		});
@@ -234,7 +234,7 @@ WCF.Label.Chooser = Class.extend({
 		for (var $containerID in this._containers) {
 			var $container = this._containers[$containerID];
 			if ($container.data('labelID')) {
-				$('<input type="hidden" name="labelIDs[]" value="' + $container.data('labelID') + '" />').appendTo($formSubmit);
+				$('<input type="hidden" name="labelIDs[' + $container.data('groupID') + ']" value="' + $container.data('labelID') + '" />').appendTo($formSubmit);
 			}
 		}
 	}

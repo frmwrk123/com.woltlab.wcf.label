@@ -47,14 +47,14 @@ abstract class AbstractLabelObjectHandler extends SingletonFactory implements IL
 	}
 	
 	/**
-	 * @see	wcf\system\label\manager\ILabelManager::getLabelGroupIDs()
+	 * @see	wcf\system\label\manager\ILabelObjectHandler::getLabelGroupIDs()
 	 */
 	public function getLabelGroupIDs(array $parameters = array()) {
 		return array_keys($this->labelGroups);
 	}
 	
 	/**
-	 * @see	wcf\system\label\manager\ILabelManager::getLabelGroups()
+	 * @see	wcf\system\label\manager\ILabelObjectHandler::getLabelGroups()
 	 */
 	public function getLabelGroups(array $parameters = array()) {
 		$groupIDs = $this->getLabelGroupIDs($parameters);
@@ -68,36 +68,45 @@ abstract class AbstractLabelObjectHandler extends SingletonFactory implements IL
 	}
 	
 	/**
-	 * @see	wcf\system\label\manager\ILabelManager::validateLabelIDs()
+	 * @see	wcf\system\label\manager\ILabelObjectHandler::validateLabelIDs()
 	 */
-	public function validateLabelIDs(array $labelIDs, array $parameters = array()) {
-		$result = array();
-		
-		foreach ($labelIDs as $labelID) {
-			$isValid = false;
-			
-			foreach ($this->labelGroups as $group) {
-				if ($group->isValid($labelID)) {
-					if (!isset($result[$group->groupID])) {
-						$result[$group->groupID] = array();
-					}
-					
-					$result[$group->groupID][] = $labelID;
-					$isValid = true;
-					
-					break;
-				}
-			}
-			
-			// label id is invalid or not accessible
-			if (!$isValid) {
-				return false;
+	public function validateLabelIDs(array $labelIDs, $optionName = '') {
+		$optionID = 0;
+		if (!empty($optionName)) {
+			$optionID = LabelHandler::getInstance()->getOptionID($optionName);
+			if ($optionID === null) {
+				throw new SystemException("Cannot validate label permissions, option '".$optionName."' is unknown");
 			}
 		}
 		
-		// only one label per group allowed
-		foreach ($result as $groupData) {
-			if (count($groupData) > 1) {
+		$satisfiedGroups = array();
+		foreach ($labelIDs as $groupID => $labelID) {
+			// only one label per group is allowed
+			if (is_array($labelID)) {
+				return false;
+			}
+			
+			// label group id is unknown or label id is invalid for this group
+			if (!isset($this->labelGroups[$groupID]) || !$this->labelGroups[$groupID]->isValid($labelID)) {
+				return false;
+			}
+			
+			// check permission
+			if ($optionID && !$this->labelGroups[$groupID]->getPermission($optionID)) {
+				return false;
+			}
+			
+			$satisfiedGroups[] = $groupID;
+		}
+		
+		// check if required label groups were set
+		foreach ($this->labelGroups as $labelGroup) {
+			if ($labelGroup->forceSelection && !in_array($labelGroup->groupID, $satisfiedGroups)) {
+				// check if group wasn't set, but is not accessible for this user anyway
+				if (!$labelGroup->getPermission($optionID)) {
+					continue;
+				}
+				
 				return false;
 			}
 		}
@@ -106,21 +115,21 @@ abstract class AbstractLabelObjectHandler extends SingletonFactory implements IL
 	}
 	
 	/**
-	 * @see	wcf\system\label\manager\ILabelManager::setLabels()
+	 * @see	wcf\system\label\manager\ILabelObjectHandler::setLabels()
 	 */
 	public function setLabels(array $labelIDs, $objectID, $validatePermissions = true) {
 		LabelHandler::getInstance()->setLabels($labelIDs, $this->objectTypeID, $objectID, $validatePermissions);
 	}
 	
 	/**
-	 * @see	wcf\system\label\manager\ILabelManager::removeLabels()
+	 * @see	wcf\system\label\manager\ILabelObjectHandler::removeLabels()
 	 */
 	public function removeLabels($objectID, $validatePermissions = true) {
 		LabelHandler::getInstance()->removeLabels($this->objectTypeID, $objectID, $validatePermissions);
 	}
 	
 	/**
-	 * @see	wcf\system\label\manager\ILabelManager::getAssignedLabels()
+	 * @see	wcf\system\label\manager\ILabelObjectHandler::getAssignedLabels()
 	 */
 	public function getAssignedLabels(array $objectIDs, $validatePermissions = true) {
 		return LabelHandler::getInstance()->getAssignedLabels($this->objectTypeID, $objectIDs, $validatePermissions);

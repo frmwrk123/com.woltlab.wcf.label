@@ -12,7 +12,7 @@ use wcf\util\StringUtil;
  * Shows the label group add form.
  * 
  * @author	Alexander Ebert
- * @copyright	2001-2012 WoltLab GmbH
+ * @copyright	2001-2013 WoltLab GmbH
  * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
  * @package	com.woltlab.wcf.label
  * @subpackage	acp.form
@@ -28,6 +28,12 @@ class LabelGroupAddForm extends AbstractForm {
 	 * @see	wcf\page\AbstractPage::$neededPermissions
 	 */
 	public $neededPermissions = array('admin.content.label.canAddLabelGroup');
+	
+	/**
+	 * force users to select a label
+	 * @var	boolean
+	 */
+	public $forceSelection = false;
 	
 	/**
 	 * group name
@@ -74,6 +80,7 @@ class LabelGroupAddForm extends AbstractForm {
 	public function readFormParameters() {
 		parent::readFormParameters();
 		
+		if (isset($_POST['forceSelection'])) $this->forceSelection = true;
 		if (isset($_POST['groupName'])) $this->groupName = StringUtil::trim($_POST['groupName']);
 		if (isset($_POST['objectTypes']) && is_array($_POST['objectTypes'])) $this->objectTypes = $_POST['objectTypes'];
 	}
@@ -126,6 +133,7 @@ class LabelGroupAddForm extends AbstractForm {
 		
 		// save label
 		$this->objectAction = new LabelGroupAction(array(), 'create', array('data' => array(
+			'forceSelection' => ($this->forceSelection ? 1 : 0),
 			'groupName' => $this->groupName
 		)));
 		$returnValues = $this->objectAction->executeAction();
@@ -139,6 +147,7 @@ class LabelGroupAddForm extends AbstractForm {
 		$this->saved();
 		
 		// reset values
+		$this->forceSelection = false;
 		$this->groupName = '';
 		$this->objectTypes = array();
 		$this->setObjectTypeRelations();
@@ -157,6 +166,7 @@ class LabelGroupAddForm extends AbstractForm {
 		
 		WCF::getTPL()->assign(array(
 			'action' => 'add',
+			'forceSelection' => $this->forceSelection,
 			'groupName' => $this->groupName,
 			'labelObjectTypeContainers' => $this->labelObjectTypeContainers,
 			'objectTypeID' => $this->objectTypeID
