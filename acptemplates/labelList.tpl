@@ -14,7 +14,7 @@
 		{else}
 			options.emptyMessage = '{lang}wcf.acp.label.noneAvailable{/lang}';
 		{/if}
-
+		
 		new WCF.Table.EmptyTableHandler($('#labelTableContainer'), 'jsLabelRow', options);
 	});
 	//]]>
@@ -29,16 +29,22 @@
 <div class="contentNavigation">
 	{pages print=true assign=pagesLinks controller="LabelList" link="pageNo=%d&sortField=$sortField&sortOrder=$sortOrder"}
 	
-	{if $__wcf->session->getPermission('admin.content.label.canAddLabel')}
+	{hascontent}
 		<nav>
 			<ul>
-				<li><a href="{link controller='LabelAdd'}{/link}" title="{lang}wcf.acp.label.add{/lang}" class="button"><span class="icon icon16 icon-plus"></span> <span>{lang}wcf.acp.label.add{/lang}</span></a></li>
+				{content}
+					{if $__wcf->session->getPermission('admin.content.label.canAddLabel')}
+						<li><a href="{link controller='LabelAdd'}{/link}" title="{lang}wcf.acp.label.add{/lang}" class="button"><span class="icon icon16 icon-plus"></span> <span>{lang}wcf.acp.label.add{/lang}</span></a></li>
+					{/if}
+					
+					{event name='contentNavigationButtonsTop'}
+				{/content}
 			</ul>
 		</nav>
-	{/if}
+	{/hascontent}
 </div>
 
-{hascontent}
+{if $objects|count}
 	<div id="labelTableContainer" class="tabularBox tabularBoxTitle marginTop">
 		<hgroup>
 			<h1>{lang}wcf.acp.label.list{/lang} <span class="badge badgeInverse">{#$items}</span></h1>
@@ -51,50 +57,53 @@
 					<th class="columnTitle columnLabel{if $sortField == 'label'} active {@$sortOrder}{/if}"><a href="{link controller='LabelList'}pageNo={@$pageNo}&sortField=label&sortOrder={if $sortField == 'label' && $sortOrder == 'ASC'}DESC{else}ASC{/if}{/link}">{lang}wcf.acp.label.label{/lang}</a></th>
 					<th class="columnText columnGroup{if $sortField == 'groupName'} active {@$sortOrder}{/if}"><a href="{link controller='LabelList'}pageNo={@$pageNo}&sortField=groupName&sortOrder={if $sortField == 'groupName' && $sortOrder == 'ASC'}DESC{else}ASC{/if}{/link}">{lang}wcf.acp.label.group.groupName{/lang}</a></th>
 					
-					{event name='headColumns'}
+					{event name='columnHeads'}
 				</tr>
 			</thead>
 			
 			<tbody>
-				{content}
-					{foreach from=$objects item=label}
-						<tr class="jsLabelRow">
-							<td class="columnIcon">
-								{if $label->isEditable()}
-									<a href="{link controller='LabelEdit' id=$label->labelID}{/link}" title="{lang}wcf.global.button.edit{/lang}" class="jsTooltip"><span class="icon icon16 icon-pencil"></span></a>
-								{/if}
-								{if $label->isDeletable()}
-									<span class="icon icon16 icon-remove jsDeleteButton jsTooltip pointer" title="{lang}wcf.global.button.delete{/lang}" data-object-id="{@$label->labelID}" data-confirm-message="{lang}wcf.acp.label.delete.sure{/lang}"></span>
-								{/if}
-
-								{event name='buttons'}
-							</td>
-							<td class="columnID"><p>{@$label->labelID}</p></td>
-							<td class="columnTitle columnLabel">{if $label->isEditable()}<p><a href="{link controller='LabelEdit' id=$label->labelID}{/link}" title="{$label}" class="badge label{if $label->cssClassName} {$label->cssClassName}{/if}">{$label}</a></p>{else}<p class="badge label{if $label->cssClassName} {$label->cssClassName}{/if}">{$label}</p>{/if}</td>
-							<td class="columnText columnGroup"><p>{$label->groupName}</p></td>
+				{foreach from=$objects item=label}
+					<tr class="jsLabelRow">
+						<td class="columnIcon">
+							{if $label->isEditable()}
+								<a href="{link controller='LabelEdit' object=$label}{/link}" title="{lang}wcf.global.button.edit{/lang}" class="jsTooltip"><span class="icon icon16 icon-pencil"></span></a>
+							{/if}
+							{if $label->isDeletable()}
+								<span class="icon icon16 icon-remove jsDeleteButton jsTooltip pointer" title="{lang}wcf.global.button.delete{/lang}" data-object-id="{@$label->labelID}" data-confirm-message="{lang}wcf.acp.label.delete.sure{/lang}"></span>
+							{/if}
 							
-							{event name='columns'}
-						</tr>
-					{/foreach}
-				{/content}
+							{event name='rowButtons'}
+						</td>
+						<td class="columnID"><p>{@$label->labelID}</p></td>
+						<td class="columnTitle columnLabel">{if $label->isEditable()}<p><a href="{link controller='LabelEdit' object=$label}{/link}" title="{$label}" class="badge label{if $label->cssClassName} {$label->cssClassName}{/if}">{$label}</a></p>{else}<p class="badge label{if $label->cssClassName} {$label->cssClassName}{/if}">{$label}</p>{/if}</td>
+						<td class="columnText columnGroup"><p>{$label->groupName}</p></td>
+						
+						{event name='columns'}
+					</tr>
+				{/foreach}
 			</tbody>
 		</table>
-		
 	</div>
 	
 	<div class="contentNavigation">
 		{@$pagesLinks}
 		
-		{if $__wcf->session->getPermission('admin.content.label.canAddLabel')}
+		{hascontent}
 			<nav>
 				<ul>
-					<li><a href="{link controller='LabelAdd'}{/link}" title="{lang}wcf.acp.label.add{/lang}" class="button"><span class="icon icon16 icon-plus"></span> <span>{lang}wcf.acp.label.add{/lang}</span></a></li>
+					{content}
+						{if $__wcf->session->getPermission('admin.content.label.canAddLabel')}
+							<li><a href="{link controller='LabelAdd'}{/link}" title="{lang}wcf.acp.label.add{/lang}" class="button"><span class="icon icon16 icon-plus"></span> <span>{lang}wcf.acp.label.add{/lang}</span></a></li>
+						{/if}
+						
+						{event name='contentNavigationButtonsBottom'}
+					{/content}
 				</ul>
 			</nav>
-		{/if}
+		{/hascontent}
 	</div>
-{hascontentelse}
+{else}
 	<p class="info">{lang}wcf.acp.label.noneAvailable{/lang}</p>
-{/hascontent}
+{/if}
 
 {include file='footer'}

@@ -13,12 +13,10 @@
 	<category name="wcf.acp.label">
 		<item name="wcf.acp.label.add"><![CDATA[Add Label]]></item>
 		<item name="wcf.acp.label.cssClassName"><![CDATA[CSS Class Name]]></item>
-		<item name="wcf.acp.label.data"><![CDATA[Label Data]]></item>
 		<item name="wcf.acp.label.defaultValue"><![CDATA[Label]]></item>
 		<item name="wcf.acp.label.error.noGroups"><![CDATA[Please <a href="{link controller='LabelGroupAdd'}{/link}">add a label group</a> prior to creating labels.]]></item>
 		<item name="wcf.acp.label.group"><![CDATA[Label Group]]></item>
 		<item name="wcf.acp.label.group.add"><![CDATA[Add Label Group]]></item>
-		<item name="wcf.acp.label.group.data"><![CDATA[Label Group Data]]></item>
 		<item name="wcf.acp.label.group.groupName"><![CDATA[Title]]></item>
 		<item name="wcf.acp.label.group.list"><![CDATA[Label Groups]]></item>
 		<item name="wcf.acp.label.group.noneAvailable"><![CDATA[There are no label groups yet.]]></item>
@@ -29,15 +27,15 @@
 	
 	<category name="wcf.acp.menu">
 		<item name="wcf.acp.menu.link.label"><![CDATA[Labels]]></item>
-		<item name="wcf.acp.menu.link.label.list"><![CDATA[List Labels]]></item>
 		<item name="wcf.acp.menu.link.label.add"><![CDATA[Add Label]]></item>
-		<item name="wcf.acp.menu.link.label.group.list"><![CDATA[List Label Groups]]></item>
+		<item name="wcf.acp.menu.link.label.list"><![CDATA[List Labels]]></item>
 		<item name="wcf.acp.menu.link.label.group.add"><![CDATA[Add Label Group]]></item>
+		<item name="wcf.acp.menu.link.label.group.list"><![CDATA[List Label Groups]]></item>
 	</category>
 	
 	<category name="wcf.label">
-		<item name="wcf.label.none"><![CDATA[No Selection]]></item>
 		<item name="wcf.label.label"><![CDATA[Label]]></item>
 		<item name="wcf.label.labels"><![CDATA[Labels]]></item>
+		<item name="wcf.label.none"><![CDATA[No Selection]]></item>
 	</category>
 </language>

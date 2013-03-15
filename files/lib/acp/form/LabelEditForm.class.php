@@ -12,7 +12,7 @@ use wcf\system\WCF;
  * Shows the label edit form.
  * 
  * @author	Alexander Ebert
- * @copyright	2001-2012 WoltLab GmbH
+ * @copyright	2001-2013 WoltLab GmbH
  * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
  * @package	com.woltlab.wcf.label
  * @subpackage	acp.form
@@ -117,7 +117,7 @@ class LabelEditForm extends LabelAddForm {
 		I18nHandler::getInstance()->assignVariables(!empty($_POST));
 		
 		WCF::getTPL()->assign(array(
-			'labelID' => $this->labelID,
+			'label' => $this->labelObj,
 			'action' => 'edit'
 		));
 	}

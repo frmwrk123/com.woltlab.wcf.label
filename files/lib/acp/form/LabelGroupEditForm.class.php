@@ -99,7 +99,7 @@ class LabelGroupEditForm extends LabelGroupAddForm {
 		parent::assignVariables();
 		
 		WCF::getTPL()->assign(array(
-			'groupID' => $this->groupID,
+			'group' => $this->group,
 			'action' => 'edit'
 		));
 	}
@@ -109,14 +109,13 @@ class LabelGroupEditForm extends LabelGroupAddForm {
 	 */
 	protected function setObjectTypeRelations($data = null) {
 		if (empty($_POST)) {
-			$data = array();
-			
 			// read database values
 			$sql = "SELECT	objectTypeID, objectID
 				FROM	wcf".WCF_N."_label_group_to_object
 				WHERE	groupID = ?";
 			$statement = WCF::getDB()->prepareStatement($sql);
 			$statement->execute(array($this->groupID));
+			
 			$data = array();
 			while ($row = $statement->fetchArray()) {
 				if (!isset($data[$row['objectTypeID']])) {
