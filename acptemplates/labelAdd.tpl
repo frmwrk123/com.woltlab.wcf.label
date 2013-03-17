@@ -23,22 +23,30 @@
 {/if}
 
 {if $success|isset}
-	<p class="success">{lang}wcf.global.success.{$action}{/lang}</p>	
+	<p class="success">{lang}wcf.global.success.{$action}{/lang}</p>
 {/if}
 
-<div class="contentNavigation">
-	<nav>
-		<ul>
-			<li><a href="{link controller='LabelList'}{/link}" title="{lang}wcf.acp.menu.link.label.list{/lang}" class="button"><span class="icon icon16 icon-list"></span> <span>{lang}wcf.acp.menu.link.label.list{/lang}</span></a></li>
-		</ul>
-	</nav>
-</div>
+{hascontent}
+	<div class="contentNavigation">
+		<nav>
+			<ul>
+				{content}
+					{if $__wcf->session->getPermission('admin.content.label.canDeleteLabel') || $__wcf->session->getPermission('admin.content.label.canEditLabel')}
+						<li><a href="{link controller='LabelList'}{/link}" title="{lang}wcf.acp.menu.link.label.list{/lang}" class="button"><span class="icon icon16 icon-list"></span> <span>{lang}wcf.acp.menu.link.label.list{/lang}</span></a></li>
+					{/if}
+					
+					{event name='contentNavigationButtons'}
+				{/content}
+			</ul>
+		</nav>
+	</div>
+{/hascontent}
 
 {if $labelGroupList|count}
-	<form method="post" action="{if $action == 'add'}{link controller='LabelAdd'}{/link}{else}{link controller='LabelEdit'}{/link}{/if}">
+	<form method="post" action="{if $action == 'add'}{link controller='LabelAdd'}{/link}{else}{link controller='LabelEdit' object=$label}{/link}{/if}">
 		<div class="container containerPadding marginTop">
 			<fieldset>
-				<legend>{lang}wcf.acp.label.data{/lang}</legend>
+				<legend>{lang}wcf.global.form.data{/lang}</legend>
 				
 				<dl{if $errorField == 'groupID'} class="formError"{/if}>
 					<dt><label for="groupID">{lang}wcf.acp.label.group{/lang}</label></dt>
@@ -100,12 +108,15 @@
 						{/if}
 					</dd>
 				</dl>
+				
+				{event name='dataFields'}
 			</fieldset>
+			
+			{event name='fieldsets'}
 		</div>
 		
 		<div class="formSubmit">
 			<input type="submit" value="{lang}wcf.global.button.submit{/lang}" accesskey="s" />
-			{if $labelID|isset}<input type="hidden" name="id" value="{@$labelID}" />{/if}
 		</div>
 	</form>
 {else}

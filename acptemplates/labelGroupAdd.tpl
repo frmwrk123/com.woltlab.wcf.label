@@ -25,18 +25,26 @@
 {/if}
 
 {if $success|isset}
-	<p class="success">{lang}wcf.global.success.{$action}{/lang}</p>	
+	<p class="success">{lang}wcf.global.success.{$action}{/lang}</p>
 {/if}
 
-<div class="contentNavigation">
-	<nav>
-		<ul>
-			<li><a href="{link controller='LabelGroupList'}{/link}" title="{lang}wcf.acp.menu.link.label.group.list{/lang}" class="button"><span class="icon icon16 icon-list"></span> <span>{lang}wcf.acp.menu.link.label.group.list{/lang}</span></a></li>
-		</ul>
-	</nav>
-</div>
+{hascontent}
+	<div class="contentNavigation">
+		<nav>
+			<ul>
+				{content}
+					{if $__wcf->session->getPermission('admin.content.label.canDeleteLabelGroup') || $__wcf->session->getPermission('admin.content.label.canEditLabelGroup')}
+						<li><a href="{link controller='LabelGroupList'}{/link}" title="{lang}wcf.acp.menu.link.label.group.list{/lang}" class="button"><span class="icon icon16 icon-list"></span> <span>{lang}wcf.acp.menu.link.label.group.list{/lang}</span></a></li>
+					{/if}
+					
+					{event name='contentNavigationButtons'}
+				{/content}
+			</ul>
+		</nav>
+	</div>
+{/hascontent}
 
-<form method="post" action="{if $action == 'add'}{link controller='LabelGroupAdd'}{/link}{else}{link controller='LabelGroupEdit'}{/link}{/if}">
+<form method="post" action="{if $action == 'add'}{link controller='LabelGroupAdd'}{/link}{else}{link controller='LabelGroupEdit' object=$labelGroup}{/link}{/if}">
 	<div class="tabMenuContainer">
 		<nav class="tabMenu">
 			<ul>
@@ -47,7 +55,7 @@
 		
 		<div id="general" class="container containerPadding tabMenuContainer tabMenuContent">
 			<fieldset>
-				<legend>{lang}wcf.acp.label.group.data{/lang}</legend>
+				<legend>{lang}wcf.global.form.data{/lang}</legend>
 				
 				<dl{if $errorField == 'groupName'} class="formError"{/if}>
 					<dt><label for="groupName">{lang}wcf.acp.label.group.groupName{/lang}</label></dt>
@@ -66,22 +74,25 @@
 				</dl>
 				
 				<dl>
-					<dd><label>
-						<input type="checkbox" name="forceSelection" id="forceSelection" value="1"{if $forceSelection} checked="checked"{/if} /> {lang}wcf.acp.label.group.forceSelection{/lang}
-					</label></dd>
+					<dt class="reversed"><label for="forceSelection">{lang}wcf.acp.label.group.forceSelection{/lang}</label></dt>
+					<dd><input type="checkbox" name="forceSelection" id="forceSelection" value="1"{if $forceSelection} checked="checked"{/if} /></dd>
 				</dl>
 				
 				<dl id="groupPermissions">
 					<dt>{lang}wcf.acp.acl.permissions{/lang}</dt>
 					<dd></dd>
 				</dl>
+				
+				{event name='dataFields'}
 			</fieldset>
+			
+			{event name='generalFieldsets'}
 		</div>
 		
 		<div id="connect" class="container containerPadding tabMenuContainer tabMenuContent">
 			<fieldset>
 				<legend>{lang}wcf.acp.label.group.category.connect{/lang}</legend>
-			
+				
 				{foreach from=$labelObjectTypeContainers item=container}
 					{if $container->isBooleanOption()}
 						<!-- TODO: Implement boolean option mode -->
@@ -102,12 +113,13 @@
 					{/if}
 				{/foreach}
 			</fieldset>
+			
+			{event name='connectFieldsets'}
 		</div>
 	</div>
 	
 	<div class="formSubmit">
 		<input type="submit" value="{lang}wcf.global.button.submit{/lang}" accesskey="s" />
-		{if $groupID|isset}<input type="hidden" name="id" value="{@$groupID}" />{/if}
 	</div>
 </form>
 
