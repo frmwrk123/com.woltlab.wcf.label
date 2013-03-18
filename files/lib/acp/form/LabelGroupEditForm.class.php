@@ -99,8 +99,9 @@ class LabelGroupEditForm extends LabelGroupAddForm {
 		parent::assignVariables();
 		
 		WCF::getTPL()->assign(array(
-			'labelGroup' => $this->group,
-			'action' => 'edit'
+			'action' => 'edit',
+			'groupID' => $this->groupID,
+			'labelGroup' => $this->group
 		));
 	}
 	
