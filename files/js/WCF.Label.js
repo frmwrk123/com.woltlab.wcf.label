@@ -172,7 +172,7 @@ WCF.Label.Chooser = Class.extend({
 				if (!$container.data('forceSelection')) {
 					$('<li class="dropdownDivider" />').appendTo($dropdownMenu);
 					
-					var $buttonEmpty = $('<li><span><span class="badge label">' + WCF.Language.get('wcf.label.none') + '</span></span></li>').appendTo($dropdownMenu);
+					var $buttonEmpty = $('<li data-label-id="0"><span><span class="badge label">' + WCF.Language.get('wcf.label.none') + '</span></span></li>').appendTo($dropdownMenu);
 					$buttonEmpty.click($.proxy(this._click, this));
 				}
 			}
